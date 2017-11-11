@@ -1,0 +1,41 @@
+{
+  "native": {
+    "path_ignore": []
+  },
+  "publish": {
+    "web": 0,
+    "native": 1,
+    "path": "bin-release"
+  },
+  "egret_version": "5.0.12",
+  "template": {},
+  "modules": [
+    {
+      "name": "egret"
+    },
+    {
+      "name": "game"
+    },
+    {
+      "name": "res"
+    },
+    {
+      "name": "tween"
+    },
+    {
+      "name": "socket"
+    },
+    {
+      "name": "promise",
+      "path": "./promise"
+    },
+    {
+      "name": "features",
+      "path": "../libs/features"
+    },
+    {
+      "name": "layer",
+      "path": "../libs/layer"
+    }
+  ]
+}
