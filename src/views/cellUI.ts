@@ -31,6 +31,7 @@ class CellUI extends layer.ui.Sprite {
 		this.graphics.endFill();
 		
 		let text:egret.TextField = new egret.TextField;
+		text.name = 'index';
 		text.textColor = 0xffffff;
 		text.text = this.cell.index.toString() + "\n" + this.cell.row.toString() + "/" + this.cell.col.toString();
 		text.width = this.width;
@@ -64,6 +65,21 @@ class CellUI extends layer.ui.Sprite {
 		//this.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
 		this.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
 		this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTap, this);
+	}
+
+	public moveTo(duration:number, ...args: egret.Point[]) : Promise<any> {
+		//let dfd : DeferredPromise = new DeferredPromise;
+		return new Promise<any>((resolve, reject) => {
+			let tween: egret.Tween = egret.Tween.get(this, {
+				loop: false,
+			});
+			args.forEach(p => tween = tween.to({x: p.x, y: p.y}, duration));
+			tween.call(() => {
+				let text: egret.TextField = this.getChildByName('index') as egret.TextField;
+					text.text = this.cell.index.toString() + "\n" + this.cell.row.toString() + "/" + this.cell.col.toString();
+				resolve();
+			}, this)
+		});
 	}
 
 	public onTouchBegin(event: egret.TouchEvent) {

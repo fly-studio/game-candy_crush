@@ -2,6 +2,7 @@ class meshUI extends layer.ui.Sprite {
 	public mesh: Mesh;
 	private gameSprite: gameUI;
 	private _selectedCell: Cell;
+	private animating:boolean = false;
 
 	constructor() {
 		super();
@@ -52,7 +53,9 @@ class meshUI extends layer.ui.Sprite {
 
 	public async swapAndCrush(fromCell: Cell, toCell:Cell, crushCells: CrushCells)
 	{
-		await this.gameSprite.renderSwap(fromCell, toCell, !crushCells.hasCrushes);
+		this.animating = true;
+		
+		await this.gameSprite.renderSwap(fromCell, toCell, !crushCells.cellIndicesCrushed(fromCell.index, toCell.index));
 
 		while (crushCells.hasCrushes)
 		{
@@ -60,26 +63,25 @@ class meshUI extends layer.ui.Sprite {
 			let filledCells = this.mesh.rebuildWithCrush(crushCells);
 			await this.gameSprite.renderFill(filledCells);
 
-			crushCells = this.mesh.crushCells();
+			crushCells = this.mesh.crushCells();break;
 		}
-
+		this.animating = false;
 	}
 
 	private onCellDrag(event:CellEvent) {
-		if(event.cell.block) return;
+		if(event.cell.block || this.animating) return;
 		//如果是Drag，取消选择
 		this.selectedCell = null;
 
 		let cell: Cell = this.mesh.getCellByPostion(event.cell, event.position);
 		if (cell instanceof Cell) { // valid
 			let crushCells: CrushCells  = this.mesh.swapWithCrush(event.cell, cell); //计算可以消失的cells
-
-			this.swapAndCrush(event.cell, cell, crushCells); //使用yield直到动画完成，
+			this.swapAndCrush(event.cell, cell, crushCells);
 		}
 	}
 
 	private onCellSelect(event:CellEvent) {
-		if(event.cell.block) return;
+		if(event.cell.block || this.animating) return;
 
 		if (!this.selectedCell) {
 			this.selectedCell = event.cell;
@@ -89,10 +91,11 @@ class meshUI extends layer.ui.Sprite {
 				|| (Math.abs(event.cell.col - this.selectedCell.col) == 1 && event.cell.row == this.selectedCell.row)
 			) { //只差距1格
 				let crushCells: CrushCells  = this.mesh.swapWithCrush(event.cell, this.selectedCell); //计算可以消失的cells
-
-				this.swapAndCrush(event.cell, this.selectedCell, crushCells); //使用yield直到动画完成，
+				this.swapAndCrush(event.cell, this.selectedCell, crushCells);
 				
 				this.selectedCell = null;
+			} else { //隔太远 重新点击
+				this.selectedCell = event.cell;
 			}
 		}
 	}

@@ -59,9 +59,22 @@ class gameUI extends layer.ui.Sprite {
 		}
 	}
 
-	public renderSwap(fromCell: Cell, toCell:Cell, exchangeBack:boolean) : Promise<any>
+	public renderSwap(fromCell: Cell, toCell:Cell, swapBack:boolean) : Promise<any>
 	{
-		return ;
+		let fromCellUI: CellUI = this.getChildByCellIndex(fromCell.index) as CellUI;
+		let toCellUI: CellUI = this.getChildByCellIndex(toCell.index) as CellUI;
+		console.log('swap: ', fromCell.index, toCell.index);
+
+		let promises : Promise<any>[] = [];
+		if (swapBack)
+		{
+			promises.push(fromCellUI.moveTo(200, toCellUI.position, fromCellUI.position));
+			promises.push(toCellUI.moveTo(200, fromCellUI.position, toCellUI.position));
+		} else {
+			promises.push(fromCellUI.moveTo(200, toCellUI.position));
+			promises.push(toCellUI.moveTo(200, fromCellUI.position));
+		}
+		return Promise.all(promises);
 	}
 
 	public renderCrush(crushCells: CrushCells) : Promise<any>
@@ -91,7 +104,7 @@ class gameUI extends layer.ui.Sprite {
 
 	public select(cell: Cell) : void {
 		this.clearSelected();
-
+		if (!cell) return;
 		let element: CellUI = this.getChildByCellIndex(cell.index);
 		if (element instanceof CellUI)
 			element.selected = true;

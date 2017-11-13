@@ -28,7 +28,6 @@ class MeshData extends layer.Grid {
 	public cell(row:number, col:number): Cell {
 		let index: number = this.index(row, col);
 		return this.at(index);
-			
 	}
 
 	protected randomColorIndex(row:number, col:number) : number {

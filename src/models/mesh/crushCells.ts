@@ -84,6 +84,11 @@ class CrushCells {
 		return formated;
 	}
 
+	public cellIndicesCrushed(...args: number[]) : boolean
+	{
+		return layer.array.intersect(this.cellWithoutCrossIndices, args).length > 0;
+	}
+
 	public get crushes(): CrushGroup[] {
 		return this._crushes;
 	}

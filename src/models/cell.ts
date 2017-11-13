@@ -17,7 +17,7 @@ class Cell {
 	}
 
 	public get col(): number {
-		return this.mesh.row(this.index);
+		return this.mesh.col(this.index);
 	}
 
 	public get block():boolean {

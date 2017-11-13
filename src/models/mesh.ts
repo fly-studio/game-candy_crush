@@ -64,7 +64,7 @@ class Mesh extends MeshData {
 
 		let crushCells: CrushCells = this.crushCells();
 
-		if (!crushCells.length) //没有可以消的 //交换回来
+		if (!crushCells.cellIndicesCrushed(fromCell.index, toCell.index)) //没有可以消的 //交换回来
 			this.swap(fromCell, toCell);
 		
 		return crushCells;
