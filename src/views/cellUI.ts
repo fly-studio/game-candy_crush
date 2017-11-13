@@ -1,4 +1,4 @@
-class CellUI extends egret.Sprite {
+class CellUI extends layer.ui.Sprite {
 	public cell:Cell;
 	public _selected:boolean;
 	private selectedSharp: egret.Shape;
@@ -10,7 +10,6 @@ class CellUI extends egret.Sprite {
 		this.touchPoint = new egret.Point();
 
 		this.touchEnabled = true;
-		this.once(egret.Event.ADDED_TO_STAGE, this.onAddedToStage, this);
 	}
 
 	public set selected(value: boolean) {
@@ -18,7 +17,7 @@ class CellUI extends egret.Sprite {
 		this.selectedSharp.visible = value;
 	}
 
-	public render() : void {
+	private render() : void {
 		if (this.width <= 0 || this.height <= 0)
 			throw new Error('Set width/height first.');
 		if (this.cell.block)
@@ -30,6 +29,14 @@ class CellUI extends egret.Sprite {
 		this.graphics.beginFill(this.cell.color);
 		this.graphics.drawRoundRect(0, 0, this.width, this.height, 5);
 		this.graphics.endFill();
+		
+		let text:egret.TextField = new egret.TextField;
+		text.textColor = 0xffffff;
+		text.text = this.cell.index.toString() + "\n" + this.cell.row.toString() + "/" + this.cell.col.toString();
+		text.width = this.width;
+		text.wordWrap = true;
+		text.textAlign = egret.HorizontalAlign.CENTER;
+		this.addChild(text);
 
 		this.selectedSharp = new egret.Shape;
 		this.selectedSharp.graphics.lineStyle(4, 0x00ffff);
@@ -39,33 +46,55 @@ class CellUI extends egret.Sprite {
 		this.addChild(this.selectedSharp);
 	}
 
-	private onAddedToStage(event: egret.Event) {
+	public onAddedToStage(event: egret.Event) : void {
 		this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin, this);
-		this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
+		//this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
 		this.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
 		this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTap, this);
+
+		this.render();
+	}
+
+	public onRemovedFromStage(event: egret.Event): void {
+		this.removeAllEventListeners();
+	}
+
+	public removeAllEventListeners(): void {
+		this.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin, this);
+		//this.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
+		this.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
+		this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTap, this);
 	}
 
 	public onTouchBegin(event: egret.TouchEvent) {
+		if (this.cell.block) return;
 		console.log('touch-begin:', this.cell.index);
 
 		this.touchPoint.x = event.stageX;
 		this.touchPoint.y = event.stageY;
 	}
 
-	public onTouchMove(event: egret.TouchEvent) {
-
-	}
-
 	public onTouchEnd(event: egret.TouchEvent) {
+		if (this.cell.block) return;
+
 		console.log('touch-drag:', this.cell.index);
 
-		let position:layer.math.POSITION = layer.math.position(this.touchPoint, new egret.Point(event.stageX, event.stageY));
+		let position:layer.sharp.POSITION = layer.sharp.position(this.touchPoint, new egret.Point(event.stageX, event.stageY));
 		console.log('direction:', position);
+
+		let cellEvent = new CellEvent(CellEvent.CELL_DRAG, true);
+		cellEvent.cell = this.cell;
+		cellEvent.position = position;
+		this.parent.dispatchEvent(cellEvent);
 	}
 
 	public onTouchTap(event: egret.TouchEvent) {
-		this.selected = true;
+		if (this.cell.block) return;
+
 		console.log('touch-tap:', this.cell.index);
+
+		let cellEvent = new CellEvent(CellEvent.CELL_SELECT, true);
+		cellEvent.cell = this.cell;
+		this.parent.dispatchEvent(cellEvent);
 	}
 }

@@ -1,11 +1,9 @@
-class CellEvent extends egret.TouchEvent {
-	public cellIndex: number = -1;
+class CellEvent extends egret.Event {
 
-	public static createFrom(event: egret.TouchEvent) {
-		return event as CellEvent;
-		//let self = new CellEvent(event.type, event.bubbles, event.cancelable, event.stageX, event.stageY, event.touchPointID);
-		
-		//_.deepExtends(self, {...event});
-		//return self;
-	}
+	static CELL_DRAG: string = 'CELL_DRAG';
+	static CELL_SELECT: string = 'CELL_SELECT';
+
+	public cell: Cell;
+	public position: layer.sharp.POSITION = -1;
+	
 }

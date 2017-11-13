@@ -1,4 +1,4 @@
 
-class math {
-	 
+namespace math {
+
 }

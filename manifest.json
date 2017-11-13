@@ -11,12 +11,15 @@
 		"libs/modules/layer/layer.js"
 	],
 	"game": [
+		"bin-debug/models/mesh/meshData.js",
 		"bin-debug/Main.js",
 		"bin-debug/events/CellEvent.js",
 		"bin-debug/models/cell.js",
 		"bin-debug/models/mesh.js",
+		"bin-debug/models/mesh/crushCells.js",
 		"bin-debug/utils/math.js",
 		"bin-debug/views/cellUI.js",
+		"bin-debug/views/gameUI.js",
 		"bin-debug/views/meshUI.js"
 	]
 }
