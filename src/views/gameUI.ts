@@ -51,12 +51,20 @@ class gameUI extends layer.ui.Sprite {
 			row = this.mesh.row(rowOrIndex);
 			col = this.mesh.col(rowOrIndex);
 		}
-		// 列永远为正
-		col = Math.abs(col);
 		return new egret.Point(
 			this.cellColPadding * col * 2 + this.cellWidth * col + this.cellColPadding, 
 			this.cellRowPadding * row * 2 + this.cellHeight * row + this.cellRowPadding,
 		);
+	}
+
+	public createCellUI(cell: Cell, rect: egret.Rectangle)
+	{
+		let ui: CellUI = new CellUI(cell);
+		ui.x = rect.x;
+		ui.y = rect.y;
+		ui.width = rect.width;
+		ui.height = rect.height;
+		return ui;
 	}
 
 	public renderMesh() : void
@@ -65,13 +73,8 @@ class gameUI extends layer.ui.Sprite {
 
 		for(let row of this.mesh.rowsEntries()) {
 			for(let col of this.mesh.colsEntries()) {
-				let cell: CellUI = new CellUI(this.mesh.cell(row, col));
-				let rect = this.getCellRectangle(row, col);
-				cell.x = rect.x;
-				cell.y = rect.y;
-				cell.width = rect.width;
-				cell.height = rect.height;
-				this.addChild(cell);
+				let cellUI: CellUI = this.createCellUI(this.mesh.cell(row, col), this.getCellRectangle(row, col));
+				this.addChild(cellUI);
 			}
 		}
 	}
@@ -130,10 +133,17 @@ class gameUI extends layer.ui.Sprite {
 		let promises: Promise<any>[] = [];
 		for(let group of filledCells.fills)
 		{
-			if (group.fromIndex >= 0) {
-				let cell: CellUI = this.getChildByCellIndex(group.toIndex);
-				if (cell)
-					promises.push(cell.moveTo(group.delta * 100, this.getCellPoint(group.toIndex)));
+			if (!group.creating) {
+				let cellUI: CellUI = this.getChildByCellIndex(group.toIndex);
+				if (cellUI)
+					promises.push(cellUI.moveTo(group.delta * 100, this.getCellPoint(group.toIndex)));
+			} else {
+				let rect:egret.Rectangle = this.getCellRectangle(group.delta - this.mesh.row(group.toIndex), this.mesh.col(group.toIndex));
+				rect.y = -rect.y;
+				let cellUI: CellUI = this.createCellUI(this.mesh.cell(group.toIndex), rect);
+				this.addChild(cellUI);
+
+				promises.push(cellUI.moveTo(group.delta * 100, this.getCellPoint(group.toIndex)));
 			}
 		}
 

@@ -37,11 +37,11 @@ class MeshWrite extends MeshRead {
 					if (i < exists.length) { //存在替补
 						if (exists[i] !== index) { // 不一样，则需要补充
 							let cell: Cell = this.cell(exists[i]);
-							filledCells.add(exists[i], index); //添加到结果集
+							filledCells.add(index, this.row(index) - this.row(exists[i])); //添加到结果集
 							cell.to(index); //将替补 移动到该位置
 						} 
 					} else { //不存在，则创建一个新的
-						filledCells.add(-1, index);
+						filledCells.add(index, crushedIndices.length, true); //新增的往上堆,所以新增的距离是相同的
 						let cell: Cell = this.createCell(index);
 						this.cells[index] = cell; //设置一个新的cell
 						cell.colorIndex = this.randomColorIndex(-1);

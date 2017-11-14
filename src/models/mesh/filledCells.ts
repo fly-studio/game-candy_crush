@@ -1,5 +1,5 @@
 interface FilledGroup {
-	fromIndex: number;
+	creating: boolean;
 	toIndex: number;
 	delta: number;
 }
@@ -14,12 +14,12 @@ class FilledCells {
 		this._fills = [];
 	}
 
-	public add(fromIndex: number, toIndex: number)
+	public add(toIndex: number, delta: number, creating: boolean = false)
 	{
 		let group: FilledGroup = {
-			fromIndex: fromIndex,
-			toIndex: toIndex,
-			delta: Math.abs(this.mesh.row(toIndex) - this.mesh.row(fromIndex)) + Math.abs(this.mesh.col(toIndex) - this.mesh.col(fromIndex))
+			creating,
+			toIndex,
+			delta
 		};
 		this._fills.push(group);
 	}

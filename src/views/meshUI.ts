@@ -63,7 +63,7 @@ class meshUI extends layer.ui.Sprite {
 			let filledCells:FilledCells = this.mesh.rebuildWithCrush(crushedCells);
 			await this.gameSprite.renderFill(filledCells);
 
-			crushedCells = this.mesh.crushedCells();break;
+			crushedCells = this.mesh.crushedCells();
 		}
 		this.animating = false;
 	}
