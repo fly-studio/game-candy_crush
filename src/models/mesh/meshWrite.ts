@@ -38,7 +38,7 @@ class MeshWrite extends MeshRead {
 						if (exists[i] !== index) { // 不一样，则需要补充
 							let cell: Cell = this.cell(exists[i]);
 							filledCells.add(exists[i], index); //添加到结果集
-							cell.to(this.cell(index)); //将替补 移动到该位置
+							cell.to(index); //将替补 移动到该位置
 						} 
 					} else { //不存在，则创建一个新的
 						filledCells.add(-1, index);

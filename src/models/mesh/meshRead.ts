@@ -21,19 +21,19 @@ class MeshRead extends MeshBase {
 	}
 
 	protected randomColorIndex(rowOrIndex: number, col?: number): number {
+		let random = (): number => {
+			let colorCount:number = this.cellColors.length;
+			return ~~(Math.random() * colorCount);
+		};
+		// 直接出结果
+		if (rowOrIndex < 0) return random(); 
+
 		let row: number = rowOrIndex;
 		if (col == null) {
 			row = this.row(rowOrIndex);
 			col = this.col(rowOrIndex);
 		}
 		if (this.block(row, col)) return -1; // 障碍物
-
-		let random = function(): number {
-			let colorCount:number = this.cellColors.length;
-			return ~~(Math.random() * colorCount);
-		}
-		// 直接出结果
-		if (rowOrIndex < 0) return random(); 
 
 		let colorIndex:number = -1;
 		let last2Row = row >= 2 ? this.cell(row - 2, col).colorIndex : -1; //纵列不能3个相同

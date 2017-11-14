@@ -37,12 +37,12 @@ class Cell {
 		toCell.index = index;
 	}
 
-	public to(toCell: Cell) : number {
-		this.mesh.cells[toCell.index] = this;
+	public to(toIndex: number) : number {
+		this.mesh.cells[toIndex] = this;
 		this.mesh.cells[this.index] = null;
 
 		let index: number = this.index;
-		this.index = toCell.index;
+		this.index = toIndex;
 		return index;
 	}
 
