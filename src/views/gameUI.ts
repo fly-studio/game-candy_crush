@@ -19,7 +19,7 @@ class gameUI extends layer.ui.Sprite {
 		this.cellWidth = (this.width - this.cellColPadding * this.mesh.cols * 2) / this.mesh.cols;
 		this.cellHeight = (this.height - this.cellRowPadding * this.mesh.rows * 2) / this.mesh.rows;
 
-		this.renderMesh()
+		this.renderMesh();
 	}
 
 	public onRemovedFromStage(e: egret.Event): void
@@ -51,6 +51,8 @@ class gameUI extends layer.ui.Sprite {
 			row = this.mesh.row(rowOrIndex);
 			col = this.mesh.col(rowOrIndex);
 		}
+		// 列永远为正
+		col = Math.abs(col);
 		return new egret.Point(
 			this.cellColPadding * col * 2 + this.cellWidth * col + this.cellColPadding, 
 			this.cellRowPadding * row * 2 + this.cellHeight * row + this.cellRowPadding,
@@ -95,34 +97,47 @@ class gameUI extends layer.ui.Sprite {
 	public renderCross(index: number) {
 		let crossUI = new CrossUI(this.getCellRectangle(index));
 		this.addChild(crossUI);
-		return crossUI.fadeOut(500); //十字架时间长一点
+		return crossUI.fadeOut(400); //十字架时间长一点
 	}
 
-	public renderCrush(crushCells: CrushCells) : Promise<any>
+	public renderCrush(crushedCells: CrushedCells) : Promise<any>
 	{
 		let promises : Promise<any>[] = [];
 		//十字消
-		for(let group of crushCells.crosses)
+		for(let group of crushedCells.crosses)
 		{
-			//移除十字架
+			//移除十字架所有cells
 			this.mesh.crossIndices(group.cellIndex).forEach(index => {
 				let cellUI: CellUI = this.getChildByCellIndex(index) as CellUI;
 				if (cellUI) cellUI.destroy();
 			});
 			promises.push(this.renderCross(group.cellIndex));
 		}
-		for(let group of crushCells.crushes)
+		//移除其它cells
+		for(let group of crushedCells.crushes)
 		{
 			group.cellIndices.forEach(index => {
 				let cellUI: CellUI = this.getChildByCellIndex(index) as CellUI;
-				if (cellUI) promises.push(cellUI.fadeOut(300)); //如果不是十字消，则消失
+				if (cellUI) promises.push(cellUI.fadeOut(300).then(() => {
+					cellUI.destroy(); 
+				})); //消失且移除
 			});
 		}
 		return Promise.all(promises);
 	}
 
-	public renderFill(filledCells) : Promise<any> {
-		return ;
+	public renderFill(filledCells:FilledCells) : Promise<any> {
+		let promises: Promise<any>[] = [];
+		for(let group of filledCells.fills)
+		{
+			if (group.fromIndex >= 0) {
+				let cell: CellUI = this.getChildByCellIndex(group.toIndex);
+				if (cell)
+					promises.push(cell.moveTo(group.delta * 100, this.getCellPoint(group.toIndex)));
+			}
+		}
+
+		return Promise.all(promises);
 	}
 
 	public getChildByCellIndex(index: number) : CellUI|null {

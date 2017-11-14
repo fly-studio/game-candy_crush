@@ -8,30 +8,29 @@ class CrossUI extends layer.ui.Sprite {
 	{
 		super();
 		this.crossRect = crossRect;
+	}
 
+	public onAddedToStage(event: egret.Event) : void {
 		this.width = this.parent.width;
 		this.height = this.parent.height;
 			
 		this.rowSprite = new layer.ui.BitmapUI("cross_png");
-		this.rowSprite.x = 0;
+		this.rowSprite.x = this.width * .45;
 		this.rowSprite.y = this.crossRect.y;
 		this.rowSprite.width = this.width;
 		this.rowSprite.height = this.crossRect.height;
-		this.rowSprite.scaleX = .7;
+		this.rowSprite.scaleX = .1;
 
 		this.addChild(this.rowSprite);
 
-		this.rowSprite = new layer.ui.BitmapUI("cross_png");
-		this.rowSprite.x = this.crossRect.x;
-		this.rowSprite.y = 0;
-		this.rowSprite.width = this.width;
-		this.rowSprite.height = this.crossRect.height;
-		this.rotation = 90;
-		this.rowSprite.scaleX = .7;
-	}
-
-	public onAddedToStage(event: egret.Event) : void {
+		this.colSprite = new layer.ui.BitmapUI("cross_v_png");
+		this.colSprite.x = this.crossRect.x;
+		this.colSprite.y = this.height * .45;
+		this.colSprite.width = this.crossRect.width;
+		this.colSprite.height = this.height;
+		this.colSprite.scaleY = .1;
 		
+		this.addChild(this.colSprite);
 	}
 
 	public onRemovedFromStage(event: egret.Event): void {
@@ -46,8 +45,8 @@ class CrossUI extends layer.ui.Sprite {
 		return Promise.all([
 			new Promise<any>((resolve) => {
 				egret.Tween.get(this.rowSprite).to({
-					scaleX: 1.2,
-					x: -this.rowSprite.width * 0.1
+					scaleX: 2,
+					x: -this.width * 0.5
 				}, duration * .8).to({
 					alpha: 0
 				}, duration * .2).call(() => {
@@ -56,8 +55,8 @@ class CrossUI extends layer.ui.Sprite {
 			}),
 			new Promise<any>((resolve) => {
 				egret.Tween.get(this.colSprite).to({
-					scaleX: 1.2,
-					y: -this.colSprite.width * 0.1
+					scaleY: 2,
+					y: -this.height * 0.5
 				}, duration * .8).to({
 					alpha: 0
 				}, duration * .2).call(() => {

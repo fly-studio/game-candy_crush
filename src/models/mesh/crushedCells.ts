@@ -1,24 +1,24 @@
-interface CrushGroup {
+interface CrushedGroup {
 	row: number;
 	col: number;
 	cellIndices: number[];
 };
 
-interface CrushCross {
+interface CrushedCross {
 	cellIndex: number;
-	group1: CrushGroup;
-	group2: CrushGroup;
+	group1: CrushedGroup;
+	group2: CrushedGroup;
 };
 
-class CrushCells {
-	private _crushes: CrushGroup[];
-	private _crosses: CrushCross[];
-	public grid: layer.Grid;
+class CrushedCells {
+	private _crushes: CrushedGroup[];
+	private _crosses: CrushedCross[];
+	public mesh: MeshBase;
 
-	constructor(grid: layer.Grid) {
-		this._crushes = new Array<CrushGroup>();
-		this._crosses = new Array<CrushCross>();
-		this.grid = grid;
+	constructor(mesh: MeshBase) {
+		this._crushes = new Array<CrushedGroup>();
+		this._crosses = new Array<CrushedCross>();
+		this.mesh = mesh;
 	}
 
 	/**
@@ -27,9 +27,13 @@ class CrushCells {
 	 * 注意：此处并不判断索引是否符合消除条件，需要在外面判断
 	 */
 	public addCells(cells: Cell[]) {
+		//cells中有block
+		if (cells.filter(cell => cell.block).length > 0)
+			throw new Error('some cells are block.');
+		//数量小于3		
 		if (cells.length < 3)
-			throw new Error('cells length must > 3');
-		let crush:CrushGroup = {
+			throw new Error('cells length must > 3.');
+		let crush:CrushedGroup = {
 			row: -1,
 			col: -1,
 			cellIndices: cells.map(v => v.index).sort((a, b) => a - b) //index asc
@@ -39,6 +43,9 @@ class CrushCells {
 			crush.row = cells[0].row;
 		} else if (cells[0].col == cells[1].col) {
 			crush.col = cells[0].col;
+		} else {
+			//这么巧，不同列、行
+			throw new Error('cells are not the same row or col.')
 		}
 		this._crushes.push(crush);
 
@@ -51,13 +58,13 @@ class CrushCells {
 	 */
 	private calcLastCross() {
 		let lastIndex: number = this._crushes.length - 1;
-		let last: CrushGroup = this.eq(lastIndex);
+		let last: CrushedGroup = this.eq(lastIndex);
 		for (var i = 0; i < this._crushes.length - 1; i++) { //最后一个不取
-			let group: CrushGroup = this.eq(i);
+			let group: CrushedGroup = this.eq(i);
 			if (group.row == group.row || group.col == group.col) continue; //都是行或列，则跳过
 			let crosses = _.intersection(last.cellIndices, group.cellIndices);
 			if (crosses.length) {
-				let cross: CrushCross = {
+				let cross: CrushedCross = {
 					cellIndex: crosses[0],
 					group1: last,
 					group2: group
@@ -76,12 +83,15 @@ class CrushCells {
 		if (withCross)
 		{
 			indices = indices.concat(...this._crosses.map( group => {
-				let row: number = this.grid.row(group.cellIndex);
-				let col: number = this.grid.col(group.cellIndex);
-				return this.grid.crossIndices(row, col); // 十字全消
+				let row: number = this.mesh.row(group.cellIndex);
+				let col: number = this.mesh.col(group.cellIndex);
+				return this.mesh.crossIndices(row, col); // 十字全消
 			}));
 		}
-		return _.uniq(indices).sort((a, b) => a - b); //去重 正序
+		return _.difference(
+			_.uniq(indices), //去重
+			this.mesh.blocks //去block项目
+		).sort((a, b) => a - b); // 正序
 	}
 
 	/**
@@ -99,10 +109,13 @@ class CrushCells {
 	public colCellIndices() : number[][] {
 		let formated : number[][] = new Array<number[]>();
 		let cells:number[] = this.cellIndices();
-		for(let col of this.grid.colsEntries()) // 按 列，内容倒序
+		for(let col of this.mesh.colsEntries()) // 按 列，内容倒序
 		{
 			formated.push(
-				_.intersection(this.grid.colIndices(col), cells).sort((a, b) => b - a)
+				_.difference(
+					_.intersection(this.mesh.colIndices(col), cells), //取当前列
+					this.mesh.blocks // 去block
+				).sort((a, b) => b - a) // 倒序
 			);
 		}
 		return formated;
@@ -120,10 +133,13 @@ class CrushCells {
 	public rowCellIndices() : number[][] {
 		let formated : number[][] = new Array<number[]>();
 		let cells:number[] = this.cellIndices();
-		for(let row of this.grid.rowsEntries()) // 按 行 内容正序
+		for(let row of this.mesh.rowsEntries()) // 按 行 内容正序
 		{
 			formated.push(
-				_.intersection(this.grid.rowIndices(row), cells).sort((a, b) => a - b)
+				_.difference(
+					_.intersection(this.mesh.rowIndices(row), cells), //取当前行
+					this.mesh.blocks // 去block					
+				).sort((a, b) => a - b) // 正序
 			);
 		}
 		return formated;
@@ -142,14 +158,14 @@ class CrushCells {
 	/**
 	 * 所有消除组
 	 */
-	public get crushes(): CrushGroup[] {
+	public get crushes(): CrushedGroup[] {
 		return this._crushes;
 	}
 
 	/**
 	 * 所有十字消除组
 	 */
-	public get crosses(): CrushCross[] {
+	public get crosses(): CrushedCross[] {
 		return this._crosses;
 	}
 
@@ -170,7 +186,7 @@ class CrushCells {
 	/**
 	 * 取第几个消除组
 	 */
-	public eq(index: number): CrushGroup {
+	public eq(index: number): CrushedGroup {
 		return this._crushes[index];
 	}
 

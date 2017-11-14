@@ -1,51 +1,55 @@
 class MeshWrite extends MeshRead {
 	//此类都是写入的函数
 
+	public createCell(rowOrIndex: number, col?: number) : Cell {
+		let index: number = rowOrIndex;
+		if (!isNaN(col))
+			index = this.index(rowOrIndex, col);
+		return new Cell(this, index);
+	}
+
 	public createMesh() : void
 	{
 		this.cells = [];
 		for(let row of this.rowsEntries()) {
 			for(let col of this.colsEntries()) {
-				let cell:Cell = new Cell(this, this.index(row, col));
-				this.cells.push(cell);
+				let cell: Cell = this.createCell(row, col);
+				this.cells.push(cell); //先加入
 				cell.colorIndex = this.randomColorIndex(row, col);
 			}
 		}
 	}
 
-	public clearRow(row: number) {
-		if (row < 0 || row >= this.rows) return;
-		for(let i: number = 0; i < this.length; ++i)
-		{
-			if (this.at(i).row == row)
-				this.cells[i] = null;
-		}
-	}
+	public rebuildWithCrush(crushedCells: CrushedCells) : FilledCells {
+		if (!crushedCells.hasCrushes)
+			throw new Error('crushedCells has no crushes.');
 
-	public clearCol(col: number) {
-		if (col < 0 || col >= this.cols) return;
-		for(let i: number = 0; i < this.length; ++i)
-		{
-			if (this.at(i).col == col)
-				this.cells[i] = null;
-		}
-	}
+		let colCells: number[][] = crushedCells.colCellIndices(); //Col DESC
+		let filledCells: FilledCells = new FilledCells(this);
 
-	public createRow(cols:number) : void {
-
-	}
-
-	public createCol(rows:number) : void {
-
-	}
-
-	public rebuildWithCrush(crushCells: CrushCells) : Cell[] {
-		if (!crushCells.hasCrushes) return [];
-
-		let gridCells: number[][] = crushCells.colCellIndices(); //DESC
-
-
-		return [];
+		colCells.forEach((crushedIndices, col) => {
+			if (crushedIndices.length > 0) { // 需填充
+				let list:any[] = [];
+				let colIndices: number[] = _.difference(this.colIndices(col), this.blocks).sort((a, b) => b - a); //当前列(去block) desc
+				let exists: number[] = _.difference(colIndices, crushedIndices).sort((a, b) => b - a); // 现在剩余的 desc
+				//尾部对齐，将上面的替补到下面
+				colIndices.forEach((index, i) => {
+					if (i < exists.length) { //存在替补
+						if (exists[i] !== index) { // 不一样，则需要补充
+							let cell: Cell = this.cell(exists[i]);
+							filledCells.add(exists[i], index); //添加到结果集
+							cell.to(this.cell(index)); //将替补 移动到该位置
+						} 
+					} else { //不存在，则创建一个新的
+						filledCells.add(-1, index);
+						let cell: Cell = this.createCell(index);
+						this.cells[index] = cell; //设置一个新的cell
+						cell.colorIndex = this.randomColorIndex(-1);
+					}
+				});
+			}
+		});
+		return filledCells;
 	}
 
 	public replace(fromCell:Cell, toCell:Cell) {
@@ -59,16 +63,16 @@ class MeshWrite extends MeshRead {
 		toCell.swap(fromCell);
 	}
 	
-	public swapWithCrush(fromCell:Cell, toCell:Cell) : CrushCells|null {
+	public swapWithCrush(fromCell:Cell, toCell:Cell) : CrushedCells|null {
 		//交换一次
 		this.swap(fromCell, toCell);
 
-		let crushCells: CrushCells = this.crushCells();
+		let crushedCells: CrushedCells = this.crushedCells();
 
-		if (!crushCells.isCellIndicesCrushed(fromCell.index, toCell.index)) //没有可以消的 //交换回来
+		if (!crushedCells.isCellIndicesCrushed(fromCell.index, toCell.index)) //没有可以消的 //交换回来
 			this.swap(fromCell, toCell);
 		
-		return crushCells;
+		return crushedCells;
 	}
 
 	public getCellByPostion(fromCell:Cell, position:layer.sharp.POSITION) : Cell {

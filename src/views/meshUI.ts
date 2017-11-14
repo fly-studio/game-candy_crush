@@ -51,19 +51,19 @@ class meshUI extends layer.ui.Sprite {
 		this.removeEventListener(CellEvent.CELL_SELECT, this.onCellSelect, this);
 	}
 
-	public async swapAndCrush(fromCell: Cell, toCell:Cell, crushCells: CrushCells)
+	public async swapAndCrush(fromCell: Cell, toCell:Cell, crushedCells: CrushedCells)
 	{
 		this.animating = true;
 		
-		await this.gameSprite.renderSwap(fromCell, toCell, !crushCells.isCellIndicesCrushed(fromCell.index, toCell.index));
+		await this.gameSprite.renderSwap(fromCell, toCell, !crushedCells.isCellIndicesCrushed(fromCell.index, toCell.index));
 
-		while (crushCells.hasCrushes)
+		while (crushedCells.hasCrushes)
 		{
-			await this.gameSprite.renderCrush(crushCells);
-			let filledCells = this.mesh.rebuildWithCrush(crushCells);
+			await this.gameSprite.renderCrush(crushedCells);
+			let filledCells:FilledCells = this.mesh.rebuildWithCrush(crushedCells);
 			await this.gameSprite.renderFill(filledCells);
 
-			crushCells = this.mesh.crushCells();break;
+			crushedCells = this.mesh.crushedCells();break;
 		}
 		this.animating = false;
 	}
@@ -75,8 +75,8 @@ class meshUI extends layer.ui.Sprite {
 
 		let cell: Cell = this.mesh.getCellByPostion(event.cell, event.position);
 		if (cell instanceof Cell) { // valid
-			let crushCells: CrushCells  = this.mesh.swapWithCrush(event.cell, cell); //计算可以消失的cells
-			this.swapAndCrush(event.cell, cell, crushCells);
+			let crushedCells: CrushedCells  = this.mesh.swapWithCrush(event.cell, cell); //计算可以消失的cells
+			this.swapAndCrush(event.cell, cell, crushedCells);
 		}
 	}
 
@@ -90,8 +90,8 @@ class meshUI extends layer.ui.Sprite {
 				(Math.abs(event.cell.row - this.selectedCell.row) == 1 && event.cell.col == this.selectedCell.col)
 				|| (Math.abs(event.cell.col - this.selectedCell.col) == 1 && event.cell.row == this.selectedCell.row)
 			) { //只差距1格
-				let crushCells: CrushCells  = this.mesh.swapWithCrush(event.cell, this.selectedCell); //计算可以消失的cells
-				this.swapAndCrush(event.cell, this.selectedCell, crushCells);
+				let crushedCells: CrushedCells  = this.mesh.swapWithCrush(event.cell, this.selectedCell); //计算可以消失的cells
+				this.swapAndCrush(event.cell, this.selectedCell, crushedCells);
 				
 				this.selectedCell = null;
 			} else { //隔太远 重新点击

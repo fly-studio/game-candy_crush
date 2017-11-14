@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json",
+			"keys": "bg_jpg,egret_icon_png,description_json,cross_v_png",
 			"name": "preload"
 		},
 		{
@@ -39,6 +39,11 @@
 			"url": "assets/crush/disappear.png",
 			"type": "image",
 			"name": "disappear_png"
+		},
+		{
+			"name": "cross_v_png",
+			"type": "image",
+			"url": "assets/crush/cross_v.png"
 		}
 	]
 }

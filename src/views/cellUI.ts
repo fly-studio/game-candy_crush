@@ -58,6 +58,7 @@ class CellUI extends layer.ui.Sprite {
 
 	public onRemovedFromStage(event: egret.Event): void {
 		this.removeAllEventListeners();
+		this.cell = null; //避免内存泄露
 	}
 
 	public removeAllEventListeners(): void {
@@ -70,9 +71,7 @@ class CellUI extends layer.ui.Sprite {
 	public moveTo(duration:number, ...args: egret.Point[]) : Promise<any> {
 		//let dfd : DeferredPromise = new DeferredPromise;
 		return new Promise<any>((resolve, reject) => {
-			let tween: egret.Tween = egret.Tween.get(this, {
-				loop: false,
-			});
+			let tween: egret.Tween = egret.Tween.get(this);
 			args.forEach(p => tween = tween.to({x: p.x, y: p.y}, duration));
 			tween.call(() => {
 				let text: egret.TextField = this.getChildByName('index') as egret.TextField;
@@ -88,10 +87,10 @@ class CellUI extends layer.ui.Sprite {
 		let factory: egret.MovieClipDataFactory = new egret.MovieClipDataFactory(RES.getRes('disappear_json'), RES.getRes('disappear_png'));
 		let data: egret.MovieClipData = factory.generateMovieClipData('crushing');
 		// duration / frameCount = 1000 / frameRate == 每帧时间
-		// frameRate * duration = 1000 * frameCount
 		data.frameRate = data.frames.length * 1000 / duration; // 重新计算帧率
 		let mc: egret.MovieClip = new egret.MovieClip(data);
-		mc.x = this.width / 2; mc.y = this.height / 2;
+		mc.x = this.width / 2;
+		mc.y = this.height / 2;
 		mc.width = this.width;
 		mc.height = this.height;
 		this.addChild(mc);
@@ -100,8 +99,6 @@ class CellUI extends layer.ui.Sprite {
 				resolve();
 			}, this);
 			mc.gotoAndPlay('disappear', 1);
-		}).then(() => {
-			this.destroy();
 		});
 	}
 
