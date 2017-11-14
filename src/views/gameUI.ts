@@ -32,13 +32,28 @@ class gameUI extends layer.ui.Sprite {
 
 	}
 
-	public getCellRectangle(row: number, col: number) : egret.Rectangle
+	public getCellRectangle(rowOrIndex: number, col?: number) : egret.Rectangle
 	{
+		let position: egret.Point = this.getCellPoint(rowOrIndex, col);
 		return new egret.Rectangle(
-			this.cellColPadding * col * 2 + this.cellWidth * col + this.cellColPadding, 
-			this.cellRowPadding * row * 2 + this.cellHeight * row + this.cellRowPadding,
+			position.x,
+			position.y,
 			this.cellWidth,
 			this.cellHeight
+		);
+	}
+
+	public getCellPoint(rowOrIndex: number, col?: number) : egret.Point
+	{
+		let row: number = rowOrIndex;
+		if (col == null)
+		{
+			row = this.mesh.row(rowOrIndex);
+			col = this.mesh.col(rowOrIndex);
+		}
+		return new egret.Point(
+			this.cellColPadding * col * 2 + this.cellWidth * col + this.cellColPadding, 
+			this.cellRowPadding * row * 2 + this.cellHeight * row + this.cellRowPadding,
 		);
 	}
 
@@ -46,8 +61,8 @@ class gameUI extends layer.ui.Sprite {
 	{
 		this.removeChildren();
 
-		for(let row: number = 0; row < this.mesh.rows; ++row) {
-			for(let col:number = 0; col < this.mesh.cols; col++) {
+		for(let row of this.mesh.rowsEntries()) {
+			for(let col of this.mesh.colsEntries()) {
 				let cell: CellUI = new CellUI(this.mesh.cell(row, col));
 				let rect = this.getCellRectangle(row, col);
 				cell.x = rect.x;
@@ -68,18 +83,42 @@ class gameUI extends layer.ui.Sprite {
 		let promises : Promise<any>[] = [];
 		if (swapBack)
 		{
-			promises.push(fromCellUI.moveTo(200, toCellUI.position, fromCellUI.position));
-			promises.push(toCellUI.moveTo(200, fromCellUI.position, toCellUI.position));
+			promises.push(fromCellUI.moveTo(200, this.getCellPoint(toCell.index), this.getCellPoint(fromCell.index)));
+			promises.push(toCellUI.moveTo(200, this.getCellPoint(fromCell.index), this.getCellPoint(toCell.index)));
 		} else {
-			promises.push(fromCellUI.moveTo(200, toCellUI.position));
-			promises.push(toCellUI.moveTo(200, fromCellUI.position));
+			promises.push(fromCellUI.moveTo(200, this.getCellPoint(fromCell.index)));
+			promises.push(toCellUI.moveTo(200, this.getCellPoint(toCell.index)));
 		}
 		return Promise.all(promises);
 	}
 
+	public renderCross(index: number) {
+		let crossUI = new CrossUI(this.getCellRectangle(index));
+		this.addChild(crossUI);
+		return crossUI.fadeOut(500); //十字架时间长一点
+	}
+
 	public renderCrush(crushCells: CrushCells) : Promise<any>
 	{
-		return ;
+		let promises : Promise<any>[] = [];
+		//十字消
+		for(let group of crushCells.crosses)
+		{
+			//移除十字架
+			this.mesh.crossIndices(group.cellIndex).forEach(index => {
+				let cellUI: CellUI = this.getChildByCellIndex(index) as CellUI;
+				if (cellUI) cellUI.destroy();
+			});
+			promises.push(this.renderCross(group.cellIndex));
+		}
+		for(let group of crushCells.crushes)
+		{
+			group.cellIndices.forEach(index => {
+				let cellUI: CellUI = this.getChildByCellIndex(index) as CellUI;
+				if (cellUI) promises.push(cellUI.fadeOut(300)); //如果不是十字消，则消失
+			});
+		}
+		return Promise.all(promises);
 	}
 
 	public renderFill(filledCells) : Promise<any> {

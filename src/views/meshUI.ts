@@ -55,7 +55,7 @@ class meshUI extends layer.ui.Sprite {
 	{
 		this.animating = true;
 		
-		await this.gameSprite.renderSwap(fromCell, toCell, !crushCells.cellIndicesCrushed(fromCell.index, toCell.index));
+		await this.gameSprite.renderSwap(fromCell, toCell, !crushCells.isCellIndicesCrushed(fromCell.index, toCell.index));
 
 		while (crushCells.hasCrushes)
 		{

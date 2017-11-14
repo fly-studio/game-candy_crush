@@ -1,22 +1,12 @@
-class MeshData extends layer.Grid {
-	public cells:Cell[];
-	
-	public cellColors: number[];
-	public blocks:number[];
+class MeshRead extends MeshBase {
+	//此类都是读取的函数
 
-	constructor(rows:number, cols:number) {
-		super(rows, cols);
-		this.blocks = [];
-		this.cellColors = [];
-		this.cells = [];
+	public color(rowOrIndex: number, col?: number) : number | null {
+		return this.cell(rowOrIndex, col).color;
 	}
 
-	public color(row: number, col: number) : number | null {
-		return this.cell(row, col).color;
-	}
-
-	public block(row: number, col: number) : boolean {
-		return this.cell(row, col).block;
+	public block(rowOrIndex: number, col?: number) : boolean {
+		return this.cell(rowOrIndex, col).block;
 	}
 
 	public at(index:number) : Cell|null {
@@ -25,8 +15,8 @@ class MeshData extends layer.Grid {
 		return this.cells[index];
 	}
 
-	public cell(row:number, col:number): Cell {
-		let index: number = this.index(row, col);
+	public cell(rowOrIndex:number, col?:number): Cell {
+		let index: number = col == null ? rowOrIndex : this.index(rowOrIndex, col);
 		return this.at(index);
 	}
 
@@ -65,8 +55,8 @@ class MeshData extends layer.Grid {
 			}
 		};
 		// 横
-		for(let row:number = 0; row < this.rows; row++) {
-			for(let col:number = 0; col < this.cols; col++) { 
+		for(let row of this.rowsEntries()) {
+			for(let col of this.colsEntries()) { 
 				let cell:Cell = this.cell(row, col);
 				compare(cell);
 				if (col == this.cols - 1) { // 到列尾
@@ -76,8 +66,8 @@ class MeshData extends layer.Grid {
 		}
 		cells.splice(0); // clear
 		//列
-		for(let col:number = 0; col < this.cols; col++) {
-			for(let row:number = 0; row < this.rows; row++) {
+		for(let col of this.colsEntries()) {
+			for(let row of this.rowsEntries()) {
 				let cell:Cell = this.cell(row, col);
 				compare(cell);
 				if (row == this.rows - 1) { // 到行尾

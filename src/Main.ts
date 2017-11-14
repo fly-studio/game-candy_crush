@@ -62,7 +62,7 @@ class Main extends egret.DisplayObjectContainer {
 			path: "resource/"
 		});
 
-		loadingView.groupList.push("preload");
+		loadingView.groupList = ["preload", "crush"];
 		loadingView.load().then(v => {
 			loadingView.destroy();
 			this.createGameScene();

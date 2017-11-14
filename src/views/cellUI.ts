@@ -82,9 +82,32 @@ class CellUI extends layer.ui.Sprite {
 		});
 	}
 
+	public fadeOut(duration: number) : Promise<any> {
+		this.removeChildren();
+		this.graphics.clear();
+		let factory: egret.MovieClipDataFactory = new egret.MovieClipDataFactory(RES.getRes('disappear_json'), RES.getRes('disappear_png'));
+		let data: egret.MovieClipData = factory.generateMovieClipData('crushing');
+		// duration / frameCount = 1000 / frameRate == 每帧时间
+		// frameRate * duration = 1000 * frameCount
+		data.frameRate = data.frames.length * 1000 / duration; // 重新计算帧率
+		let mc: egret.MovieClip = new egret.MovieClip(data);
+		mc.x = this.width / 2; mc.y = this.height / 2;
+		mc.width = this.width;
+		mc.height = this.height;
+		this.addChild(mc);
+		return new Promise<any>(resolve => {
+			mc.once(egret.Event.COMPLETE, () => {
+				resolve();
+			}, this);
+			mc.gotoAndPlay('disappear', 1);
+		}).then(() => {
+			this.destroy();
+		});
+	}
+
 	public onTouchBegin(event: egret.TouchEvent) {
 		if (this.cell.block) return;
-		console.log('touch-begin:', this.cell.index);
+		//console.log('touch-begin:', this.cell.index);
 
 		this.touchPoint.x = event.stageX;
 		this.touchPoint.y = event.stageY;

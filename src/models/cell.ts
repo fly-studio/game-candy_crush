@@ -1,9 +1,9 @@
 class Cell {
-	public mesh: Mesh;
+	public mesh: MeshBase;
 	public index:number;
 	public colorIndex:number = -1;
 
-	constructor(mesh: Mesh, index:number) {
+	constructor(mesh: MeshBase, index:number) {
 		this.mesh = mesh;
 		this.index = index;
 	}

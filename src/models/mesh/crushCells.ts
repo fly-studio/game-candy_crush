@@ -21,6 +21,11 @@ class CrushCells {
 		this.grid = grid;
 	}
 
+	/**
+	 * 添加消除组
+	 * 
+	 * 注意：此处并不判断索引是否符合消除条件，需要在外面判断
+	 */
 	public addCells(cells: Cell[]) {
 		if (cells.length < 3)
 			throw new Error('cells length must > 3');
@@ -40,13 +45,17 @@ class CrushCells {
 		this.calcLastCross(); //检查最后一个的交集
 	}
 
+	/**
+	 * 每次添加一个消除组时
+	 * 计算与之前组，是否包含十字消
+	 */
 	private calcLastCross() {
-		let lastIndex: number = this.length - 1;
+		let lastIndex: number = this._crushes.length - 1;
 		let last: CrushGroup = this.eq(lastIndex);
-		for (var i = 0; i < this.length - 1; i++) { //最后一个不取
+		for (var i = 0; i < this._crushes.length - 1; i++) { //最后一个不取
 			let group: CrushGroup = this.eq(i);
 			if (group.row == group.row || group.col == group.col) continue; //都是行或列，则跳过
-			let crosses = layer.array.intersect(last.cellIndices, group.cellIndices);
+			let crosses = _.intersection(last.cellIndices, group.cellIndices);
 			if (crosses.length) {
 				let cross: CrushCross = {
 					cellIndex: crosses[0],
@@ -57,54 +66,110 @@ class CrushCells {
 			}
 		}
 	}
-
-	public get cellWithoutCrossIndices() : number[] {
-		let cells:number[] = [].concat(...this.crushes.map(group => group.cellIndices));
-		return layer.array.unique(cells);
+	/**
+	 * 取所有可以消除的索引
+	 * 
+	 * @param withCross [false] 是否包含十字消的索引
+	 */
+	public cellIndices(withCross:boolean = true) : number[] {
+		let indices: number[] = [].concat(...this._crushes.map(group => group.cellIndices));
+		if (withCross)
+		{
+			indices = indices.concat(...this._crosses.map( group => {
+				let row: number = this.grid.row(group.cellIndex);
+				let col: number = this.grid.col(group.cellIndex);
+				return this.grid.crossIndices(row, col); // 十字全消
+			}));
+		}
+		return _.uniq(indices).sort((a, b) => a - b); //去重 正序
 	}
 
-	public get cellIndices() : number[] {
-		let cells:number[] = this.cellWithoutCrossIndices.concat(...this._crosses.map( group => {
-			let row = this.grid.row(group.cellIndex);
-			let col = this.grid.col(group.cellIndex);
-			return this.grid.crossIndices(row, col);
-		}));
-		return layer.array.unique(cells);
-	}
-
-	public get formatedCellIndices() : number[][] {
+	/**
+	 * 按列取需要消除的索引
+	 * 
+	 * 返回
+	 * [
+	 * 	[0, 9, 18], // 0 列
+	 *  [x, x, x], // 1 列
+	 *  ... // N 列
+	 * ]
+	 * 
+	 * }
+	 */
+	public colCellIndices() : number[][] {
 		let formated : number[][] = new Array<number[]>();
-		let cells:number[] = this.cellIndices;
-		for(let row of this.grid.rowsEntries())
+		let cells:number[] = this.cellIndices();
+		for(let col of this.grid.colsEntries()) // 按 列，内容倒序
 		{
 			formated.push(
-				layer.array.intersect(this.grid.rowIndices(row), cells) //当行的交集
+				_.intersection(this.grid.colIndices(col), cells).sort((a, b) => b - a)
+			);
+		}
+		return formated;
+	}
+	/**
+	 * 按行取需要消除的索引
+	 * 
+	 * 返回
+	 * [
+	 * 	[0, 1, 2], // 0 行
+	 *  [x, x, x], // 1 行
+	 *  ... // N 行
+	 * ]
+	 */
+	public rowCellIndices() : number[][] {
+		let formated : number[][] = new Array<number[]>();
+		let cells:number[] = this.cellIndices();
+		for(let row of this.grid.rowsEntries()) // 按 行 内容正序
+		{
+			formated.push(
+				_.intersection(this.grid.rowIndices(row), cells).sort((a, b) => a - b)
 			);
 		}
 		return formated;
 	}
 
-	public cellIndicesCrushed(...args: number[]) : boolean
+	/**
+	 * 该索引是否在消除组列表中
+	 * 注意：输入多个索引，只要一个匹配即返回 TRUE
+	 * 
+	 */
+	public isCellIndicesCrushed(...args: number[]) : boolean
 	{
-		return layer.array.intersect(this.cellWithoutCrossIndices, args).length > 0;
+		return _.intersection(this.cellIndices(false), args).length > 0;
 	}
 
+	/**
+	 * 所有消除组
+	 */
 	public get crushes(): CrushGroup[] {
 		return this._crushes;
 	}
 
+	/**
+	 * 所有十字消除组
+	 */
 	public get crosses(): CrushCross[] {
 		return this._crosses;
 	}
 
+	/**
+	 * 是否有消除
+	 */
 	public get hasCrushes() : boolean {
-		return this.length > 0;
+		return this._crushes.length > 0;
 	}
 
+	/**
+	 * 是否有十字消
+	 */
 	public get hasCrosses() : boolean {
 		return this.crosses.length > 0;
 	}
 
+	/**
+	 * 取第几个消除组
+	 */
 	public eq(index: number): CrushGroup {
 		return this._crushes[index];
 	}
@@ -120,11 +185,7 @@ class CrushCells {
 	/**
 	 * 消掉的单元格数量(包括 Cross)
 	 */
-	public get cellsLength() : number {
-		return this.cellIndices.length;
-	}
-
 	public get length() : number {
-		return this._crushes.length;
+		return this.cellIndices().length;
 	}
 }

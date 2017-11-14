@@ -7,18 +7,22 @@
 		"libs/modules/tween/tween.js",
 		"libs/modules/socket/socket.js",
 		"promise/bin/promise.js",
+		"libs/modules/lodash/lodash.js",
 		"libs/modules/features/features.js",
 		"libs/modules/layer/layer.js"
 	],
 	"game": [
-		"bin-debug/models/mesh/meshData.js",
+		"bin-debug/models/mesh/meshBase.js",
+		"bin-debug/models/mesh/meshRead.js",
+		"bin-debug/models/mesh/meshWrite.js",
+		"bin-debug/models/mesh.js",
+		"bin-debug/models/mesh/crushCells.js",
 		"bin-debug/Main.js",
 		"bin-debug/events/CellEvent.js",
 		"bin-debug/models/cell.js",
-		"bin-debug/models/mesh.js",
-		"bin-debug/models/mesh/crushCells.js",
 		"bin-debug/utils/math.js",
 		"bin-debug/views/cellUI.js",
+		"bin-debug/views/crossUI.js",
 		"bin-debug/views/gameUI.js",
 		"bin-debug/views/meshUI.js"
 	]

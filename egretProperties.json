@@ -30,6 +30,10 @@
       "path": "./promise"
     },
     {
+      "name": "lodash",
+      "path": "../libs/lodash"
+    },
+    {
       "name": "features",
       "path": "../libs/features"
     },
