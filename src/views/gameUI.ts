@@ -132,7 +132,7 @@ class GameUI extends layer.ui.Sprite {
 
 			crushedCells = this.mesh.crushedCells();
 		}
-		this.enabled = true;
+		this.enabled = this.running;
 	}
 
 	private onCellDrag(event:CellEvent) {
