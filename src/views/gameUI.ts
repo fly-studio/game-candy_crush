@@ -1,178 +1,167 @@
-class gameUI extends layer.ui.Sprite {
-	private mesh: Mesh;
-	public readonly cellColPadding: number = 7.5;
-	public readonly cellRowPadding: number = 5;
-	private cellWidth:number;
-	private cellHeight:number;
+class GameUI extends layer.ui.Sprite {
+	public mesh: Mesh;
+	private meshSprite: MeshUI;
+	private _selectedCell: Cell;
+	private score: number = 0;
 
-	constructor(mesh: Mesh) {
+
+	private enabled: boolean = false;
+	private running: boolean = false;
+	private countdown: layer.timer.Countdown;
+
+	constructor() {
 		super();
-		this.mesh = mesh;
 
-		this.mesh.createMesh();
+		this.mesh = new Mesh(9, 9);
+		/*this.mesh.cellColors = [
+			0xff0000,
+			0x00ff00,
+			0x0000ff,
+			0xff00ff,
+			0x00ffff
+		];*/
+		this.mesh.cellColors = [
+			'metro_1_png',
+			'metro_2_png',
+			'metro_3_png',
+			'metro_4_png',
+			'metro_5_png'
+		];
+		this._selectedCell = null;
+		this.countdown = new layer.timer.Countdown(60 * 1000);
 	}
 
-	public onAddedToStage(e: egret.Event): void
-	{
-		this.width = this.parent.width;
-		this.height = this.parent.height;
-		this.cellWidth = (this.width - this.cellColPadding * this.mesh.cols * 2) / this.mesh.cols;
-		this.cellHeight = (this.height - this.cellRowPadding * this.mesh.rows * 2) / this.mesh.rows;
-
-		this.renderMesh();
+	public set selectedCell(value: Cell) {
+		this._selectedCell = value;
+		this.meshSprite.select(value);
 	}
 
-	public onRemovedFromStage(e: egret.Event): void
-	{
-
+	public get selectedCell() : Cell|null {
+		return this._selectedCell;
 	}
 
-	public removeAllEventListeners(): void
-	{
+	private incrementScore(value: number) : void {
+		this.score += value;
 
+		// 分数动画，以及create / prefect
+
+		let text: egret.TextField = this.getChildByName('score') as egret.TextField;
+		if (text) text.text = this.score + '分';
 	}
 
-	public getCellRectangle(rowOrIndex: number, col?: number) : egret.Rectangle
-	{
-		let position: egret.Point = this.getCellPoint(rowOrIndex, col);
-		return new egret.Rectangle(
-			position.x,
-			position.y,
-			this.cellWidth,
-			this.cellHeight
-		);
+	public start() {
+		this.enabled = true;
+		this.running = true;
+		this.score = 0;
+		this.countdown.start(70);
+		this.countdownRender().then(v => this.stop()); //直到倒计时结束
 	}
 
-	public getCellPoint(rowOrIndex: number, col?: number) : egret.Point
+	public stop() {
+		this.enabled = false;
+		this.running = false;
+	}
+
+	public onAddedToStage(event: egret.Event) : void {
+
+		this.addEventListener(CellEvent.CELL_DRAG, this.onCellDrag, this);
+		this.addEventListener(CellEvent.CELL_SELECT, this.onCellSelect, this);
+		
+		this.meshSprite = new MeshUI(this.mesh);
+		this.meshSprite.width = this.stage.stageWidth * .95;
+		this.meshSprite.height = this.stage.stageHeight * .5;
+		this.meshSprite.x = this.stage.stageWidth * .025;
+		this.meshSprite.y = this.stage.stageHeight * 0.2;
+		this.addChild(this.meshSprite);
+
+		let cdText: egret.TextField = new egret.TextField;
+		cdText.name = 'countdown';
+		cdText.x = 20;
+		cdText.y = 150;
+		cdText.text = "剩余：60.00 秒";
+		cdText.textColor = 0xffffff;
+		cdText.size = 35;
+		this.addChild(cdText);
+
+		let scoreText: egret.TextField = new egret.TextField;
+		scoreText.name = 'score';
+		scoreText.x = 500;
+		scoreText.y = 150;
+		scoreText.text = "0 分";
+		scoreText.textColor = 0xffffff;
+		scoreText.size = 35;
+
+		this.addChild(scoreText);
+
+		this.start();
+	}
+
+	public onRemovedFromStage(event: egret.Event): void {
+		this.removeAllEventListeners();
+	}
+
+	public removeAllEventListeners(): void {
+		this.removeEventListener(CellEvent.CELL_DRAG, this.onCellDrag, this);
+		this.removeEventListener(CellEvent.CELL_SELECT, this.onCellSelect, this);
+	}
+
+	public async countdownRender()
 	{
-		let row: number = rowOrIndex;
-		if (col == null)
-		{
-			row = this.mesh.row(rowOrIndex);
-			col = this.mesh.col(rowOrIndex);
+		let remaining: number;
+		let text: egret.TextField = this.getChildByName('countdown') as egret.TextField;
+		while(remaining = await this.countdown.remainingPromise()) {
+			if (text) text.text = "剩余："+ (remaining > 0 ? (remaining / 1000).toFixed(3) : 0) +" 秒";
 		}
-		return new egret.Point(
-			this.cellColPadding * col * 2 + this.cellWidth * col + this.cellColPadding, 
-			this.cellRowPadding * row * 2 + this.cellHeight * row + this.cellRowPadding,
-		);
+		if (text) text.text = "剩余：0 秒";
 	}
 
-	public createCellUI(cell: Cell, rect: egret.Rectangle)
+	public async swapAndCrush(fromCell: Cell, toCell:Cell, crushedCells: CrushedCells)
 	{
-		let ui: CellUI = new CellUI(cell);
-		ui.x = rect.x;
-		ui.y = rect.y;
-		ui.width = rect.width;
-		ui.height = rect.height;
-		return ui;
+		this.enabled = false;
+		
+		await this.meshSprite.renderSwap(fromCell, toCell, !crushedCells.isCellIndicesCrushed(fromCell.index, toCell.index));
+
+		while (crushedCells.hasCrushes && this.running)
+		{
+			this.selectedCell = null;
+			this.incrementScore(crushedCells.length);
+			
+			await this.meshSprite.renderCrush(crushedCells);
+			let filledCells:FilledCells = this.mesh.rebuildWithCrush(crushedCells);
+			await this.meshSprite.renderFill(filledCells);
+
+			crushedCells = this.mesh.crushedCells();
+		}
+		this.enabled = true;
 	}
 
-	public renderMesh() : void
-	{
-		this.removeChildren();
+	private onCellDrag(event:CellEvent) {
+		if(event.cell.block || !this.enabled) return;
 
-		for(let row of this.mesh.rowsEntries()) {
-			for(let col of this.mesh.colsEntries()) {
-				let cellUI: CellUI = this.createCellUI(this.mesh.cell(row, col), this.getCellRectangle(row, col));
-				this.addChild(cellUI);
+		this.selectedCell = event.cell;
+
+		let cell: Cell = this.mesh.getCellByPostion(event.cell, event.position);
+		if (cell instanceof Cell) { // valid
+			let crushedCells: CrushedCells  = this.mesh.swapWithCrush(event.cell, cell); //计算可以消失的cells
+			this.swapAndCrush(event.cell, cell, crushedCells);
+		}
+	}
+
+	private onCellSelect(event:CellEvent) {
+		if(event.cell.block || !this.enabled) return;
+
+		if (!this.selectedCell) {
+			this.selectedCell = event.cell;
+		} else if (this.selectedCell instanceof Cell) {
+			if (
+				(Math.abs(event.cell.row - this.selectedCell.row) == 1 && event.cell.col == this.selectedCell.col)
+				|| (Math.abs(event.cell.col - this.selectedCell.col) == 1 && event.cell.row == this.selectedCell.row)
+			) { //只差距1格
+				let crushedCells: CrushedCells  = this.mesh.swapWithCrush(event.cell, this.selectedCell); //计算可以消失的cells
+				this.swapAndCrush(event.cell, this.selectedCell, crushedCells);
+			} else { //隔太远 重新点击
+				this.selectedCell = event.cell;
 			}
 		}
 	}
-
-	public renderSwap(fromCell: Cell, toCell:Cell, swapBack:boolean) : Promise<any>
-	{
-		let fromCellUI: CellUI = this.getChildByCellIndex(fromCell.index) as CellUI;
-		let toCellUI: CellUI = this.getChildByCellIndex(toCell.index) as CellUI;
-		console.log('swap: ', fromCell.index, toCell.index);
-
-		let promises : Promise<any>[] = [];
-		if (swapBack)
-		{
-			promises.push(fromCellUI.moveTo(200, this.getCellPoint(toCell.index), this.getCellPoint(fromCell.index)));
-			promises.push(toCellUI.moveTo(200, this.getCellPoint(fromCell.index), this.getCellPoint(toCell.index)));
-		} else {
-			promises.push(fromCellUI.moveTo(200, this.getCellPoint(fromCell.index)));
-			promises.push(toCellUI.moveTo(200, this.getCellPoint(toCell.index)));
-		}
-		return Promise.all(promises);
-	}
-
-	public renderCross(index: number) {
-		let crossUI = new CrossUI(this.getCellRectangle(index));
-		this.addChild(crossUI);
-		return crossUI.fadeOut(400); //十字架时间长一点
-	}
-
-	public renderCrush(crushedCells: CrushedCells) : Promise<any>
-	{
-		let promises : Promise<any>[] = [];
-		//十字消
-		for(let group of crushedCells.crosses)
-		{
-			//移除十字架所有cells
-			this.mesh.crossIndices(group.cellIndex).forEach(index => {
-				let cellUI: CellUI = this.getChildByCellIndex(index) as CellUI;
-				if (cellUI) cellUI.destroy();
-			});
-			promises.push(this.renderCross(group.cellIndex));
-		}
-		//移除其它cells
-		for(let group of crushedCells.crushes)
-		{
-			group.cellIndices.forEach(index => {
-				let cellUI: CellUI = this.getChildByCellIndex(index) as CellUI;
-				if (cellUI) promises.push(cellUI.fadeOut(300).then(() => {
-					cellUI.destroy(); 
-				})); //消失且移除
-			});
-		}
-		return Promise.all(promises);
-	}
-
-	public renderFill(filledCells:FilledCells) : Promise<any> {
-		let promises: Promise<any>[] = [];
-		for(let group of filledCells.fills)
-		{
-			if (!group.creating) {
-				let cellUI: CellUI = this.getChildByCellIndex(group.toIndex);
-				if (cellUI)
-					promises.push(cellUI.moveTo(group.delta * 100, this.getCellPoint(group.toIndex)));
-			} else {
-				let rect:egret.Rectangle = this.getCellRectangle(group.delta - this.mesh.row(group.toIndex), this.mesh.col(group.toIndex));
-				rect.y = -rect.y;
-				let cellUI: CellUI = this.createCellUI(this.mesh.cell(group.toIndex), rect);
-				this.addChild(cellUI);
-
-				promises.push(cellUI.moveTo(group.delta * 100, this.getCellPoint(group.toIndex)));
-			}
-		}
-
-		return Promise.all(promises);
-	}
-
-	public getChildByCellIndex(index: number) : CellUI|null {
-		for (let i = 0; i < this.numChildren; i++) {
-			let element: CellUI = this.getChildAt(i) as CellUI;
-			if (element.cell.index == index)
-				return element;
-		}
-		return null;
-	}
-
-	public clearSelected() : void {
-		for (let i = 0; i < this.numChildren; i++) {
-			let element: CellUI = this.getChildAt(i) as CellUI;
-			element.selected = false;
-		}
-	}
-
-	public select(cell: Cell) : void {
-		this.clearSelected();
-		if (!cell) return;
-		let element: CellUI = this.getChildByCellIndex(cell.index);
-		if (element instanceof CellUI)
-			element.selected = true;
-	}
-
-
 }

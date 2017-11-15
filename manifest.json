@@ -23,7 +23,8 @@
 		"bin-debug/models/cell.js",
 		"bin-debug/utils/math.js",
 		"bin-debug/views/cellUI.js",
-		"bin-debug/views/crossUI.js",
+		"bin-debug/views/crossColUI.js",
+		"bin-debug/views/crossRowUI.js",
 		"bin-debug/views/gameUI.js",
 		"bin-debug/views/meshUI.js"
 	]

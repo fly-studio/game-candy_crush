@@ -4,20 +4,22 @@ interface CrushedGroup {
 	cellIndices: number[];
 };
 
-interface CrushedCross {
-	cellIndex: number;
-	group1: CrushedGroup;
-	group2: CrushedGroup;
+interface CrushedCrosses {
+	rows: number[];
+	cols: number[];
 };
 
 class CrushedCells {
 	private _crushes: CrushedGroup[];
-	private _crosses: CrushedCross[];
+	private _crosses: CrushedCrosses;
 	public mesh: MeshBase;
 
 	constructor(mesh: MeshBase) {
 		this._crushes = new Array<CrushedGroup>();
-		this._crosses = new Array<CrushedCross>();
+		this._crosses = {
+			rows: [],
+			cols: []
+		};
 		this.mesh = mesh;
 	}
 
@@ -49,29 +51,33 @@ class CrushedCells {
 		}
 		this._crushes.push(crush);
 
-		this.calcLastCross(); //检查最后一个的交集
+		this.checkCross(cells); //检查最后一个是否包含十字消
 	}
 
 	/**
 	 * 每次添加一个消除组时
 	 * 计算与之前组，是否包含十字消
 	 */
-	private calcLastCross() {
-		let lastIndex: number = this._crushes.length - 1;
-		let last: CrushedGroup = this.eq(lastIndex);
-		for (var i = 0; i < this._crushes.length - 1; i++) { //最后一个不取
-			let group: CrushedGroup = this.eq(i);
-			if (group.row == group.row || group.col == group.col) continue; //都是行或列，则跳过
-			let crosses = _.intersection(last.cellIndices, group.cellIndices);
-			if (crosses.length) {
-				let cross: CrushedCross = {
-					cellIndex: crosses[0],
-					group1: last,
-					group2: group
-				};
-				this._crosses.push(cross);
-			}
+	private checkCross(cells: Cell[]) {
+
+		cells.filter(cell => cell.crossing).forEach(cell => {
+			this._crosses.rows.push(cell.row);
+			this._crosses.cols.push(cell.col);
+		});
+		if (cells.length >= 4) //4 个消整列/行
+		{
+			let last: CrushedGroup = this.at(this.crushes.length - 1);
+			if (last.row >= 0) this._crosses.rows.push(last.row);
+			if (last.col >= 0) this._crosses.cols.push(last.col);
 		}
+		
+		this.duplicateCrosses();
+	}
+
+	private duplicateCrosses()
+	{
+		this._crosses.rows = _.uniq(this._crosses.rows).sort((a, b) => a - b);
+		this._crosses.cols = _.uniq(this._crosses.cols).sort((a, b) => a - b);
 	}
 	/**
 	 * 取所有可以消除的索引
@@ -82,16 +88,11 @@ class CrushedCells {
 		let indices: number[] = [].concat(...this._crushes.map(group => group.cellIndices));
 		if (withCross)
 		{
-			indices = indices.concat(...this._crosses.map( group => {
-				let row: number = this.mesh.row(group.cellIndex);
-				let col: number = this.mesh.col(group.cellIndex);
-				return this.mesh.crossIndices(row, col); // 十字全消
-			}));
+			indices = indices.concat(...this._crosses.rows.map( row => this.mesh.rowIndices(row, true) )); //全行
+			indices = indices.concat(...this._crosses.cols.map( col => this.mesh.colIndices(col, true) )); //全列
 		}
-		return _.difference(
-			_.uniq(indices), //去重
-			this.mesh.blocks //去block项目
-		).sort((a, b) => a - b); // 正序
+		return _.uniq(indices) //去重
+			.sort((a, b) => a - b); // 正序
 	}
 
 	/**
@@ -112,10 +113,8 @@ class CrushedCells {
 		for(let col of this.mesh.colsEntries()) // 按 列，内容倒序
 		{
 			formated.push(
-				_.difference(
-					_.intersection(this.mesh.colIndices(col), cells), //取当前列
-					this.mesh.blocks // 去block
-				).sort((a, b) => b - a) // 倒序
+				_.intersection(this.mesh.colIndices(col, true), cells) //取当前列
+				.sort((a, b) => b - a) // 倒序
 			);
 		}
 		return formated;
@@ -136,10 +135,8 @@ class CrushedCells {
 		for(let row of this.mesh.rowsEntries()) // 按 行 内容正序
 		{
 			formated.push(
-				_.difference(
-					_.intersection(this.mesh.rowIndices(row), cells), //取当前行
-					this.mesh.blocks // 去block					
-				).sort((a, b) => a - b) // 正序
+				_.intersection(this.mesh.rowIndices(row, true), cells) //取当前行					
+				.sort((a, b) => a - b) // 正序
 			);
 		}
 		return formated;
@@ -165,7 +162,7 @@ class CrushedCells {
 	/**
 	 * 所有十字消除组
 	 */
-	public get crosses(): CrushedCross[] {
+	public get crosses(): CrushedCrosses {
 		return this._crosses;
 	}
 
@@ -180,13 +177,13 @@ class CrushedCells {
 	 * 是否有十字消
 	 */
 	public get hasCrosses() : boolean {
-		return this.crosses.length > 0;
+		return this._crosses.rows.length > 0 || this._crosses.cols.length > 0;
 	}
 
 	/**
 	 * 取第几个消除组
 	 */
-	public eq(index: number): CrushedGroup {
+	public at(index: number): CrushedGroup {
 		return this._crushes[index];
 	}
 
@@ -195,7 +192,7 @@ class CrushedCells {
 	}
 
 	public get cols() {
-		return this._crushes.filter(group => group.row > -1);
+		return this._crushes.filter(group => group.col > -1);
 	}
 
 	/**

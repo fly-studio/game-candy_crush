@@ -62,7 +62,7 @@ class Main extends egret.DisplayObjectContainer {
 			path: "resource/"
 		});
 
-		loadingView.groupList = ["preload", "crush"];
+		loadingView.groupList = ["preload", "metro", "crush"];
 		loadingView.load().then(v => {
 			loadingView.destroy();
 			this.createGameScene();
@@ -91,14 +91,9 @@ class Main extends egret.DisplayObjectContainer {
 		topMask.y = 33;
 		this.addChild(topMask);
 
-		let game = new meshUI();
-		game.width = this.stage.stageWidth * .95;
-		game.height = this.stage.stageHeight * .5;
-		game.x = this.stage.stageWidth * .025;
-		game.y = this.stage.stageHeight * 0.2;
+		let game = new GameUI();
+		
 		this.addChild(game);
-
-		game.start();
 
 	}
 

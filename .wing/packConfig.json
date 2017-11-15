@@ -1,0 +1,11 @@
+{
+    "useClip": false,
+    "maxImageWidth": 2048,
+    "maxImageHeight": 2048,
+    "defaultResPath": "d:\\Codes\\Games\\gem-crush\\resource\\default.res.json",
+    "packGroups": {
+        "preload": true,
+        "crush": true,
+        "metro": true
+    }
+}

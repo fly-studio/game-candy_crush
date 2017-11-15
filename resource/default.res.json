@@ -1,12 +1,16 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,cross_v_png",
+			"keys": "bg_jpg,egret_icon_png,description_json",
 			"name": "preload"
 		},
 		{
-			"keys": "cross_png,disappear_json,disappear_png",
+			"keys": "cross_png,disappear_json,disappear_png,cross_v_png",
 			"name": "crush"
+		},
+		{
+			"keys": "metro_5_png,metro_4_png,metro_3_png,metro_2_png,metro_1_png",
+			"name": "metro"
 		}
 	],
 	"resources": [
@@ -41,9 +45,34 @@
 			"name": "disappear_png"
 		},
 		{
-			"name": "cross_v_png",
+			"url": "assets/crush/cross_v.png",
 			"type": "image",
-			"url": "assets/crush/cross_v.png"
+			"name": "cross_v_png"
+		},
+		{
+			"url": "assets/metro/metro_5.png",
+			"type": "image",
+			"name": "metro_5_png"
+		},
+		{
+			"url": "assets/metro/metro_1.png",
+			"type": "image",
+			"name": "metro_1_png"
+		},
+		{
+			"url": "assets/metro/metro_2.png",
+			"type": "image",
+			"name": "metro_2_png"
+		},
+		{
+			"url": "assets/metro/metro_3.png",
+			"type": "image",
+			"name": "metro_3_png"
+		},
+		{
+			"url": "assets/metro/metro_4.png",
+			"type": "image",
+			"name": "metro_4_png"
 		}
 	]
 }

@@ -1,14 +1,16 @@
 class Cell {
 	public mesh: MeshBase;
 	public index:number;
+	public crossing: boolean; //是否是十字消
 	public colorIndex:number = -1;
 
 	constructor(mesh: MeshBase, index:number) {
 		this.mesh = mesh;
 		this.index = index;
+		this.crossing = false;
 	}
 
-	public get color(): number | null {
+	public get color(): any {
 		return this.colorIndex >= 0 && this.colorIndex < this.mesh.cellColors.length ? this.mesh.cellColors[this.colorIndex] : null;
 	}
 

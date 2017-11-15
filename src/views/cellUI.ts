@@ -19,25 +19,32 @@ class CellUI extends layer.ui.Sprite {
 
 	private render() : void {
 		if (this.width <= 0 || this.height <= 0)
-			throw new Error('Set width/height first.');
+			throw new Error('CellUI Set width/height first.');
 		if (this.cell.block)
 			return;
 
 		this.removeChildren();
-
 		this.graphics.clear();
-		this.graphics.beginFill(this.cell.color);
-		this.graphics.drawRoundRect(0, 0, this.width, this.height, 5);
-		this.graphics.endFill();
-		
-		let text:egret.TextField = new egret.TextField;
-		text.name = 'index';
-		text.textColor = 0xffffff;
-		text.text = this.cell.index.toString() + "\n" + this.cell.row.toString() + "/" + this.cell.col.toString();
-		text.width = this.width;
-		text.wordWrap = true;
-		text.textAlign = egret.HorizontalAlign.CENTER;
-		this.addChild(text);
+
+		if (!isNaN(this.cell.color)) { //色块
+			this.graphics.beginFill(this.cell.color);
+			this.graphics.drawRoundRect(0, 0, this.width, this.height, 5);
+			this.graphics.endFill();
+			
+			let text:egret.TextField = new egret.TextField;
+			text.name = 'index';
+			text.textColor = 0xffffff;
+			text.text = this.cell.index.toString() + "\n" + this.cell.row.toString() + "/" + this.cell.col.toString();
+			text.width = this.width;
+			text.wordWrap = true;
+			text.textAlign = egret.HorizontalAlign.CENTER;
+			this.addChild(text);
+		} else {
+			let bitmap:layer.ui.BitmapUI = new layer.ui.BitmapUI(this.cell.color);
+			bitmap.width = this.width;
+			bitmap.height = this.height;
+			this.addChild(bitmap);
+		}
 
 		this.selectedSharp = new egret.Shape;
 		this.selectedSharp.graphics.lineStyle(4, 0x00ffff);
@@ -75,6 +82,7 @@ class CellUI extends layer.ui.Sprite {
 			args.forEach(p => tween = tween.to({x: p.x, y: p.y}, duration));
 			tween.call(() => {
 				let text: egret.TextField = this.getChildByName('index') as egret.TextField;
+				if (text)
 					text.text = this.cell.index.toString() + "\n" + this.cell.row.toString() + "/" + this.cell.col.toString();
 				resolve();
 			}, this)
