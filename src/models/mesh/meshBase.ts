@@ -35,5 +35,4 @@ class MeshBase extends layer.Grid {
 		return exceptBlocks ? _.difference(indices, this.blocks) : indices;
 	}
 
-
 }

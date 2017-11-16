@@ -13,19 +13,17 @@
 	],
 	"game": [
 		"bin-debug/models/mesh/meshBase.js",
-		"bin-debug/models/mesh/meshRead.js",
-		"bin-debug/models/mesh/meshWrite.js",
-		"bin-debug/models/mesh.js",
-		"bin-debug/models/mesh/crushedCells.js",
-		"bin-debug/models/mesh/filledCells.js",
-		"bin-debug/Main.js",
 		"bin-debug/views/meshUI.js",
+		"bin-debug/models/mesh/crushedCells.js",
+		"bin-debug/models/mesh/crushedMethods.js",
+		"bin-debug/models/mesh/filledCells.js",
+		"bin-debug/events/CellEvent.js",
+		"bin-debug/models/mesh.js",
 		"bin-debug/models/cell.js",
-		"bin-debug/utils/math.js",
 		"bin-debug/views/cellUI.js",
 		"bin-debug/views/crossColUI.js",
 		"bin-debug/views/crossRowUI.js",
 		"bin-debug/views/gameUI.js",
-		"bin-debug/events/CellEvent.js"
+		"bin-debug/Main.js"
 	]
 }

@@ -8,13 +8,18 @@ class CellUI extends layer.ui.Sprite {
 		super();
 		this.cell = cell;
 		this.touchPoint = new egret.Point();
-
-		this.touchEnabled = true;
 	}
 
 	public set selected(value: boolean) {
 		if (this.cell.block) return;
 		this.selectedSharp.visible = value;
+	}
+
+	public set text(value: string) {
+		let text: egret.TextField = this.getChildByName('index') as egret.TextField;
+		text.text = value;
+		if (value == 'DEBUG')
+			text.text = DEBUG ? this.cell.index.toString() + "\n" + this.cell.row.toString() + "/" + this.cell.col.toString() : '';
 	}
 
 	private render() : void {
@@ -30,15 +35,6 @@ class CellUI extends layer.ui.Sprite {
 			this.graphics.beginFill(this.cell.color);
 			this.graphics.drawRoundRect(0, 0, this.width, this.height, 5);
 			this.graphics.endFill();
-			
-			let text:egret.TextField = new egret.TextField;
-			text.name = 'index';
-			text.textColor = 0xffffff;
-			text.text = this.cell.index.toString() + "\n" + this.cell.row.toString() + "/" + this.cell.col.toString();
-			text.width = this.width;
-			text.wordWrap = true;
-			text.textAlign = egret.HorizontalAlign.CENTER;
-			this.addChild(text);
 		} else {
 			let bitmap:layer.ui.BitmapUI = new layer.ui.BitmapUI(this.cell.color);
 			bitmap.width = this.width;
@@ -46,6 +42,16 @@ class CellUI extends layer.ui.Sprite {
 			this.addChild(bitmap);
 		}
 
+		let text:egret.TextField = new egret.TextField;
+		text.y = 10;
+		text.name = 'index';
+		text.textColor = 0x0;
+		text.width = this.width;
+		text.wordWrap = true;
+		text.textAlign = egret.HorizontalAlign.CENTER;
+		this.addChild(text);
+		this.text = 'DEBUG';
+		
 		this.selectedSharp = new egret.Shape;
 		this.selectedSharp.graphics.lineStyle(4, 0x00ffff);
 		this.selectedSharp.graphics.drawRoundRect(0, 0, this.width, this.height, 5);
@@ -55,10 +61,6 @@ class CellUI extends layer.ui.Sprite {
 	}
 
 	public onAddedToStage(event: egret.Event) : void {
-		this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin, this);
-		//this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
-		this.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
-		this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTap, this);
 
 		this.render();
 	}
@@ -69,10 +71,7 @@ class CellUI extends layer.ui.Sprite {
 	}
 
 	public removeAllEventListeners(): void {
-		this.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin, this);
-		//this.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
-		this.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
-		this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTap, this);
+
 	}
 
 	public moveTo(duration:number, ...args: egret.Point[]) : Promise<any> {
@@ -81,9 +80,7 @@ class CellUI extends layer.ui.Sprite {
 			let tween: egret.Tween = egret.Tween.get(this);
 			args.forEach(p => tween = tween.to({x: p.x, y: p.y}, duration));
 			tween.call(() => {
-				let text: egret.TextField = this.getChildByName('index') as egret.TextField;
-				if (text)
-					text.text = this.cell.index.toString() + "\n" + this.cell.row.toString() + "/" + this.cell.col.toString();
+				this.text = 'DEBUG';
 				resolve();
 			}, this)
 		});
@@ -103,7 +100,7 @@ class CellUI extends layer.ui.Sprite {
 		mc.height = this.height;
 		this.addChild(mc);
 		return new Promise<any>(resolve => {
-			mc.once(egret.Event.COMPLETE, () => {
+			mc.once(egret.Event.COMPLETE, () => {				
 				resolve();
 			}, this);
 			mc.gotoAndPlay('disappear', 1);
@@ -111,7 +108,7 @@ class CellUI extends layer.ui.Sprite {
 	}
 
 	public onTouchBegin(event: egret.TouchEvent) {
-		if (this.cell.block) return;
+		if (!this.cell || this.cell.block) return;
 		//console.log('touch-begin:', this.cell.index);
 
 		this.touchPoint.x = event.stageX;
@@ -119,12 +116,10 @@ class CellUI extends layer.ui.Sprite {
 	}
 
 	public onTouchEnd(event: egret.TouchEvent) {
-		if (this.cell.block) return;
-
-		console.log('touch-drag:', this.cell.index);
+		if (!this.cell || this.cell.block) return;
 
 		let position:layer.sharp.POSITION = layer.sharp.position(this.touchPoint, new egret.Point(event.stageX, event.stageY));
-		console.log('direction:', position);
+		console.log('touch-drag:', this.cell.index, 'direction:', position);
 
 		let cellEvent = new CellEvent(CellEvent.CELL_DRAG, true);
 		cellEvent.cell = this.cell;
@@ -133,7 +128,7 @@ class CellUI extends layer.ui.Sprite {
 	}
 
 	public onTouchTap(event: egret.TouchEvent) {
-		if (this.cell.block) return;
+		if (!this.cell || this.cell.block) return;
 
 		console.log('touch-tap:', this.cell.index);
 
