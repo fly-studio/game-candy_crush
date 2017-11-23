@@ -34,6 +34,10 @@
 			"path": "../libs/lodash"
 		},
 		{
+			"name": "axios",
+			"path": "../libs/axios"
+		},
+		{
 			"name": "features",
 			"path": "../libs/features"
 		},

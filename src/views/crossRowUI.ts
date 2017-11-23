@@ -1,4 +1,5 @@
-class CrossRowUI extends layer.ui.Sprite {
+namespace ui {
+export class CrossRowUI extends layer.ui.Sprite {
 
 	private crossRect: egret.Rectangle;
 	private rowSprite: layer.ui.BitmapUI;
@@ -12,7 +13,7 @@ class CrossRowUI extends layer.ui.Sprite {
 	public onAddedToStage(event: egret.Event) : void {
 		this.width = this.parent.width;
 		this.height = this.parent.height;
-			
+
 		this.rowSprite = new layer.ui.BitmapUI("cross_png");
 		this.rowSprite.x = this.width * .45;
 		this.rowSprite.y = this.crossRect.y;
@@ -28,7 +29,7 @@ class CrossRowUI extends layer.ui.Sprite {
 	}
 
 	public removeAllEventListeners(): void {
-		
+
 	}
 
 	public fadeOut(duration: number) : Promise<any> {
@@ -46,4 +47,5 @@ class CrossRowUI extends layer.ui.Sprite {
 		});
 	}
 
+}
 }

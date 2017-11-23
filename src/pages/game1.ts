@@ -1,4 +1,5 @@
-class Game1 extends Page  {
+namespace pages {
+export class Game1 extends Page  {
 	private score: number = 0;
 
 	constructor(){
@@ -45,4 +46,5 @@ class Game1 extends Page  {
 	public removeAllEventListeners(): void {
 
 	}
+}
 }

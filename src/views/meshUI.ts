@@ -1,9 +1,10 @@
-class MeshUI extends layer.ui.Sprite {
+namespace ui {
+export class MeshUI extends layer.ui.Sprite {
 	private mesh: Mesh;
 	public readonly cellColPadding: number = 1;
 	public readonly cellRowPadding: number = 1;
-	private cellWidth:number;
-	private cellHeight:number;
+	private cellWidth: number;
+	private cellHeight: number;
 	private touchCell: CellUI;
 
 	constructor(mesh: Mesh) {
@@ -69,7 +70,7 @@ class MeshUI extends layer.ui.Sprite {
 			if (this.touchCell == currentCell) { //相同，则是Tap点击
 				this.touchCell.onTouchTap(event);
 			} else {
-				this.touchCell.onTouchEnd(event);				
+				this.touchCell.onTouchEnd(event);
 			}
 			this.touchCell = null;
 		}
@@ -116,20 +117,20 @@ class MeshUI extends layer.ui.Sprite {
 			col = this.mesh.col(rowOrIndex);
 		}
 		return new egret.Point(
-			this.cellColPadding * col * 2 + this.cellWidth * col + this.cellColPadding, 
+			this.cellColPadding * col * 2 + this.cellWidth * col + this.cellColPadding,
 			this.cellRowPadding * row * 2 + this.cellHeight * row + this.cellRowPadding,
 		);
 	}
 
-	public createCellUI(cell: Cell, rect: egret.Rectangle)
+	public createCellUI(cell: Cell, rect: egret.Rectangle) : CellUI
 	{
-		let ui: CellUI = new CellUI(cell);
-		ui.x = rect.x;
-		ui.y = rect.y;
-		ui.width = rect.width;
-		ui.height = rect.height;
-		ui.name = "cell";
-		return ui;
+		let cellUI: CellUI = new CellUI(cell);
+		cellUI.x = rect.x;
+		cellUI.y = rect.y;
+		cellUI.width = rect.width;
+		cellUI.height = rect.height;
+		cellUI.name = "cell";
+		return cellUI;
 	}
 
 	public renderMesh() : void
@@ -195,7 +196,7 @@ class MeshUI extends layer.ui.Sprite {
 		{
 			let cellUI: CellUI = this.getChildByCellIndex(index) as CellUI;
 			if (cellUI) promises.push(cellUI.fadeOut(300).then(() => {
-				cellUI.destroy(); 
+				cellUI.destroy();
 			})); //消失且移除
 		}
 		return Promise.all(promises);
@@ -247,4 +248,5 @@ class MeshUI extends layer.ui.Sprite {
 			element.selected = true;
 	}
 
+}
 }

@@ -4,10 +4,11 @@ namespace pages.login {
 
 		private nameField: egret.TextField;
 		private phoneField: egret.TextField;
-
+		private form: layer.ui.Form;
 		constructor()
 		{
 			super();
+			this.form = new layer.ui.Form;
 		}
 
 		public onAddedToStage(event: egret.Event) : void {
@@ -17,6 +18,7 @@ namespace pages.login {
 			this.addChild(formSprite);
 
 			let nameField: egret.TextField = new egret.TextField;
+			nameField.name = 'nickname';
 			nameField.type = egret.TextFieldType.INPUT;
 			nameField.x = 269;
 			nameField.y = 467;
@@ -29,6 +31,7 @@ namespace pages.login {
 			this.addChild(nameField);
 
 			let phoneField: egret.TextField = new egret.TextField;
+			phoneField.name = 'phone';
 			phoneField.type = egret.TextFieldType.INPUT;
 			phoneField.x = 269;
 			phoneField.y = 551;
@@ -39,10 +42,12 @@ namespace pages.login {
 			phoneField.verticalAlign = egret.VerticalAlign.MIDDLE;
 			this.phoneField = phoneField;
 			this.addChild(phoneField);
+
+			this.form.addInput(nameField, phoneField);
 		}
 
-		public async submit(){
-
+		public submit(){
+			return network.userQuery(this.form);
 		}
 
 		public onRemovedFromStage(event: egret.Event): void {

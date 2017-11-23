@@ -1,4 +1,5 @@
-class CrossColUI extends layer.ui.Sprite {
+namespace ui {
+export class CrossColUI extends layer.ui.Sprite {
 
 	private crossRect: egret.Rectangle;
 	private colSprite: layer.ui.BitmapUI;
@@ -19,7 +20,7 @@ class CrossColUI extends layer.ui.Sprite {
 		this.colSprite.width = this.crossRect.width;
 		this.colSprite.height = this.height;
 		this.colSprite.scaleY = .1;
-		
+
 		this.addChild(this.colSprite);
 	}
 
@@ -28,7 +29,7 @@ class CrossColUI extends layer.ui.Sprite {
 	}
 
 	public removeAllEventListeners(): void {
-		
+
 	}
 
 	public fadeOut(duration: number) : Promise<any> {
@@ -46,4 +47,5 @@ class CrossColUI extends layer.ui.Sprite {
 		});
 	}
 
+}
 }

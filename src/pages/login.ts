@@ -1,4 +1,5 @@
-class LoginPage extends Page {
+namespace pages {
+export class LoginPage extends Page {
 
 	private formSprite: pages.login.FormSprite;
 
@@ -37,13 +38,12 @@ class LoginPage extends Page {
 		this.addChild(this.formSprite);
 
 		let startButton: egret.Sprite = new egret.Sprite;
+		startButton.name = 'start-button';
 		startButton.addChild(new layer.ui.BitmapUI("btn-start_png"));
 		startButton.x = 221;
 		startButton.y = 1026;
 		startButton.touchEnabled = true;
-		startButton.once(egret.TouchEvent.TOUCH_TAP, () => {
-			this.nextPage();
-		}, this);
+		startButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.nextPage, this);
 		this.addChild(startButton);
 	}
 
@@ -52,6 +52,9 @@ class LoginPage extends Page {
 	}
 
 	public removeAllEventListeners(): void {
+		let startButton = this.getChildByName('start-button');
+		startButton.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.nextPage, this);
 
 	}
+}
 }

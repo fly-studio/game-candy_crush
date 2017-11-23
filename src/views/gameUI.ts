@@ -1,4 +1,5 @@
-class GameUI extends layer.ui.Sprite {
+namespace ui {
+export class GameUI extends layer.ui.Sprite {
 	public mesh: Mesh;
 	private meshSprite: MeshUI;
 	private _selectedCell: Cell;
@@ -63,7 +64,7 @@ class GameUI extends layer.ui.Sprite {
 		this.running = false;
 	}
 
-	public resume() {	
+	public resume() {
 		this.countdown.resume();
 		this.enabled = true;
 		this.running = true;
@@ -204,14 +205,14 @@ class GameUI extends layer.ui.Sprite {
 	public async swapAndCrush(fromCell: Cell, toCell: Cell, crushedCells: CrushedCells)
 	{
 		this.enabled = false;
-		
+
 		await this.meshSprite.renderSwap(fromCell, toCell, !crushedCells.isCellIndicesCrushed(fromCell.index, toCell.index));
 
 		while (crushedCells.hasCrushes && this.running)
 		{
 			this.selectedCell = null;
 			this.incrementScore(crushedCells.length);
-			
+
 			await this.meshSprite.renderCrush(crushedCells);
 			let filledCells:FilledCells = this.mesh.rebuildWithCrush(crushedCells);
 			await this.meshSprite.renderFill(filledCells);
@@ -250,10 +251,11 @@ class GameUI extends layer.ui.Sprite {
 				let crushedCells: CrushedCells  = this.mesh.swapWithCrush(event.cell, this.selectedCell); //计算可以消失的cells
 				this.swapAndCrush(event.cell, this.selectedCell, crushedCells);
 				this.selectedCell = null;
-				
+
 			} else { //隔太远 重新点击
 				this.selectedCell = event.cell;
 			}
 		}
 	}
+}
 }

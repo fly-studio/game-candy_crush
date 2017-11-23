@@ -8,6 +8,7 @@
 		"libs/modules/socket/socket.js",
 		"promise/bin/promise.js",
 		"libs/modules/lodash/lodash.js",
+		"libs/modules/axios/axios.js",
 		"libs/modules/features/features.js",
 		"libs/modules/layer/layer.js"
 	],
@@ -20,6 +21,7 @@
 		"bin-debug/models/mesh/crushedMethods.js",
 		"bin-debug/models/mesh/filledCells.js",
 		"bin-debug/Main.js",
+		"bin-debug/network/http.js",
 		"bin-debug/events/CellEvent.js",
 		"bin-debug/pages/login.js",
 		"bin-debug/models/cell.js",

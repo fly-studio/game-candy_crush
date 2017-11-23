@@ -61,7 +61,7 @@ class Main extends egret.DisplayObjectContainer {
 			path: "resource/"
 		});
 
-		loadingView.groupList = ["preload", "sound"];
+		loadingView.groupList = ["preload"];
 		loadingView.load().then(v => {
 			loadingView.destroy();
 			this.createGameScene();
@@ -76,7 +76,7 @@ class Main extends egret.DisplayObjectContainer {
 	 * Create a game scene
 	 */
 	private createGameScene() {
-		new LoginPage();
+		new pages.LoginPage();
 		/*let sky = new layer.ui.BitmapUI("bg_jpg");
 		this.addChild(sky);
 		let stageW = this.stage.stageWidth;

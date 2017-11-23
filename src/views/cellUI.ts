@@ -1,4 +1,5 @@
-class CellUI extends layer.ui.Sprite {
+namespace ui {
+export class CellUI extends layer.ui.Sprite {
 	public cell:Cell;
 	public _selected:boolean;
 	private selectedSharp: egret.Shape;
@@ -51,7 +52,7 @@ class CellUI extends layer.ui.Sprite {
 		text.textAlign = egret.HorizontalAlign.CENTER;
 		this.addChild(text);
 		this.text = 'DEBUG';
-		
+
 		this.selectedSharp = new egret.Shape;
 		this.selectedSharp.graphics.lineStyle(4, 0x00ffff);
 		this.selectedSharp.graphics.drawRoundRect(0, 0, this.width, this.height, 5);
@@ -100,7 +101,7 @@ class CellUI extends layer.ui.Sprite {
 		mc.height = this.height;
 		this.addChild(mc);
 		return new Promise<any>(resolve => {
-			mc.once(egret.Event.COMPLETE, () => {				
+			mc.once(egret.Event.COMPLETE, () => {
 				resolve();
 			}, this);
 			mc.gotoAndPlay('disappear', 1);
@@ -136,4 +137,5 @@ class CellUI extends layer.ui.Sprite {
 		cellEvent.cell = this.cell;
 		this.parent.dispatchEvent(cellEvent);
 	}
+}
 }
