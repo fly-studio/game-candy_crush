@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json",
+			"keys": "description_json,bg_png",
 			"name": "preload"
 		},
 		{
@@ -11,19 +11,45 @@
 		{
 			"keys": "metro_5_png,metro_4_png,metro_3_png,metro_2_png,metro_1_png",
 			"name": "metro"
+		},
+		{
+			"keys": "good_fnt,good_fnt_png,great_fnt,great_fnt_png,perfect_fnt,perfect_fnt_png,pink_fnt,pink_fnt_png,unbelievable_fnt,unbelievable_fnt_png",
+			"name": "fonts"
+		},
+		{
+			"keys": "btn-start_png,form_png,login_frame_png,rules_png,welcome_png",
+			"name": "page-login"
+		},
+		{
+			"keys": "rank_frame_png",
+			"name": "page-rank"
+		},
+		{
+			"keys": "game1_frame_png,out-tips_png",
+			"name": "page-game1"
+		},
+		{
+			"keys": "game2_frame_png",
+			"name": "page-game2"
+		},
+		{
+			"keys": "game3_frame_png,last-frame_png,btn-home_png,btn-rank_png",
+			"name": "page-game3"
+		},
+		{
+			"keys": "good_png,great_png,next-stage_png,perfect_png,scorebar_png,unbelievable_png",
+			"name": "game"
+		},
+		{
+			"keys": "click_mp3,clock_mp3,countdown_mp3,crush_mp3,go_mp3,perfect_mp3,ready_go_mp3,win_mp3",
+			"name": "sound"
+		},
+		{
+			"keys": "1_png,2_png,3_png,go_png",
+			"name": "countdown"
 		}
 	],
 	"resources": [
-		{
-			"url": "assets/bg.jpg",
-			"type": "image",
-			"name": "bg_jpg"
-		},
-		{
-			"url": "assets/egret_icon.png",
-			"type": "image",
-			"name": "egret_icon_png"
-		},
 		{
 			"url": "config/description.json",
 			"type": "json",
@@ -73,6 +99,226 @@
 			"url": "assets/metro/metro_4.png",
 			"type": "image",
 			"name": "metro_4_png"
+		},
+		{
+			"url": "assets/fonts/good.fnt",
+			"type": "font",
+			"name": "good_fnt"
+		},
+		{
+			"url": "assets/fonts/good.png",
+			"type": "image",
+			"name": "good_fnt_png"
+		},
+		{
+			"url": "assets/fonts/great.fnt",
+			"type": "font",
+			"name": "great_fnt"
+		},
+		{
+			"url": "assets/fonts/great.png",
+			"type": "image",
+			"name": "great_fnt_png"
+		},
+		{
+			"url": "assets/fonts/perfect.fnt",
+			"type": "font",
+			"name": "perfect_fnt"
+		},
+		{
+			"url": "assets/fonts/perfect.png",
+			"type": "image",
+			"name": "perfect_fnt_png"
+		},
+		{
+			"url": "assets/fonts/pink.fnt",
+			"type": "font",
+			"name": "pink_fnt"
+		},
+		{
+			"url": "assets/fonts/pink.png",
+			"type": "image",
+			"name": "pink_fnt_png"
+		},
+		{
+			"url": "assets/fonts/rank.fnt",
+			"type": "font",
+			"name": "rank_fnt"
+		},
+		{
+			"url": "assets/fonts/rank.png",
+			"type": "image",
+			"name": "rank_png"
+		},
+		{
+			"url": "assets/fonts/unbelievable.fnt",
+			"type": "font",
+			"name": "unbelievable_fnt"
+		},
+		{
+			"url": "assets/fonts/unbelievable.png",
+			"type": "image",
+			"name": "unbelievable_fnt_png"
+		},
+		{
+			"url": "assets/page-game1/frame.png",
+			"type": "image",
+			"name": "game1_frame_png"
+		},
+		{
+			"url": "assets/page-game2/frame.png",
+			"type": "image",
+			"name": "game2_frame_png"
+		},
+		{
+			"url": "assets/page-game3/frame.png",
+			"type": "image",
+			"name": "game3_frame_png"
+		},
+		{
+			"url": "assets/page-login/btn-start.png",
+			"type": "image",
+			"name": "btn-start_png"
+		},
+		{
+			"url": "assets/page-login/form.png",
+			"type": "image",
+			"name": "form_png"
+		},
+		{
+			"url": "assets/page-login/frame.png",
+			"type": "image",
+			"name": "login_frame_png"
+		},
+		{
+			"url": "assets/page-login/rules.png",
+			"type": "image",
+			"name": "rules_png"
+		},
+		{
+			"url": "assets/page-login/welcome.png",
+			"type": "image",
+			"name": "welcome_png"
+		},
+		{
+			"url": "assets/bg.png",
+			"type": "image",
+			"name": "bg_png"
+		},
+		{
+			"url": "assets/page-rank/frame.png",
+			"type": "image",
+			"name": "rank_frame_png"
+		},
+		{
+			"url": "assets/game/scorebar.png",
+			"type": "image",
+			"name": "scorebar_png"
+		},
+		{
+			"url": "assets/game/next-stage.png",
+			"type": "image",
+			"name": "next-stage_png"
+		},
+		{
+			"url": "assets/game/good.png",
+			"type": "image",
+			"name": "good_png"
+		},
+		{
+			"url": "assets/game/great.png",
+			"type": "image",
+			"name": "great_png"
+		},
+		{
+			"url": "assets/game/perfect.png",
+			"type": "image",
+			"name": "perfect_png"
+		},
+		{
+			"url": "assets/game/unbelievable.png",
+			"type": "image",
+			"name": "unbelievable_png"
+		},
+		{
+			"url": "assets/sound/go.mp3",
+			"type": "sound",
+			"name": "go_mp3"
+		},
+		{
+			"url": "assets/sound/clock.mp3",
+			"type": "sound",
+			"name": "clock_mp3"
+		},
+		{
+			"url": "assets/sound/countdown.mp3",
+			"type": "sound",
+			"name": "countdown_mp3"
+		},
+		{
+			"url": "assets/sound/click.mp3",
+			"type": "sound",
+			"name": "click_mp3"
+		},
+		{
+			"url": "assets/sound/win.mp3",
+			"type": "sound",
+			"name": "win_mp3"
+		},
+		{
+			"url": "assets/sound/ready_go.mp3",
+			"type": "sound",
+			"name": "ready_go_mp3"
+		},
+		{
+			"url": "assets/sound/perfect.mp3",
+			"type": "sound",
+			"name": "perfect_mp3"
+		},
+		{
+			"url": "assets/sound/crush.mp3",
+			"type": "sound",
+			"name": "crush_mp3"
+		},
+		{
+			"url": "assets/countdown/1.png",
+			"type": "image",
+			"name": "1_png"
+		},
+		{
+			"url": "assets/countdown/2.png",
+			"type": "image",
+			"name": "2_png"
+		},
+		{
+			"url": "assets/countdown/3.png",
+			"type": "image",
+			"name": "3_png"
+		},
+		{
+			"url": "assets/countdown/go.png",
+			"type": "image",
+			"name": "go_png"
+		},
+		{
+			"url": "assets/page-game3/btn-rank.png",
+			"type": "image",
+			"name": "btn-rank_png"
+		},
+		{
+			"url": "assets/page-game3/last-frame.png",
+			"type": "image",
+			"name": "last-frame_png"
+		},
+		{
+			"url": "assets/page-game3/btn-home.png",
+			"type": "image",
+			"name": "btn-home_png"
+		},
+		{
+			"url": "assets/page-game1/out-tips.png",
+			"type": "image",
+			"name": "out-tips_png"
 		}
 	]
 }

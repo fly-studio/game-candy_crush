@@ -52,7 +52,6 @@ class Main extends egret.DisplayObjectContainer {
 			egret.ticker.resume();
 		}
 
-
 		//设置加载进度界面
 		//Config to load process interface
 		let loadingView:layer.ui.LoadingUI = new layer.ui.LoadingUI();
@@ -62,7 +61,7 @@ class Main extends egret.DisplayObjectContainer {
 			path: "resource/"
 		});
 
-		loadingView.groupList = ["preload", "metro", "crush"];
+		loadingView.groupList = ["preload", "sound"];
 		loadingView.load().then(v => {
 			loadingView.destroy();
 			this.createGameScene();
@@ -77,7 +76,8 @@ class Main extends egret.DisplayObjectContainer {
 	 * Create a game scene
 	 */
 	private createGameScene() {
-		let sky = new layer.ui.BitmapUI("bg_jpg");
+		new LoginPage();
+		/*let sky = new layer.ui.BitmapUI("bg_jpg");
 		this.addChild(sky);
 		let stageW = this.stage.stageWidth;
 		let stageH = this.stage.stageHeight;
@@ -92,8 +92,8 @@ class Main extends egret.DisplayObjectContainer {
 		this.addChild(topMask);
 
 		let game = new GameUI();
-		
-		this.addChild(game);
+
+		this.addChild(game);*/
 
 	}
 
