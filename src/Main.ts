@@ -61,7 +61,7 @@ class Main extends egret.DisplayObjectContainer {
 			path: "resource/"
 		});
 
-		loadingView.groupList = ["preload"];
+		loadingView.groupList = ["preload", "game", "fonts", "metro", "sound", "crush", "countdown"];
 		loadingView.load().then(v => {
 			loadingView.destroy();
 			this.createGameScene();
@@ -77,24 +77,6 @@ class Main extends egret.DisplayObjectContainer {
 	 */
 	private createGameScene() {
 		new pages.LoginPage();
-		/*let sky = new layer.ui.BitmapUI("bg_jpg");
-		this.addChild(sky);
-		let stageW = this.stage.stageWidth;
-		let stageH = this.stage.stageHeight;
-		sky.width = stageW;
-		sky.height = stageH;
-
-		let topMask = new egret.Shape();
-		topMask.graphics.beginFill(0x000000, 0.5);
-		topMask.graphics.drawRect(0, 0, stageW, 172);
-		topMask.graphics.endFill();
-		topMask.y = 33;
-		this.addChild(topMask);
-
-		let game = new GameUI();
-
-		this.addChild(game);*/
-
 	}
 
 }

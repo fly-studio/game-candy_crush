@@ -1,24 +1,35 @@
-abstract class Page extends layer.ui.Sprite {
+namespace pages {
+	export abstract class Page extends layer.ui.Sprite {
 
-	public constructor() {
-		super();
+		public constructor() {
+			super();
 
-		this.getStage().removeChildren();
-	}
+			this.getStage().removeChildren();
 
-	public abstract nextPage();
+			this.loading(this.groupList);
+		}
 
-	public loading(groupList: string[], configList: layer.ui.ResourceConfig[] = []) : void {
-		let loadingView:layer.ui.LoadingUI = new layer.ui.LoadingUI();
-		loadingView.addToStage();
+		protected abstract get groupList() : string[];
 
-		loadingView.configList = configList;
-		loadingView.groupList = groupList;
-		loadingView.load().then(v => {
-			loadingView.destroy();
-			this.addToStage();
-		}).catch(v => {
-			alert('无法读取：'+ v);
-		});
+		public abstract nextPage();
+
+		public onRemovedFromStage(event: egret.Event): void {
+			this.removeAllEventListeners();
+			this.groupList.forEach(v => RES.destroyRes(v));
+		}
+
+		public loading(groupList: string[], configList: layer.ui.ResourceConfig[] = []) : void {
+			let loadingView:layer.ui.LoadingUI = new layer.ui.LoadingUI();
+			loadingView.addToStage();
+
+			loadingView.configList = configList;
+			loadingView.groupList = groupList;
+			loadingView.load().then(v => {
+				loadingView.destroy();
+				this.addToStage();
+			}).catch(v => {
+				alert('无法读取：'+ v);
+			});
+		}
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,bg_png",
+			"keys": "bg_png",
 			"name": "preload"
 		},
 		{
@@ -13,7 +13,7 @@
 			"name": "metro"
 		},
 		{
-			"keys": "good_fnt,good_fnt_png,great_fnt,great_fnt_png,perfect_fnt,perfect_fnt_png,pink_fnt,pink_fnt_png,unbelievable_fnt,unbelievable_fnt_png",
+			"keys": "good_fnt,good_fnt_png,great_fnt,great_fnt_png,perfect_fnt,perfect_fnt_png,pink_fnt,pink_fnt_png,unbelievable_fnt,unbelievable_fnt_png,select_fault_mp3",
 			"name": "fonts"
 		},
 		{
@@ -41,7 +41,7 @@
 			"name": "game"
 		},
 		{
-			"keys": "click_mp3,clock_mp3,countdown_mp3,crush_mp3,go_mp3,perfect_mp3,ready_go_mp3,win_mp3",
+			"keys": "click_mp3,clock_mp3,countdown_mp3,crush_mp3,go_mp3,perfect_mp3,ready_go_mp3,win_mp3,select_fault_mp3,good_mp3,excellent_mp3,amazing_mp3,unbelievable_mp3,great_mp3,deadmap_mp3,strip_mp3,syllable_1_mp3,syllable_2_mp3,syllable_3_mp3,syllable_4_mp3,syllable_5_mp3,syllable_6_mp3,syllable_7_mp3,syllable_0_mp3,break_mp3,click1_mp3,normal_mp3",
 			"name": "sound"
 		},
 		{
@@ -319,6 +319,101 @@
 			"url": "assets/page-game1/out-tips.png",
 			"type": "image",
 			"name": "out-tips_png"
+		},
+		{
+			"url": "assets/sound/SelectFault.mp3",
+			"type": "sound",
+			"name": "select_fault_mp3"
+		},
+		{
+			"url": "assets/sound/good.mp3",
+			"type": "sound",
+			"name": "good_mp3"
+		},
+		{
+			"url": "assets/sound/excellent.mp3",
+			"type": "sound",
+			"name": "excellent_mp3"
+		},
+		{
+			"url": "assets/sound/amazing.mp3",
+			"type": "sound",
+			"name": "amazing_mp3"
+		},
+		{
+			"url": "assets/sound/unbelievable.mp3",
+			"type": "sound",
+			"name": "unbelievable_mp3"
+		},
+		{
+			"url": "assets/sound/great.mp3",
+			"type": "sound",
+			"name": "great_mp3"
+		},
+		{
+			"url": "assets/sound/deadmap.mp3",
+			"type": "sound",
+			"name": "deadmap_mp3"
+		},
+		{
+			"url": "assets/sound/strip.mp3",
+			"type": "sound",
+			"name": "strip_mp3"
+		},
+		{
+			"url": "assets/sound/syllable_1.mp3",
+			"type": "sound",
+			"name": "syllable_1_mp3"
+		},
+		{
+			"url": "assets/sound/syllable_2.mp3",
+			"type": "sound",
+			"name": "syllable_2_mp3"
+		},
+		{
+			"url": "assets/sound/syllable_3.mp3",
+			"type": "sound",
+			"name": "syllable_3_mp3"
+		},
+		{
+			"url": "assets/sound/syllable_4.mp3",
+			"type": "sound",
+			"name": "syllable_4_mp3"
+		},
+		{
+			"url": "assets/sound/syllable_5.mp3",
+			"type": "sound",
+			"name": "syllable_5_mp3"
+		},
+		{
+			"url": "assets/sound/syllable_6.mp3",
+			"type": "sound",
+			"name": "syllable_6_mp3"
+		},
+		{
+			"url": "assets/sound/syllable_7.mp3",
+			"type": "sound",
+			"name": "syllable_7_mp3"
+		},
+		{
+			"url": "assets/sound/syllable_0.mp3",
+			"type": "sound",
+			"name": "syllable_0_mp3"
+		},
+		{
+			"url": "assets/sound/break.mp3",
+			"type": "sound",
+			"name": "break_mp3"
+		},
+		{
+			"url": "assets/sound/click1.mp3",
+			"type": "sound",
+			"name": "click1_mp3"
+		},
+		{
+			"url": "assets/sound/normal.mp3",
+			"type": "sound",
+			"name": "normal_mp3"
 		}
 	]
 }

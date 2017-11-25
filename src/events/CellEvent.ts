@@ -5,5 +5,5 @@ class CellEvent extends egret.Event {
 
 	public cell: Cell;
 	public position: layer.sharp.POSITION = -1;
-	
+
 }

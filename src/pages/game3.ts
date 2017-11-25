@@ -1,17 +1,17 @@
 namespace pages {
-	export class Game1Page extends Game  {
+	export class Game3Page extends Game  {
 
 		constructor() {
 			super();
 		}
 
 		protected get groupList(): string[] {
-			return ["page-game1"];
+			return ["page-game3"];
 		}
 
 		public nextPage()
 		{
-			new Game2Page();
+			window.close();
 		}
 
 		public onAddedToStage(event: egret.Event) : void {
@@ -21,10 +21,10 @@ namespace pages {
 			this.addChild(bgSprite);
 
 			this.scorebarSprite = new pages.game.ScorebarSprite();
-			this.scorebarSprite.stageNumber = 1;
+			this.scorebarSprite.stageNumber = 3;
 			this.addChild(this.scorebarSprite);
 
-			let frameSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI("game1_frame_png");
+			let frameSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI("game3_frame_png");
 			frameSprite.x = 21;
 			frameSprite.y = 373;
 			this.addChild(frameSprite);
@@ -34,7 +34,7 @@ namespace pages {
 			gameUI.y = 381;
 			gameUI.width = 689;
 			gameUI.height = 689;
-			gameUI.blocks = [/*0, 1, 8, 9, 6, 7, 14, 15, 48, 49, 56, 57, 54, 55, 62, 63, 27, 28, 35, 36*/];
+			gameUI.blocks = [0, 1, 8, 9, 6, 7, 14, 15, 48, 49, 56, 57, 54, 55, 62, 63/*, 27, 28, 35, 36*/];
 			this.addChild(gameUI);
 
 			this.readySprite.animating().then(() => {

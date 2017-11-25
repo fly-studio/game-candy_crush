@@ -13,9 +13,11 @@
 		"libs/modules/layer/layer.js"
 	],
 	"game": [
-		"bin-debug/models/mesh/meshBase.js",
 		"bin-debug/pages/page.js",
-		"bin-debug/pages/game1.js",
+		"bin-debug/models/mesh/meshBase.js",
+		"bin-debug/pages/game.js",
+		"bin-debug/pages/game3.js",
+		"bin-debug/models/cell.js",
 		"bin-debug/models/mesh.js",
 		"bin-debug/models/mesh/crushedCells.js",
 		"bin-debug/models/mesh/crushedMethods.js",
@@ -23,13 +25,21 @@
 		"bin-debug/Main.js",
 		"bin-debug/network/http.js",
 		"bin-debug/events/CellEvent.js",
+		"bin-debug/pages/game1.js",
+		"bin-debug/pages/game2.js",
+		"bin-debug/sound.js",
 		"bin-debug/pages/login.js",
-		"bin-debug/models/cell.js",
+		"bin-debug/events/GameEvent.js",
+		"bin-debug/pages/game/cheerSprite.js",
+		"bin-debug/pages/game/nextStageSprite.js",
+		"bin-debug/pages/game/scorebar.js",
 		"bin-debug/pages/login/form.js",
+		"bin-debug/pages/login/info.js",
 		"bin-debug/views/cellUI.js",
 		"bin-debug/views/crossColUI.js",
 		"bin-debug/views/crossRowUI.js",
 		"bin-debug/views/gameUI.js",
-		"bin-debug/views/meshUI.js"
+		"bin-debug/views/meshUI.js",
+		"bin-debug/views/readyUI.js"
 	]
 }

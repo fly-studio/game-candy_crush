@@ -5,15 +5,17 @@ namespace network {
 		return form.submit();
 	}
 
-	export function todayCount() {
-		return layer.http.get('crush/today-count');
+	export function todayRemaining() {
+		return layer.http.get('crush/today-remaining').then(json => {
+			return typeof json.data != 'undefined' ? json.data.todayRemaining : 0;
+		});
 	}
 
 	export function topQuery() {
 		return layer.http.get('crush/top-query');
 	}
 
-	export function scoreQuery(score) {
-		return layer.http.post('crush/score-query', {score});
+	export function scoreQuery(score: number) {
+		return layer.http.form('crush/score-query', {score});
 	}
 }
