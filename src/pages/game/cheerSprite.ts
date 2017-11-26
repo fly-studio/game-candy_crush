@@ -4,23 +4,23 @@ namespace pages.game {
 		{
 
 			let words: string = '';
-			if (score <= 3)
+			if (score <= 3) //一组
 			{
 				//words = 'normal';
 			}
-			else if (score <= 4)
+			else if (score <= 4) // 1组超过3
 			{
 				words = 'good';
 			}
-			else if (score <= 6)
+			else if (score <= 6) // 两组
 			{
 				words = 'great';
 			}
-			else if (score <= 8)
+			else if (score <= 8) // 一条
 			{
 				words = 'amazing';
 			}
-			else if (score <= 11)
+			else if (score <= 11) //一条 + 1组
 			{
 				words = 'excellent';
 			}

@@ -188,7 +188,20 @@ namespace ui {
 			}
 
 			if (crushedCells.hasCrosses)
-				Sound.play('strip_mp3');
+			{
+				switch (crushedCells.crosses.rows.length + crushedCells.crosses.cols.length) {
+					case 1:
+						Sound.play('line_mp3');
+						break;
+					case 2:
+						Sound.play('line1_mp3');
+						break;
+					case 3:
+					default:
+						Sound.play('line2_mp3');
+						break;
+				}
+			}
 
 			//移除其它cells
 			for(let index of crushedCells.cellIndices(false))

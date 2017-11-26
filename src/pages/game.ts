@@ -25,9 +25,7 @@ namespace pages {
 			this.addEventListener(GameEvent.GAME_COUNTDOWN, this.onGameCountdown, this);
 		}
 
-		public onRemovedToStage(event: egret.Event) : void {
-			super.onRemovedFromStage(event);
-
+		public removeAllEventListeners(): void {
 			this.removeEventListener(GameEvent.GAME_START, this.onGameStart, this);
 			this.removeEventListener(GameEvent.GAME_STOP, this.onGameStop, this);
 			this.removeEventListener(GameEvent.GAME_RESUME, this.onGameResume, this);

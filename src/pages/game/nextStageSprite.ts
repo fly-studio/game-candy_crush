@@ -17,7 +17,7 @@ namespace pages.game {
 			this.addChild(bgSprite);
 
 			let scoreField: egret.TextField = new egret.TextField;
-			scoreField.name = 'stage';
+			scoreField.name = 'score';
 			scoreField.fontFamily = "Microsoft Yahei";
 			scoreField.bold = true;
 			scoreField.x = 406;

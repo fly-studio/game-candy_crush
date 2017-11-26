@@ -41,7 +41,7 @@
 			"name": "game"
 		},
 		{
-			"keys": "click_mp3,clock_mp3,countdown_mp3,crush_mp3,go_mp3,perfect_mp3,ready_go_mp3,win_mp3,select_fault_mp3,good_mp3,excellent_mp3,amazing_mp3,unbelievable_mp3,great_mp3,deadmap_mp3,strip_mp3,syllable_1_mp3,syllable_2_mp3,syllable_3_mp3,syllable_4_mp3,syllable_5_mp3,syllable_6_mp3,syllable_7_mp3,syllable_0_mp3,break_mp3,click1_mp3,normal_mp3",
+			"keys": "click_mp3,clock_mp3,countdown_mp3,go_mp3,perfect_mp3,ready_go_mp3,win_mp3,select_fault_mp3,good_mp3,excellent_mp3,amazing_mp3,unbelievable_mp3,great_mp3,deadmap_mp3,strip_mp3,syllable_1_mp3,syllable_2_mp3,syllable_3_mp3,syllable_4_mp3,syllable_5_mp3,syllable_6_mp3,syllable_7_mp3,syllable_0_mp3,break_mp3,click1_mp3,normal_mp3,line_mp3,line1_mp3,line2_mp3",
 			"name": "sound"
 		},
 		{
@@ -276,11 +276,6 @@
 			"name": "perfect_mp3"
 		},
 		{
-			"url": "assets/sound/crush.mp3",
-			"type": "sound",
-			"name": "crush_mp3"
-		},
-		{
 			"url": "assets/countdown/1.png",
 			"type": "image",
 			"name": "1_png"
@@ -414,6 +409,21 @@
 			"url": "assets/sound/normal.mp3",
 			"type": "sound",
 			"name": "normal_mp3"
+		},
+		{
+			"url": "assets/sound/line.mp3",
+			"type": "sound",
+			"name": "line_mp3"
+		},
+		{
+			"url": "assets/sound/line1.mp3",
+			"type": "sound",
+			"name": "line1_mp3"
+		},
+		{
+			"url": "assets/sound/line2.mp3",
+			"type": "sound",
+			"name": "line2_mp3"
 		}
 	]
 }

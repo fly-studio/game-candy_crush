@@ -199,7 +199,7 @@ namespace ui {
 
 		public async swapAndCrush(fromCell: Cell, toCell: Cell, crushedCells: CrushedCells)
 		{
-			let serials :number = 1;
+			let serials :number = 0;
 			this.enabled = false;
 			let isCrushed: boolean = crushedCells.isCellIndicesCrushed(fromCell.index, toCell.index);
 
@@ -210,7 +210,11 @@ namespace ui {
 
 			while (crushedCells.hasCrushes && this.running)
 			{
-				Sound.play('syllable_' + (serials % 8) + '_mp3');
+				if (serials > 0)
+					Sound.play('syllable_' + (serials % 8) + '_mp3');
+				else
+					Sound.play('normal_mp3');
+
 				serials++;
 
 				this.selectedCell = null;

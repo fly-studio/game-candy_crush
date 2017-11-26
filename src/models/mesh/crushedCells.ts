@@ -25,14 +25,14 @@ class CrushedCells {
 
 	/**
 	 * 添加消除组
-	 * 
+	 *
 	 * 注意：此处并不判断索引是否符合消除条件，需要在外面判断
 	 */
 	public addCells(cells: Cell[]) {
 		//cells中有block
 		if (cells.filter(cell => cell.block).length > 0)
 			throw new Error('some cells are block.');
-		//数量小于3		
+		//数量小于3
 		if (cells.length < 3)
 			throw new Error('cells length must > 3.');
 		let crush:CrushedGroup = {
@@ -64,13 +64,13 @@ class CrushedCells {
 			this._crosses.rows.push(cell.row);
 			this._crosses.cols.push(cell.col);
 		});
-		if (cells.length >= 4) //4 个消整列/行
+		if (cells.length >= 5) //5 个消整列/行
 		{
 			let last: CrushedGroup = this.at(this.crushes.length - 1);
 			if (last.row >= 0) this._crosses.rows.push(last.row);
 			if (last.col >= 0) this._crosses.cols.push(last.col);
 		}
-		
+
 		this.duplicateCrosses();
 	}
 
@@ -81,7 +81,7 @@ class CrushedCells {
 	}
 	/**
 	 * 取所有可以消除的索引
-	 * 
+	 *
 	 * @param withCross [false] 是否包含十字消的索引
 	 */
 	public cellIndices(withCross:boolean = true) : number[] {
@@ -97,14 +97,14 @@ class CrushedCells {
 
 	/**
 	 * 按列取需要消除的索引
-	 * 
+	 *
 	 * 返回
 	 * [
 	 * 	[0, 9, 18], // 0 列
 	 *  [x, x, x], // 1 列
 	 *  ... // N 列
 	 * ]
-	 * 
+	 *
 	 * }
 	 */
 	public colCellIndices() : number[][] {
@@ -121,7 +121,7 @@ class CrushedCells {
 	}
 	/**
 	 * 按行取需要消除的索引
-	 * 
+	 *
 	 * 返回
 	 * [
 	 * 	[0, 1, 2], // 0 行
@@ -135,7 +135,7 @@ class CrushedCells {
 		for(let row of this.mesh.rowsEntries()) // 按 行 内容正序
 		{
 			formated.push(
-				_.intersection(this.mesh.rowIndices(row, true), cells) //取当前行					
+				_.intersection(this.mesh.rowIndices(row, true), cells) //取当前行
 				.sort((a, b) => a - b) // 正序
 			);
 		}
@@ -145,7 +145,7 @@ class CrushedCells {
 	/**
 	 * 该索引是否在消除组列表中
 	 * 注意：输入多个索引，只要一个匹配即返回 TRUE
-	 * 
+	 *
 	 */
 	public isCellIndicesCrushed(...args: number[]) : boolean
 	{

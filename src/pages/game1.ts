@@ -42,16 +42,6 @@ namespace pages {
 			});
 		}
 
-		public onRemovedFromStage(event: egret.Event): void {
-			super.onRemovedToStage(event);
-
-			this.removeAllEventListeners();
-		}
-
-		public removeAllEventListeners(): void {
-
-		}
-
 		protected onGameStop(event: GameEvent) : void {
 			super.onGameStop(event);
 

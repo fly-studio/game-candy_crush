@@ -11,7 +11,7 @@ namespace pages {
 
 		public nextPage()
 		{
-			window.close();
+			window.reload();
 		}
 
 		public onAddedToStage(event: egret.Event) : void {
@@ -42,21 +42,11 @@ namespace pages {
 			});
 		}
 
-		public onRemovedFromStage(event: egret.Event): void {
-			super.onRemovedToStage(event);
-
-			this.removeAllEventListeners();
-		}
-
-		public removeAllEventListeners(): void {
-
-		}
-
 		protected onGameStop(event: GameEvent) : void {
 			super.onGameStop(event);
 
-			let nextStageSprite: game.NextStageSprite = new game.NextStageSprite(event.score, this.nextPage);
-			this.addChild(nextStageSprite);
+			let resultSprite: game.ResultSprite = new game.ResultSprite(event.score, 0);
+			this.addChild(resultSprite);
 		}
 	}
 }

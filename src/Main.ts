@@ -76,7 +76,7 @@ class Main extends egret.DisplayObjectContainer {
 	 * Create a game scene
 	 */
 	private createGameScene() {
-		new pages.LoginPage();
+		new pages.Game3Page();
 	}
 
 }
