@@ -27,64 +27,30 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Main extends eui.UILayer  {
 
-	public constructor() {
-		super();
-	}
-
-	protected createChildren() {
-		super.createChildren();
-
-		egret.lifecycle.addLifecycleListener((context) => {
-			// custom lifecycle plugin
-
-			context.onUpdate = () => {
-				//console.log('hello,world')
-			}
-		})
-
-		egret.lifecycle.onPause = () => {
-			egret.ticker.pause();
-		}
-
-		egret.lifecycle.onResume = () => {
-			egret.ticker.resume();
-		}
-
-		 //inject the custom material parser
-        //注入自定义的素材解析器
-        let assetAdapter = new AssetAdapter();
-        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
-        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
-
-		//设置加载进度界面
-		//Config to load process interface
-		let loadingView:layer.ui.LoadingUI = new layer.ui.LoadingUI();
-		loadingView.addToStage(this.stage);
-		loadingView.configList.push({
-			resourceFile: "resource/default.res.json",
-			path: "resource/"
-		});
-		loadingView.themeList = ['resource/default.thm.json'];
-		loadingView.groupList = ["preload", "eui", "game", "fonts", "metro", "sound", "crush", "countdown"];
-		loadingView.load().then(v => {
-			loadingView.destroy();
-			this.createGameScene();
-		}).catch(v => {
-			alert('无法读取：'+ v);
-		});
-
-	}
-
-	/**
-	 * 创建游戏场景
-	 * Create a game scene
-	 */
-	private createGameScene() {
-		new pages.Game3Page();
-	}
-
+class AssetAdapter implements eui.IAssetAdapter {
+    /**
+     * @language zh_CN
+     * 解析素材
+     * @param source 待解析的新素材标识符
+     * @param compFunc 解析完成回调函数，示例：callBack(content:any,source:string):void;
+     * @param thisObject callBack的 this 引用
+     */
+    public getAsset(source: string, compFunc:Function, thisObject: any): void {
+        function onGetRes(data: any): void {
+            compFunc.call(thisObject, data, source);
+        }
+        if (RES.hasRes(source)) {
+            let data = RES.getRes(source);
+            if (data) {
+                onGetRes(data);
+            }
+            else {
+                RES.getResAsync(source, onGetRes, this);
+            }
+        }
+        else {
+            RES.getResByUrl(source, onGetRes, this, RES.ResourceItem.TYPE_IMAGE);
+        }
+    }
 }
-
-

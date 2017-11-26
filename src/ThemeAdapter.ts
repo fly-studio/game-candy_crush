@@ -27,64 +27,27 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Main extends eui.UILayer  {
 
-	public constructor() {
-		super();
-	}
+class ThemeAdapter implements eui.IThemeAdapter {
 
-	protected createChildren() {
-		super.createChildren();
-
-		egret.lifecycle.addLifecycleListener((context) => {
-			// custom lifecycle plugin
-
-			context.onUpdate = () => {
-				//console.log('hello,world')
-			}
-		})
-
-		egret.lifecycle.onPause = () => {
-			egret.ticker.pause();
-		}
-
-		egret.lifecycle.onResume = () => {
-			egret.ticker.resume();
-		}
-
-		 //inject the custom material parser
-        //注入自定义的素材解析器
-        let assetAdapter = new AssetAdapter();
-        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
-        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
-
-		//设置加载进度界面
-		//Config to load process interface
-		let loadingView:layer.ui.LoadingUI = new layer.ui.LoadingUI();
-		loadingView.addToStage(this.stage);
-		loadingView.configList.push({
-			resourceFile: "resource/default.res.json",
-			path: "resource/"
-		});
-		loadingView.themeList = ['resource/default.thm.json'];
-		loadingView.groupList = ["preload", "eui", "game", "fonts", "metro", "sound", "crush", "countdown"];
-		loadingView.load().then(v => {
-			loadingView.destroy();
-			this.createGameScene();
-		}).catch(v => {
-			alert('无法读取：'+ v);
-		});
-
-	}
-
-	/**
-	 * 创建游戏场景
-	 * Create a game scene
-	 */
-	private createGameScene() {
-		new pages.Game3Page();
-	}
-
+    /**
+     * 解析主题
+     * @param url 待解析的主题url
+     * @param compFunc 解析完成回调函数，示例：compFunc(e:egret.Event):void;
+     * @param errorFunc 解析失败回调函数，示例：errorFunc():void;
+     * @param thisObject 回调的this引用
+     */
+    public getTheme(url:string,compFunc:Function,errorFunc:Function,thisObject:any):void {
+        function onGetRes(e:string):void {
+            compFunc.call(thisObject, e);
+        }
+        function onError(e:RES.ResourceEvent):void {
+            if(e.resItem.url == url) {
+                RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, onError, null);
+                errorFunc.call(thisObject);
+            }
+        }
+        RES.addEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, onError, null);
+        RES.getResByUrl(url, onGetRes, this, RES.ResourceItem.TYPE_TEXT);
+    }
 }
-
-

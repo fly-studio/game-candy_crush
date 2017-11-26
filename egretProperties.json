@@ -9,6 +9,15 @@
 	},
 	"egret_version": "5.0.13",
 	"template": {},
+	"eui": {
+		"exmlRoot": [
+			"resource/eui_skins"
+		],
+		"themes": [
+			"resource/default.thm.json"
+		],
+		"exmlPublishPolicy": "content"
+	},
 	"modules": [
 		{
 			"name": "egret"
@@ -23,7 +32,7 @@
 			"name": "tween"
 		},
 		{
-			"name": "socket"
+		"name": "eui"
 		},
 		{
 			"name": "promise",
