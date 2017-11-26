@@ -11,7 +11,7 @@ namespace pages {
 
 		public nextPage()
 		{
-			window.reload();
+			window.location.reload();
 		}
 
 		public onAddedToStage(event: egret.Event) : void {
