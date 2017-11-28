@@ -4,6 +4,6 @@ class CellEvent extends egret.Event {
 	static CELL_SELECT: string = 'CELL_SELECT';
 
 	public cell: Cell;
-	public position: layer.sharp.POSITION = -1;
+	public position: sharp.POSITION = -1;
 
 }

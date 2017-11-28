@@ -29,7 +29,7 @@ namespace pages.game {
 				words = 'unbelievable';
 			}
 			this.createWords(words + '_png');
-			Sound.play(words + '_mp3');
+			layer.media.Sound.play(words + '_mp3');
 		}
 
 		protected createWords(words: string)

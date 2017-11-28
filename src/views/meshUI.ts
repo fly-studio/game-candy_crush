@@ -191,14 +191,14 @@ namespace ui {
 			{
 				switch (crushedCells.crosses.rows.length + crushedCells.crosses.cols.length) {
 					case 1:
-						Sound.play('line_mp3');
+						layer.media.Sound.play('line_mp3');
 						break;
 					case 2:
-						Sound.play('line1_mp3');
+						layer.media.Sound.play('line1_mp3');
 						break;
 					case 3:
 					default:
-						Sound.play('line2_mp3');
+						layer.media.Sound.play('line2_mp3');
 						break;
 				}
 			}

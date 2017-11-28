@@ -50,7 +50,7 @@ class Mesh extends MeshBase {
 		return colorIndex;
 	}
 
-	public getCellByPostion(fromIndex:number, position:layer.sharp.POSITION) : Cell {
+	public getCellByPostion(fromIndex: number, position: sharp.POSITION) : Cell {
 		if (this.block(fromIndex)) 
 			throw new Error('Cell must be not block.');
 
@@ -58,16 +58,16 @@ class Mesh extends MeshBase {
 		let row: number = this.row(fromIndex);
 		let col: number = this.col(fromIndex);
 		switch (position) {
-			case layer.sharp.POSITION.TOP:
+			case sharp.POSITION.TOP:
 				cell = row <= 0 ? null : this.cell(row - 1, col);
 				break;
-			case layer.sharp.POSITION.RIGHT:
+			case sharp.POSITION.RIGHT:
 				cell = col >= this.cols - 1 ? null : this.cell(row, col + 1);
 				break;
-			case layer.sharp.POSITION.BOTTOM:
+			case sharp.POSITION.BOTTOM:
 				cell = row >= this.rows - 1 ? null : this.cell(row + 1, col);
 				break;
-			case layer.sharp.POSITION.LEFT:
+			case sharp.POSITION.LEFT:
 				cell = col <= 0 ? null : this.cell(row, col - 1);
 				break;
 		}
@@ -116,7 +116,7 @@ class Mesh extends MeshBase {
 					 * ♡ ← 上下交换
 					 */
 					if (this.colorIndex(row + 3, col) == colorIndex) {
-						results.add(this.index(row + 3, col), layer.sharp.POSITION.UP);
+						results.add(this.index(row + 3, col), sharp.POSITION.UP);
 					}
 				}
 				if (bx2) { // 往下至少1行
@@ -127,7 +127,7 @@ class Mesh extends MeshBase {
 						 * ♤ ♡ ← 左右交换
 						 */
 						if (this.colorIndex(row + 2, col + 1) == colorIndex) {
-							results.add(this.index(row + 2, col + 1), layer.sharp.POSITION.BACKWARD);
+							results.add(this.index(row + 2, col + 1), sharp.POSITION.BACKWARD);
 						}
 					}
 					if (ly1) { //左边至少1列
@@ -139,7 +139,7 @@ class Mesh extends MeshBase {
 						 * 左右交换
 						 */
 						if (this.colorIndex(row + 2, col - 1) == colorIndex) {
-							results.add(this.index(row + 2, col - 1), layer.sharp.POSITION.FORWARD);
+							results.add(this.index(row + 2, col - 1), sharp.POSITION.FORWARD);
 						}
 					}
 				}
@@ -151,7 +151,7 @@ class Mesh extends MeshBase {
 					 * ♡
 					 */
 					if (this.colorIndex(row - 2, col) == colorIndex) {
-						results.add(this.index(row - 2, col), layer.sharp.POSITION.DOWN);
+						results.add(this.index(row - 2, col), sharp.POSITION.DOWN);
 					}
 				}
 				if (lx1) { // 上面至少1行
@@ -164,7 +164,7 @@ class Mesh extends MeshBase {
 						 *   ♡
 						 */
 						if (this.colorIndex(row - 1, col - 1) == colorIndex) {
-							results.add(this.index(row - 1, col - 1), layer.sharp.POSITION.FORWARD);
+							results.add(this.index(row - 1, col - 1), sharp.POSITION.FORWARD);
 						}
 					}
 					if (by1) { // 右边至少1列
@@ -174,7 +174,7 @@ class Mesh extends MeshBase {
 						 * ♡
 						 */
 						if (this.colorIndex(row - 1, col + 1) == colorIndex) {
-							results.add(this.index(row - 1, col + 1), layer.sharp.POSITION.BACKWARD);
+							results.add(this.index(row - 1, col + 1), sharp.POSITION.BACKWARD);
 						}
 					}
 				}
@@ -187,7 +187,7 @@ class Mesh extends MeshBase {
 				 * 上下交换 
 				 */
 				if (this.colorIndex(row + 1, col - 1) == colorIndex && this.colorIndex(row + 1, col + 1) == colorIndex) {
-					results.add(this.index(row, col), layer.sharp.POSITION.DOWN);
+					results.add(this.index(row, col), sharp.POSITION.DOWN);
 				}
 			}
 		}
@@ -205,7 +205,7 @@ class Mesh extends MeshBase {
 					 * ♥ ← colorIndex
 					 */
 					if (this.colorIndex(row - 3, col) == colorIndex) {
-						results.add(this.index(row - 3, col), layer.sharp.POSITION.DOWN);
+						results.add(this.index(row - 3, col), sharp.POSITION.DOWN);
 					}
 				}
 				if (lx2) { // 上面至少2行
@@ -216,7 +216,7 @@ class Mesh extends MeshBase {
 					 */
 					if (by1) { // 右边至少有1列
 						if (this.colorIndex(row - 2, col + 1) == colorIndex) {
-							results.add(this.index(row - 2, col + 1), layer.sharp.POSITION.BACKWARD);
+							results.add(this.index(row - 2, col + 1), sharp.POSITION.BACKWARD);
 						}
 					}
 					/**
@@ -226,7 +226,7 @@ class Mesh extends MeshBase {
 					 */
 					if (ly1) { // 左边至少有1列
 						if (this.colorIndex(row - 2, col - 1) == colorIndex) {
-							results.add(this.index(row - 2, col - 1), layer.sharp.POSITION.FORWARD);
+							results.add(this.index(row - 2, col - 1), sharp.POSITION.FORWARD);
 						}
 					}
 				}
@@ -239,7 +239,7 @@ class Mesh extends MeshBase {
 					 * ♡ ← 上下交换
 					 */
 					if (this.colorIndex(row + 2, col) == colorIndex) {
-						results.add(this.index(row + 2, col), layer.sharp.POSITION.UP);
+						results.add(this.index(row + 2, col), sharp.POSITION.UP);
 					}
 				}
 				if (bx1) { // 下面至少1行
@@ -250,7 +250,7 @@ class Mesh extends MeshBase {
 						 * ♡ ♤ ← 左右交换
 						 */
 						if (this.colorIndex(row + 1, col - 1) == colorIndex) {
-							results.add(this.index(row + 1, col - 1), layer.sharp.POSITION.FORWARD);
+							results.add(this.index(row + 1, col - 1), sharp.POSITION.FORWARD);
 						}
 					}
 					if (by1) { //右边至少1列
@@ -260,7 +260,7 @@ class Mesh extends MeshBase {
 						 *  ♤ ♡ ← 左右交换
 						 */
 						if (this.colorIndex(row + 1, col + 1) == colorIndex) {
-							results.add(this.index(row + 1, col + 1), layer.sharp.POSITION.BACKWARD);
+							results.add(this.index(row + 1, col + 1), sharp.POSITION.BACKWARD);
 						}
 					}
 				}
@@ -273,7 +273,7 @@ class Mesh extends MeshBase {
 				 *   ♥    ← colorIndex
 				 */
 				if (this.colorIndex(row - 1, col - 1) == colorIndex && this.colorIndex(row - 1, col + 1) == colorIndex) {
-					results.add(this.index(row, col), layer.sharp.POSITION.UP);
+					results.add(this.index(row, col), sharp.POSITION.UP);
 				}
 			}
 		}
@@ -293,7 +293,7 @@ class Mesh extends MeshBase {
 					 * colorIndex
 					 */
 					if (this.colorIndex(row, col + 3) == colorIndex) {
-						results.add(this.index(row, col + 3), layer.sharp.POSITION.BACKWARD);
+						results.add(this.index(row, col + 3), sharp.POSITION.BACKWARD);
 					}
 				}
 				if (by2) { // 右边至少2列
@@ -305,7 +305,7 @@ class Mesh extends MeshBase {
 						 * colorIndex
 						 */
 						if (this.colorIndex(row - 1, col + 2) == colorIndex) {
-							results.add(this.index(row - 1, col + 2), layer.sharp.POSITION.DOWN);
+							results.add(this.index(row - 1, col + 2), sharp.POSITION.DOWN);
 						}
 					}
 					if (bx1) { // 下面至少1行
@@ -316,7 +316,7 @@ class Mesh extends MeshBase {
 						 *     ♡ ← 上下交换
 						 */
 						if (this.colorIndex(row + 1, col + 2) == colorIndex) {
-							results.add(this.index(row + 1, col + 2), layer.sharp.POSITION.UP);
+							results.add(this.index(row + 1, col + 2), sharp.POSITION.UP);
 						}
 					}
 				}
@@ -330,7 +330,7 @@ class Mesh extends MeshBase {
 					 * 左右交换
 					 */
 					if (this.colorIndex(row, col - 2) == colorIndex) {
-						results.add(this.index(row, col - 2), layer.sharp.POSITION.FORWARD);
+						results.add(this.index(row, col - 2), sharp.POSITION.FORWARD);
 					}
 				}
 				if (ly1) { // 除了首列
@@ -342,7 +342,7 @@ class Mesh extends MeshBase {
 						 * ♡ ← 上下交换
 						 */
 						if (this.colorIndex(row + 1, col - 1) == colorIndex) {
-							results.add(this.index(row + 1, col - 1), layer.sharp.POSITION.UP);
+							results.add(this.index(row + 1, col - 1), sharp.POSITION.UP);
 						}
 					}
 					if (lx1) { //上面至少1行
@@ -353,7 +353,7 @@ class Mesh extends MeshBase {
 						 *   colorIndex
 						 */
 						if (this.colorIndex(row - 1, col - 1) == colorIndex) {
-							results.add(this.index(row - 1, col - 1), layer.sharp.POSITION.DOWN);
+							results.add(this.index(row - 1, col - 1), sharp.POSITION.DOWN);
 						}
 					}
 
@@ -368,7 +368,7 @@ class Mesh extends MeshBase {
 				 *    ♡
 				 */
 				if (this.colorIndex(row - 1, col + 1) == colorIndex && this.colorIndex(row + 1, col + 1) == colorIndex) {
-					results.add(this.index(row, col), layer.sharp.POSITION.FORWARD);
+					results.add(this.index(row, col), sharp.POSITION.FORWARD);
 				}
 			}
 		}
@@ -384,7 +384,7 @@ class Mesh extends MeshBase {
 					 * ♡ ♤ ♡ ♥ ← colorIndex
 					 */
 					if (this.colorIndex(row, col - 3) == colorIndex) {
-						results.add(this.index(row, col - 3), layer.sharp.POSITION.FORWARD);
+						results.add(this.index(row, col - 3), sharp.POSITION.FORWARD);
 					}
 				}
 				if (ly2) { // 左边至少2列
@@ -396,7 +396,7 @@ class Mesh extends MeshBase {
 						 * ♤ ♡ ♥ ← colorIndex
 						 */
 						if (this.colorIndex(row - 1, col - 2) == colorIndex) {
-							results.add(this.index(row - 1, col - 2), layer.sharp.POSITION.DOWN);
+							results.add(this.index(row - 1, col - 2), sharp.POSITION.DOWN);
 						}
 					}
 					if (bx1) { // 下面至少1行
@@ -407,7 +407,7 @@ class Mesh extends MeshBase {
 						 * 上下交换
 						 */
 						if (this.colorIndex(row + 1, col - 2) == colorIndex) {
-							results.add(this.index(row + 1, col - 2), layer.sharp.POSITION.UP);
+							results.add(this.index(row + 1, col - 2), sharp.POSITION.UP);
 						}
 					}
 				}
@@ -418,7 +418,7 @@ class Mesh extends MeshBase {
 					 * ♡ ♥ ♤ ♡ ← 左右交换 
 					 */
 					if (this.colorIndex(row, col + 2) == colorIndex) {
-						results.add(this.index(row, col + 2), layer.sharp.POSITION.BACKWARD);
+						results.add(this.index(row, col + 2), sharp.POSITION.BACKWARD);
 					}
 				}
 				if (by1) { // 右边至少1列
@@ -430,7 +430,7 @@ class Mesh extends MeshBase {
 						 *     ♡ ← 上下交换 
 						 */
 						if (this.colorIndex(row + 1, col + 1) == colorIndex) {
-							results.add(this.index(row + 1, col + 1), layer.sharp.POSITION.UP);
+							results.add(this.index(row + 1, col + 1), sharp.POSITION.UP);
 						}
 					}
 					if (lx1) { // 上面至少1行
@@ -441,7 +441,7 @@ class Mesh extends MeshBase {
 						 * colorIndex
 						 */
 						if (this.colorIndex(row - 1, col + 1) == colorIndex) {
-							results.add(this.index(row - 1, col + 1), layer.sharp.POSITION.DOWN);
+							results.add(this.index(row - 1, col + 1), sharp.POSITION.DOWN);
 						}
 					}
 				}
@@ -453,7 +453,7 @@ class Mesh extends MeshBase {
 				 * ♡
 				 */
 				if (this.colorIndex(row - 1, col - 1) == colorIndex && this.colorIndex(row + 1, col - 1) == colorIndex) {
-					results.add(this.index(row, col), layer.sharp.POSITION.BACKWARD);
+					results.add(this.index(row, col), sharp.POSITION.BACKWARD);
 				}
 			}
 		}

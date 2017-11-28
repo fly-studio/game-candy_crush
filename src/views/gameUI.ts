@@ -37,7 +37,7 @@ namespace ui {
 		public set selectedCell(value: Cell) {
 			this._selectedCell = value;
 			if (value)
-				Sound.play('click1_mp3');
+				layer.media.Sound.play('click1_mp3');
 
 			this.meshSprite.select(value);
 		}
@@ -148,7 +148,7 @@ namespace ui {
 			text.y = 100;
 			deadSprite.addChild(text);
 
-			Sound.play('deadmap_mp3');
+			layer.media.Sound.play('deadmap_mp3');
 
 			this.stage.addChild(deadSprite);
 
@@ -180,16 +180,16 @@ namespace ui {
 				let cell: CellUI = this.meshSprite.getChildByCellIndex(method.cellIndex);
 				if (cell) {
 					switch (method.postion) {
-						case layer.sharp.POSITION.UP:
+						case sharp.POSITION.UP:
 							cell.text = '↑';
 							break;
-						case layer.sharp.POSITION.FORWARD:
+						case sharp.POSITION.FORWARD:
 							cell.text = '→';
 							break;
-						case layer.sharp.POSITION.DOWN:
+						case sharp.POSITION.DOWN:
 							cell.text = '↓';
 							break;
-						case layer.sharp.POSITION.BACKWARD:
+						case sharp.POSITION.BACKWARD:
 							cell.text = '←';
 							break;
 					}
@@ -204,16 +204,16 @@ namespace ui {
 			let isCrushed: boolean = crushedCells.isCellIndicesCrushed(fromCell.index, toCell.index);
 
 			if (!isCrushed)
-				Sound.play('break_mp3');
+				layer.media.Sound.play('break_mp3');
 
 			await this.meshSprite.renderSwap(fromCell, toCell, !isCrushed);
 
 			while (crushedCells.hasCrushes && this.running)
 			{
 				if (serials > 0)
-					Sound.play('syllable_' + (serials % 8) + '_mp3');
+					layer.media.Sound.play('syllable_' + (serials % 8) + '_mp3');
 				else
-					Sound.play('normal_mp3');
+					layer.media.Sound.play('normal_mp3');
 
 				serials++;
 

@@ -3,12 +3,12 @@ namespace ui {
 		public cell:Cell;
 		public _selected:boolean;
 		private selectedSharp: egret.Shape;
-		private touchPoint: egret.Point;
+		private touchPoint: sharp.Point;
 
 		constructor(cell: Cell) {
 			super();
 			this.cell = cell;
-			this.touchPoint = new egret.Point();
+			this.touchPoint = new sharp.Point();
 		}
 
 		public set selected(value: boolean) {
@@ -121,7 +121,7 @@ namespace ui {
 		public onTouchEnd(event: egret.TouchEvent) {
 			if (!this.cell || this.cell.block) return;
 
-			let position:layer.sharp.POSITION = layer.sharp.position(this.touchPoint, new egret.Point(event.stageX, event.stageY));
+			let position:sharp.POSITION = sharp.position(this.touchPoint, new sharp.Point(event.stageX, event.stageY));
 			console.log('touch-drag:', this.cell.index, 'direction:', position);
 
 			let cellEvent = new CellEvent(CellEvent.CELL_DRAG, true);

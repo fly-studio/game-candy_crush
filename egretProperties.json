@@ -32,7 +32,7 @@
 			"name": "tween"
 		},
 		{
-		"name": "eui"
+			"name": "eui"
 		},
 		{
 			"name": "promise",
@@ -49,6 +49,10 @@
 		{
 			"name": "features",
 			"path": "../libs/features"
+		},
+		{
+			"name": "_",
+			"path": "../libs/_"
 		},
 		{
 			"name": "layer",

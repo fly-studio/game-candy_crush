@@ -2,7 +2,7 @@ namespace pages {
 	export abstract class Game extends Page {
 		protected scorebarSprite: pages.game.ScorebarSprite = null;
 		protected cheerSprite: pages.game.CheerSprite;
-		protected readySprite: ui.ReadyUI;
+		protected readySprite: layer.ui.ready.CircleUI;
 		private playedClock: boolean = false;
 
 		constructor()
@@ -13,7 +13,25 @@ namespace pages {
 		public onAddedToStage(event: egret.Event) : void {
 			this.cheerSprite = new pages.game.CheerSprite;
 			this.stage.addChild(this.cheerSprite);
-			this.readySprite = new ui.ReadyUI();
+			this.readySprite = new layer.ui.ready.CircleUI();
+			this.readySprite.readyRes = [
+				{
+					imageRes: "3_png",
+					soundRes: "countdown_mp3"
+				},
+				{
+					imageRes: "2_png",
+					soundRes: "countdown_mp3"
+				},
+				{
+					imageRes: "1_png",
+					soundRes: "countdown_mp3"
+				},
+				{
+					imageRes: "go_png",
+					soundRes: "ready_go_mp3"
+				},
+			]
 			this.stage.addChild(this.readySprite);
 
 			this.addEventListener(GameEvent.GAME_START, this.onGameStart, this);
@@ -43,7 +61,7 @@ namespace pages {
 			this.stage.removeChild(this.cheerSprite);
 			this.cheerSprite = null;
 
-			Sound.play('win_mp3');
+			layer.media.Sound.play('win_mp3');
 		}
 
 		protected onGameResume(event: GameEvent) : void {
@@ -75,7 +93,7 @@ namespace pages {
 			if (remaining <= 5000 && !this.playedClock)
 			{
 				this.playedClock = true;
-				Sound.play('clock_mp3', 4);
+				layer.media.Sound.play('clock_mp3', 4);
 			}
 		}
 	}
