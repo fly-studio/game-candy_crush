@@ -22,7 +22,10 @@ namespace pages {
 			frameSprite.y = 63;
 			this.addChild(frameSprite);
 
-
+			let rankSprite: pages.rank.RankSprite = new pages.rank.RankSprite();
+			rankSprite.x = 85;
+			rankSprite.y = 230;
+			this.addChild(rankSprite);
 		}
 
 		public removeAllEventListeners(): void {

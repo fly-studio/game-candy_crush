@@ -28,7 +28,7 @@ namespace pages.game {
 			{
 				words = 'unbelievable';
 			}
-			this.createWords(words + '_png');
+			//this.createWords(words + '_png');
 			layer.media.Sound.play(words + '_mp3');
 		}
 

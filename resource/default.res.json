@@ -21,7 +21,7 @@
 			"name": "page-login"
 		},
 		{
-			"keys": "rank_frame_png",
+			"keys": "rank_frame_png,list-item-bg_png,rank-item_exml,rank-list_exml,rank_png,rank_fnt",
 			"name": "page-rank"
 		},
 		{
@@ -543,6 +543,21 @@
 			"url": "assets/eui/ToggleSwitch/on.png",
 			"type": "image",
 			"name": "on_png"
+		},
+		{
+			"url": "assets/page-rank/list-item-bg.png",
+			"type": "image",
+			"name": "list-item-bg_png"
+		},
+		{
+			"url": "assets/page-rank/rank-item.exml",
+			"type": "text",
+			"name": "rank-item_exml"
+		},
+		{
+			"url": "assets/page-rank/rank-list.exml",
+			"type": "text",
+			"name": "rank-list_exml"
 		}
 	]
 }

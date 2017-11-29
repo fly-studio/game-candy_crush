@@ -29,7 +29,7 @@ namespace pages {
 				},
 				{
 					imageRes: "go_png",
-					soundRes: "ready_go_mp3"
+					soundRes: "go_mp3"
 				},
 			]
 			this.stage.addChild(this.readySprite);

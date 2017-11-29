@@ -82,7 +82,7 @@ class Main extends eui.UILayer  {
 	 * Create a game scene
 	 */
 	private createGameScene() {
-		new pages.Game3Page();
+		new pages.RankPage();
 	}
 
 }
