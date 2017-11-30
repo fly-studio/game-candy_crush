@@ -46,7 +46,7 @@ namespace pages {
 			super.onGameStop(event);
 
 			network.scoreQuery(event.score, 3).then(json => {
-				let resultSprite: game.ResultSprite = new game.ResultSprite(json.data.score, 0);
+				let resultSprite: game.ResultSprite = new game.ResultSprite(json.data.score, json.data.rank);
 				this.addChild(resultSprite);
 			});
 			
