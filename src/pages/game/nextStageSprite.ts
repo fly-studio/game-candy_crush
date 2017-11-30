@@ -2,7 +2,7 @@ namespace pages.game {
 	export class NextStageSprite extends layer.ui.Sprite {
 		private score: number;
 		private nextStageCallback: Function;
-		constructor(score: number, nextStageCallback: Function)
+		constructor(score: number = 0, nextStageCallback: Function)
 		{
 			super();
 			this.score = score;

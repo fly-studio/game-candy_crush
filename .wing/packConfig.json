@@ -6,6 +6,16 @@
     "packGroups": {
         "preload": true,
         "crush": true,
-        "metro": true
+        "metro": true,
+        "fonts": true,
+        "page-login": true,
+        "page-rank": true,
+        "page-game1": true,
+        "page-game2": true,
+        "page-game3": true,
+        "game": true,
+        "sound": true,
+        "countdown": true,
+        "eui": true
     }
 }

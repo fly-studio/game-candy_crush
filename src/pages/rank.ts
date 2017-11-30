@@ -26,6 +26,10 @@ namespace pages {
 			rankSprite.x = 85;
 			rankSprite.y = 230;
 			this.addChild(rankSprite);
+
+			network.topQuery().then(json => {
+				rankSprite.data = json.data;
+			});
 		}
 
 		public removeAllEventListeners(): void {

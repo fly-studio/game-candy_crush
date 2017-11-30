@@ -36,7 +36,7 @@ namespace pages {
 			rulerSprite.y = 689;
 			this.addChild(rulerSprite);
 
-			if (window['LP'] != null && !window['LP']['user'])
+			if (window['LP'] == undefined || window['LP']['user'] == undefined)
 			{
 				this.formSprite = new pages.login.FormSprite;
 				this.addChild(this.formSprite);

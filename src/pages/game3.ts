@@ -45,8 +45,11 @@ namespace pages {
 		protected onGameStop(event: GameEvent) : void {
 			super.onGameStop(event);
 
-			let resultSprite: game.ResultSprite = new game.ResultSprite(event.score, 0);
-			this.addChild(resultSprite);
+			network.scoreQuery(event.score, 3).then(json => {
+				let resultSprite: game.ResultSprite = new game.ResultSprite(json.data.score, 0);
+				this.addChild(resultSprite);
+			});
+			
 		}
 	}
 }

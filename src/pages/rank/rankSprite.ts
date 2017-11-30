@@ -18,7 +18,10 @@ namespace pages.rank {
 		private uiCompHandler(): void
 		{
 			this.rankList.useVirtualLayout = true;
-			this.data = _.fill(Array(100), {'avatar_url': 'logo1', 'nickname': '测试', 'score': 1000, 'rank': 'f'});
+			
+			network.topQuery().then(data => {
+				this.data = data;
+			});
 
 			this.rankList.itemRenderer = pages.rank.RankItemSprite;
 		}
