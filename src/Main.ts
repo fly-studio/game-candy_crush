@@ -82,7 +82,7 @@ class Main extends eui.UILayer  {
 	 * Create a game scene
 	 */
 	private createGameScene() {
-		if (window.location.hash == 'rank')
+		if (window.location.hash == '#rank')
 			new pages.RankPage();
 		else
 			new pages.LoginPage();

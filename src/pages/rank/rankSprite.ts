@@ -18,10 +18,6 @@ namespace pages.rank {
 		private uiCompHandler(): void
 		{
 			this.rankList.useVirtualLayout = true;
-			
-			network.topQuery().then(data => {
-				this.data = data;
-			});
 
 			this.rankList.itemRenderer = pages.rank.RankItemSprite;
 		}
@@ -30,10 +26,6 @@ namespace pages.rank {
 		{
 			super.createChildren();
 
-		}
-
-		public setData(data: any): void
-		{
 		}
 	}
 

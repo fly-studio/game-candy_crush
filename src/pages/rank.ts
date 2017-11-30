@@ -27,8 +27,8 @@ namespace pages {
 			rankSprite.y = 230;
 			this.addChild(rankSprite);
 
-			network.topQuery().then(json => {
-				rankSprite.data = json.data;
+			network.topQuery().then(data => {
+				rankSprite.data = data;
 			});
 		}
 
