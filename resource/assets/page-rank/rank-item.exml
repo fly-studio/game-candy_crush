@@ -5,7 +5,7 @@
 		<e:BitmapLabel width="51.5" height="51" x="32.5" y="18.5" anchorOffsetX="0" anchorOffsetY="0" text="{data.rank}" id="font" font="rank_fnt"  textAlign="center" verticalAlign="middle"/>
 		<e:Label x="179.5" y="23" width="212" height="42" verticalAlign="middle" textAlign="left" textColor="0x000000" fontFamily="Microsoft YaHei" text="{data.nickname}"/>
 		<e:Label x="446.5" y="23" width="115" height="42" verticalAlign="middle" textAlign="left" textColor="0x000000" fontFamily="Microsoft YaHei" text="{data.score}"/>
-		<e:Image width="63" height="60.5" x="96" y="13.75" anchorOffsetX="0" anchorOffsetY="0" source="{data.avatar_url}"/>
+		<e:Image width="54" height="55.5" x="102" y="16.25" anchorOffsetX="0" anchorOffsetY="0" source="{data.avatar_url}"/>
 
 	</e:Group>
 </e:Skin>

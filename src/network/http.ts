@@ -20,7 +20,7 @@ namespace network {
 			for(let v of json.data)
 			{
 				data.push({
-					avatar_url: layer.http.baseURI + '/attachment/' + v.wechat_user.avatar_aid + '/avatar.jpg',
+					avatar_url: layer.http.baseURI + '/attachment/' + v.wechat_user.avatar_aid + '/55x55.jpg',
 					rank: v.rank,
 					nickname: v.nickname,
 					score: v.max_score
