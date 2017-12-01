@@ -47,6 +47,7 @@ namespace pages {
 					tips.x = this.stage.stageWidth / 2 - tips.width / 2;
 					tips.y = this.stage.stageHeight / 2 - tips.height / 2;
 					this.addChild(tips);
+					this.readySprite.destroy();
 				}
 				else
 				{
@@ -56,6 +57,12 @@ namespace pages {
 				}
 			})
 			
+		}
+
+		protected onGameStart(event: GameEvent): void {
+			super.onGameStart(event);
+
+			this.bgmChannel = layer.media.Sound.play('stage-1_mp3');
 		}
 
 		protected onGameStop(event: GameEvent) : void {

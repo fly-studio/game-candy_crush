@@ -25,15 +25,15 @@
 			"name": "page-rank"
 		},
 		{
-			"keys": "game1_frame_png,out-tips_png",
+			"keys": "game1_frame_png,out-tips_png,stage-1_mp3",
 			"name": "page-game1"
 		},
 		{
-			"keys": "game2_frame_png",
+			"keys": "game2_frame_png,stage-2_mp3",
 			"name": "page-game2"
 		},
 		{
-			"keys": "game3_frame_png,last-frame_png,btn-home_png,btn-rank_png",
+			"keys": "game3_frame_png,last-frame_png,btn-home_png,btn-rank_png,stage-3_mp3",
 			"name": "page-game3"
 		},
 		{
@@ -558,6 +558,21 @@
 			"url": "assets/page-rank/rank-list.exml",
 			"type": "text",
 			"name": "rank-list_exml"
+		},
+		{
+			"url": "assets/sound/stage-1.mp3",
+			"type": "sound",
+			"name": "stage-1_mp3"
+		},
+		{
+			"url": "assets/sound/stage-3.mp3",
+			"type": "sound",
+			"name": "stage-3_mp3"
+		},
+		{
+			"url": "assets/sound/stage-2.mp3",
+			"type": "sound",
+			"name": "stage-2_mp3"
 		}
 	]
 }

@@ -42,6 +42,12 @@ namespace pages {
 			});
 		}
 
+		protected onGameStart(event: GameEvent): void {
+			super.onGameStart(event);
+
+			this.bgmChannel = layer.media.Sound.play('stage-3_mp3');
+		}
+
 		protected onGameStop(event: GameEvent) : void {
 			super.onGameStop(event);
 

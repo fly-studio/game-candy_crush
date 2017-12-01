@@ -4,6 +4,7 @@ namespace pages {
 		protected cheerSprite: pages.game.CheerSprite;
 		protected readySprite: layer.ui.ready.CircleUI;
 		private playedClock: boolean = false;
+		protected bgmChannel: egret.SoundChannel;
 
 		constructor()
 		{
@@ -60,7 +61,7 @@ namespace pages {
 
 			this.stage.removeChild(this.cheerSprite);
 			this.cheerSprite = null;
-
+			if (this.bgmChannel) this.bgmChannel.stop();
 			layer.media.Sound.play('win_mp3');
 		}
 
