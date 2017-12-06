@@ -52,11 +52,8 @@ class Main extends eui.UILayer  {
 			egret.ticker.resume();
 		}
 
-		 //inject the custom material parser
-        //注入自定义的素材解析器
-        let assetAdapter = new AssetAdapter();
-        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
-        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
+		//inject the custom material parser
+		layer.adapter.registerEUI();
 
 		//设置加载进度界面
 		//Config to load process interface
@@ -69,7 +66,6 @@ class Main extends eui.UILayer  {
 		loadingView.themeList = ['resource/default.thm.json'];
 		loadingView.groupList = ["preload", "eui", "game", "fonts", "metro", "sound", "crush", "countdown"];
 		loadingView.load().then(v => {
-			loadingView.destroy();
 			this.createGameScene();
 		}).catch(v => {
 			alert('无法读取：'+ v);
