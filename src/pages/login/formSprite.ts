@@ -13,29 +13,16 @@ namespace pages.login {
 
 		public onAddedToStage(event: egret.Event) : void {
 			let formSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI('form_png');
-			formSprite.x = 87;
-			formSprite.y = 365;
+			formSprite.x = 72;
+			formSprite.y = 328;
 			this.addChild(formSprite);
-
-			let nameField: egret.TextField = new egret.TextField;
-			nameField.name = 'nickname';
-			nameField.type = egret.TextFieldType.INPUT;
-			nameField.x = 269;
-			nameField.y = 467;
-			nameField.width = 254;
-			nameField.height = 49;
-			nameField.size = 28;
-			nameField.textColor = 0x462c10;
-			nameField.verticalAlign = egret.VerticalAlign.MIDDLE;
-			this.nameField = nameField;
-			this.addChild(nameField);
 
 			let phoneField: egret.TextField = new egret.TextField;
 			phoneField.name = 'phone';
 			phoneField.type = egret.TextFieldType.INPUT;
-			phoneField.x = 269;
-			phoneField.y = 551;
-			phoneField.width = 331;
+			phoneField.x = 286;
+			phoneField.y = 940;
+			phoneField.width = 257;
 			phoneField.height = 49;
 			phoneField.size = 28;
 			phoneField.textColor = 0x462c10;
@@ -43,7 +30,7 @@ namespace pages.login {
 			this.phoneField = phoneField;
 			this.addChild(phoneField);
 
-			this.form.addInput(nameField, phoneField);
+			this.form.addInput(phoneField);
 		}
 
 		public submit(){

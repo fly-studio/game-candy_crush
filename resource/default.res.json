@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_png",
+			"keys": "bg_png,logo_png",
 			"name": "preload"
 		},
 		{
@@ -17,7 +17,7 @@
 			"name": "fonts"
 		},
 		{
-			"keys": "btn-start_png,form_png,login_frame_png,rules_png,welcome_png",
+			"keys": "form_png,login_frame_png",
 			"name": "page-login"
 		},
 		{
@@ -180,11 +180,6 @@
 			"name": "game3_frame_png"
 		},
 		{
-			"url": "assets/page-login/btn-start.png",
-			"type": "image",
-			"name": "btn-start_png"
-		},
-		{
 			"url": "assets/page-login/form.png",
 			"type": "image",
 			"name": "form_png"
@@ -193,16 +188,6 @@
 			"url": "assets/page-login/frame.png",
 			"type": "image",
 			"name": "login_frame_png"
-		},
-		{
-			"url": "assets/page-login/rules.png",
-			"type": "image",
-			"name": "rules_png"
-		},
-		{
-			"url": "assets/page-login/welcome.png",
-			"type": "image",
-			"name": "welcome_png"
 		},
 		{
 			"url": "assets/bg.png",
@@ -573,6 +558,11 @@
 			"url": "assets/sound/stage-2.mp3",
 			"type": "sound",
 			"name": "stage-2_mp3"
+		},
+		{
+			"name": "logo_png",
+			"type": "image",
+			"url": "assets/logo.png"
 		}
 	]
 }

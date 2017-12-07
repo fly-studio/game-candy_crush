@@ -10,25 +10,25 @@ namespace pages.game {
 			}
 			else if (score <= 4) // 1组超过3
 			{
-				words = 'good';
+				//words = 'good';
 			}
 			else if (score <= 6) // 两组
 			{
-				words = 'great';
+				words = 'logo';
 			}
 			else if (score <= 8) // 一条
 			{
-				words = 'amazing';
+				words = 'logo';
 			}
 			else if (score <= 11) //一条 + 1组
 			{
-				words = 'excellent';
+				words = 'logo';
 			}
 			else if (score > 11)
 			{
-				words = 'unbelievable';
+				words = 'logo';
 			}
-			//this.createWords(words + '_png');
+			this.createWords(words + '_png');
 			layer.media.Sound.play(words + '_mp3');
 		}
 

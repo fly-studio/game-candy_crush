@@ -3,17 +3,17 @@ namespace pages.login {
 	export class InfoSprite extends layer.ui.Sprite {
 
 		public onAddedToStage(event: egret.Event) : void {
-			let welcomeSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI('welcome_png');
-			welcomeSprite.x = 180;
-			welcomeSprite.y = 386;
+			let welcomeSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI('login_frame_png');
+			welcomeSprite.x = 73;
+			welcomeSprite.y = 330;
 			this.addChild(welcomeSprite);
 
 			let nameField: egret.TextField = new egret.TextField;
 			nameField.name = 'nickname';
 			nameField.fontFamily = "Microsoft Yahei";
 			nameField.bold = true;
-			nameField.x = 227;
-			nameField.y = 470;
+			nameField.x = 220;
+			nameField.y = 453;
 			nameField.width = 308;
 			nameField.height = 50;
 			nameField.size = 48;
@@ -28,8 +28,8 @@ namespace pages.login {
 			countField.name = 'score';
 			countField.fontFamily = "Microsoft Yahei";
 			countField.bold = true;
-			countField.x = 392;
-			countField.y = 545;
+			countField.x = 391;
+			countField.y = 540;
 			countField.width = 60;
 			countField.height = 67;
 			if (DEBUG) countField.border = true;

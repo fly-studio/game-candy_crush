@@ -61,7 +61,7 @@ namespace pages.game {
 			buttonHome.x = 408;
 			buttonHome.y = 843;
 			buttonHome.once(egret.TouchEvent.TOUCH_TAP, () => {
-				window.location.reload();
+				window.location.href = window['baseURI'] + 'crush?_=' + Math.random();
 			}, this);
 			this.addChild(buttonHome);
 		}
