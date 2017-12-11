@@ -29,8 +29,6 @@ namespace pages {
 			let startButton: egret.Sprite = new layer.ui.BlankButtonUI("click_mp3");
 			startButton.name = 'start-button';
 			startButton.touchEnabled = true;
-			startButton.width = 310;
-			startButton.height = 75;
 			startButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.nextPage, this);
 			this.addChild(startButton);
 
@@ -41,14 +39,31 @@ namespace pages {
 
 				startButton.x = 220;
 				startButton.y = 1074;
+				startButton.width = 310;
+				startButton.height = 75;
 			}
 			else
 			{
 				let infoSprite = new pages.login.InfoSprite;
 				this.addChild(infoSprite);
 
-				startButton.x = 220;
-				startButton.y = 957;
+				startButton.x = 400;
+				startButton.y = 960;
+				startButton.width = 230;
+				startButton.height = 65;
+
+				let rankButton: egret.Sprite = new layer.ui.BlankButtonUI("click_mp3");
+				rankButton.name = 'rank-button';
+				rankButton.touchEnabled = true;
+				rankButton.x = 120;
+				rankButton.y = 960;
+				rankButton.width = 230;
+				rankButton.height = 65;
+				rankButton.once(egret.TouchEvent.TOUCH_TAP, () => {
+					new RankPage();
+				}, this);
+				this.addChild(rankButton);
+				
 			}
 			
 		}

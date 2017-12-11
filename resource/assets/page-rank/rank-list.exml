@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="pages.rank.list" width="584" height="870" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="pages.rank.list" width="584" height="855" xmlns:e="http://ns.egret.com/eui">
 	<e:Scroller width="100%" height="100%" x="0" y="10" id="scroller">
 		<e:viewport>
 			<e:List height="100%" x="0" y="0" id="rankList">

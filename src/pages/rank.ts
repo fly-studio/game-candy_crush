@@ -19,17 +19,29 @@ namespace pages {
 
 			let frameSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI("rank_frame_png");
 			frameSprite.x = 48;
-			frameSprite.y = 63;
+			frameSprite.y = 48;
 			this.addChild(frameSprite);
 
 			let rankSprite: pages.rank.RankSprite = new pages.rank.RankSprite();
-			rankSprite.x = 85;
-			rankSprite.y = 230;
+			rankSprite.x = 84;
+			rankSprite.y = 177;
 			this.addChild(rankSprite);
 
 			network.topQuery().then(data => {
 				rankSprite.data = data;
 			});
+
+			let homeButton: egret.Sprite = new layer.ui.BlankButtonUI("click_mp3");
+			homeButton.name = 'rank-button';
+			homeButton.touchEnabled = true;
+			homeButton.x = 241;
+			homeButton.y = 1068;
+			homeButton.width = 311;
+			homeButton.height = 78;
+			homeButton.once(egret.TouchEvent.TOUCH_TAP, () => {
+				window.location.href = window['baseURI'] + 'crush?_=' + Math.random();
+			}, this);
+			this.addChild(homeButton);
 		}
 
 		public removeAllEventListeners(): void {
