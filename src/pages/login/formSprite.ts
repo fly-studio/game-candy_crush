@@ -14,14 +14,14 @@ namespace pages.login {
 		public onAddedToStage(event: egret.Event) : void {
 			let formSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI('form_png');
 			formSprite.x = 72;
-			formSprite.y = 328;
+			formSprite.y = 288;
 			this.addChild(formSprite);
 
 			let phoneField: egret.TextField = new egret.TextField;
 			phoneField.name = 'phone';
 			phoneField.type = egret.TextFieldType.INPUT;
 			phoneField.x = 286;
-			phoneField.y = 940;
+			phoneField.y = 897;
 			phoneField.width = 257;
 			phoneField.height = 49;
 			phoneField.size = 28;

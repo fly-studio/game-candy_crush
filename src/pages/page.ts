@@ -19,7 +19,7 @@ namespace pages {
 		}
 
 		public loading(groupList: string[], configList: layer.ui.ResourceConfig[] = []) : void {
-			let loadingView:layer.ui.LoadingUI = new layer.ui.LoadingUI();
+			let loadingView: ui.LoadingUI = new ui.LoadingUI();
 			loadingView.addToStage();
 
 			loadingView.configList = configList;

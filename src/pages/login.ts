@@ -30,7 +30,6 @@ namespace pages {
 			startButton.name = 'start-button';
 			startButton.touchEnabled = true;
 			startButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.nextPage, this);
-			this.addChild(startButton);
 
 			if (window['LP'] == undefined || window['LP']['user'] == undefined || window['LP']['user']['id'] == undefined)
 			{
@@ -38,9 +37,33 @@ namespace pages {
 				this.addChild(this.formSprite);
 
 				startButton.x = 220;
-				startButton.y = 1074;
+				startButton.y = 1064;
 				startButton.width = 310;
 				startButton.height = 75;
+
+				let copyright = new layer.ui.BitmapUI('copyright_png');
+				copyright.x = this.stage.stageWidth - copyright.width >> 1;
+				copyright.y = this.stage.stageHeight - copyright.height >> 1;
+				copyright.touchEnabled = true;
+				copyright.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+					copyright.visible = false;
+				}, this);
+				copyright.visible = false;
+				this.addChild(copyright);
+
+				let copyrightButton: egret.Sprite = new layer.ui.BlankButtonUI("click_mp3");
+				copyrightButton.name = 'copyright-button';
+				copyrightButton.touchEnabled = true;
+				copyrightButton.x = 292;
+				copyrightButton.y = 1015;
+				copyrightButton.width = 180;
+				copyrightButton.height = 37;
+				copyrightButton.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+					copyright.visible = true;
+				}, this);
+				this.addChild(copyrightButton);
+
+				
 			}
 			else
 			{
@@ -65,12 +88,14 @@ namespace pages {
 				this.addChild(rankButton);
 				
 			}
+			this.addChild(startButton);
 			
 		}
 
 		public removeAllEventListeners(): void {
 			let startButton = this.getChildByName('start-button');
 			startButton.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.nextPage, this);
+			
 		}
 	}
 }

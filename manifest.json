@@ -42,6 +42,7 @@
 		"bin-debug/views/crossColUI.js",
 		"bin-debug/views/crossRowUI.js",
 		"bin-debug/views/gameUI.js",
+		"bin-debug/views/loadingUI.js",
 		"bin-debug/views/meshUI.js"
 	]
 }

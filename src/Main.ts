@@ -57,20 +57,25 @@ class Main extends eui.UILayer  {
 
 		//设置加载进度界面
 		//Config to load process interface
-		let loadingView:layer.ui.LoadingUI = new layer.ui.LoadingUI();
-		loadingView.addToStage(this.stage);
+		let loadingView: layer.ui.LoadingUI = new layer.ui.LoadingUI();
 		loadingView.configList.push({
 			resourceFile: "resource/default.res.json",
 			path: "resource/"
 		});
-		loadingView.themeList = ['resource/default.thm.json'];
-		loadingView.groupList = ["preload", "eui", "game", "fonts", "metro", "sound", "crush", "countdown"];
+		loadingView.groupList = ["preload"];
+		loadingView.addToStage(this.stage);
 		loadingView.load().then(v => {
-			this.createGameScene();
-		}).catch(v => {
-			alert('无法读取：'+ v);
+			let loadingView1 = new ui.LoadingUI();
+			loadingView1.addToStage(this.stage);
+			
+			loadingView1.themeList = ['resource/default.thm.json'];
+			loadingView1.groupList = ["eui", "game", "fonts", "metro", "sound", "crush", "countdown"];
+			loadingView1.load().then(v => {
+				this.createGameScene();
+			}).catch(v => {
+				alert('无法读取：'+ v);
+			});
 		});
-
 	}
 
 	/**

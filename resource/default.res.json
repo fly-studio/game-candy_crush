@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_png,logo_png",
+			"keys": "bg_png,logo_png,logo-big_png",
 			"name": "preload"
 		},
 		{
@@ -17,7 +17,7 @@
 			"name": "fonts"
 		},
 		{
-			"keys": "form_png,login_frame_png",
+			"keys": "form_png,login_frame_png,copyright_png",
 			"name": "page-login"
 		},
 		{
@@ -560,9 +560,19 @@
 			"name": "stage-2_mp3"
 		},
 		{
-			"name": "logo_png",
+			"url": "assets/logo.png",
 			"type": "image",
-			"url": "assets/logo.png"
+			"name": "logo_png"
+		},
+		{
+			"url": "assets/logo-big.png",
+			"type": "image",
+			"name": "logo-big_png"
+		},
+		{
+			"url": "assets/page-login/copyright.png",
+			"type": "image",
+			"name": "copyright_png"
 		}
 	]
 }

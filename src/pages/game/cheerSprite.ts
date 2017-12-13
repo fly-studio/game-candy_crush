@@ -28,7 +28,7 @@ namespace pages.game {
 			{
 				words = 'unbelievable';
 			}
-			if (words.length) this.createWords('logo_png');
+			if (words.length) this.createWords('logo-big_png');
 			layer.media.Sound.play(words + '_mp3');
 		}
 
@@ -40,10 +40,10 @@ namespace pages.game {
 			let bmp: layer.ui.BitmapUI = new layer.ui.BitmapUI(words);
 			wordSprite.addChild(bmp);
 			wordSprite.x = (this.stage.stageWidth - bmp.width) / 2;
-			wordSprite.y = 300;
+			wordSprite.y = 200;
 			this.addChild(wordSprite);
-			egret.Tween.get(wordSprite).wait(500).to({
-				y: 220,
+			egret.Tween.get(wordSprite).wait(300).to({
+				y: 150,
 				alpha: 0
 			}, 500).call(() => {
 				wordSprite.parent.removeChild(wordSprite);
