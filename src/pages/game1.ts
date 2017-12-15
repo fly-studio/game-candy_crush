@@ -44,9 +44,14 @@ namespace pages {
 					this.addChild(maskUI);
 
 					let tips = new layer.ui.BitmapUI('out-tips_png');
-					tips.x = this.stage.stageWidth / 2 - tips.width / 2;
-					tips.y = this.stage.stageHeight / 2 - tips.height / 2;
+					tips.x = this.stage.stageWidth - tips.width >> 1;
+					tips.y = this.stage.stageHeight - tips.height >> 1;
+					tips.touchEnabled = true;
+					tips.once(egret.TouchEvent.TOUCH_TAP, () => {
+						window.location.href = window['LP'].share;
+					}, this);
 					this.addChild(tips);
+
 					this.readySprite.destroy();
 				}
 				else

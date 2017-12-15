@@ -89,7 +89,6 @@ namespace pages {
 				
 			}
 			this.addChild(startButton);
-			
 		}
 
 		public removeAllEventListeners(): void {

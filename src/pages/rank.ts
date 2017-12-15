@@ -18,13 +18,13 @@ namespace pages {
 			this.addChild(bgSprite);
 
 			let frameSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI("rank_frame_png");
-			frameSprite.x = 48;
-			frameSprite.y = 48;
+			frameSprite.x = 51;
+			frameSprite.y = 27;
 			this.addChild(frameSprite);
 
 			let rankSprite: pages.rank.RankSprite = new pages.rank.RankSprite();
-			rankSprite.x = 84;
-			rankSprite.y = 177;
+			rankSprite.x = 85;
+			rankSprite.y = 180;
 			this.addChild(rankSprite);
 
 			network.topQuery().then(data => {
@@ -35,7 +35,7 @@ namespace pages {
 			homeButton.name = 'rank-button';
 			homeButton.touchEnabled = true;
 			homeButton.x = 241;
-			homeButton.y = 1068;
+			homeButton.y = 1090;
 			homeButton.width = 311;
 			homeButton.height = 78;
 			homeButton.once(egret.TouchEvent.TOUCH_TAP, () => {

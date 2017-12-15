@@ -33,7 +33,7 @@
 			"name": "page-game2"
 		},
 		{
-			"keys": "game3_frame_png,last-frame_png,btn-home_png,btn-rank_png,stage-3_mp3",
+			"keys": "game3_frame_png,last-frame_png,stage-3_mp3",
 			"name": "page-game3"
 		},
 		{
@@ -285,19 +285,9 @@
 			"name": "go_png"
 		},
 		{
-			"url": "assets/page-game3/btn-rank.png",
-			"type": "image",
-			"name": "btn-rank_png"
-		},
-		{
 			"url": "assets/page-game3/last-frame.png",
 			"type": "image",
 			"name": "last-frame_png"
-		},
-		{
-			"url": "assets/page-game3/btn-home.png",
-			"type": "image",
-			"name": "btn-home_png"
 		},
 		{
 			"url": "assets/page-game1/out-tips.png",

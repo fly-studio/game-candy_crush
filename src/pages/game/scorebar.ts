@@ -51,7 +51,7 @@ namespace pages.game {
 			countdownField.fontFamily = "Microsoft Yahei";
 			countdownField.bold = true;
 			countdownField.x = 335;
-			countdownField.y = 310;
+			countdownField.y = 315;
 			countdownField.width = 125;
 			countdownField.height = 34;
 			if (DEBUG) countdownField.border = true;
@@ -68,7 +68,7 @@ namespace pages.game {
 			scoreField.fontFamily = "Microsoft Yahei";
 			scoreField.bold = true;
 			scoreField.x = 600;
-			scoreField.y = 310;
+			scoreField.y = 315;
 			scoreField.width = 115;
 			scoreField.height = 34;
 			if (DEBUG) scoreField.border = true;

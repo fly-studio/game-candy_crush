@@ -8,6 +8,7 @@ namespace pages.game {
 			super();
 			this.score = score;
 			this.rank = rank;
+			window['LP'].rank = rank;
 		}
 
 		public onAddedToStage(event: egret.Event) : void {
@@ -21,8 +22,8 @@ namespace pages.game {
 			scoreField.fontFamily = "Microsoft Yahei";
 			scoreField.bold = true;
 			scoreField.x = 400;
-			scoreField.y = 565;
-			scoreField.width = 175;
+			scoreField.y = 558;
+			scoreField.width = 172;
 			scoreField.height = 33;
 			if (DEBUG) scoreField.border = true;
 			scoreField.size = 28;
@@ -37,9 +38,9 @@ namespace pages.game {
 			rankField.name = 'rank';
 			rankField.fontFamily = "Microsoft Yahei";
 			rankField.bold = true;
-			rankField.x = 420;
-			rankField.y = 658;
-			rankField.width = 154;
+			rankField.x = 400;
+			rankField.y = 650;
+			rankField.width = 172;
 			rankField.height = 33;
 			if (DEBUG) rankField.border = true;
 			rankField.size = 28;
@@ -49,21 +50,35 @@ namespace pages.game {
 			rankField.textAlign = egret.HorizontalAlign.CENTER;
 			this.addChild(rankField);
 
-			let buttonRank: layer.ui.ButtonUI = new layer.ui.ButtonUI('btn-rank_png', 'click_mp3');
+			let buttonRank: layer.ui.BlankButtonUI = new layer.ui.BlankButtonUI('click_mp3');
 			buttonRank.x = 123;
-			buttonRank.y = 843;
+			buttonRank.y = 813;
+			buttonRank.width = 230;
+			buttonRank.height = 62;
 			buttonRank.once(egret.TouchEvent.TOUCH_TAP, () => {
 				new RankPage();
 			}, this);
 			this.addChild(buttonRank);
 
-			let buttonHome: layer.ui.ButtonUI = new layer.ui.ButtonUI('btn-home_png', 'click_mp3');
+			let buttonHome: layer.ui.BlankButtonUI = new layer.ui.BlankButtonUI('click_mp3');
 			buttonHome.x = 408;
-			buttonHome.y = 843;
+			buttonHome.y = 813;
+			buttonHome.width = 230;
+			buttonHome.height = 62;
 			buttonHome.once(egret.TouchEvent.TOUCH_TAP, () => {
 				window.location.href = window['baseURI'] + 'crush?_=' + Math.random();
 			}, this);
 			this.addChild(buttonHome);
+
+			let linkHome: layer.ui.BlankButtonUI = new layer.ui.BlankButtonUI('click_mp3');
+			linkHome.x = 153;
+			linkHome.y = 901;
+			linkHome.width = 452;
+			linkHome.height = 68;
+			linkHome.once(egret.TouchEvent.TOUCH_TAP, () => {
+				window.location.href = window['LP']['share'];
+			}, this);
+			this.addChild(linkHome);
 		}
 
 		public onRemovedFromStage(event: egret.Event): void {
