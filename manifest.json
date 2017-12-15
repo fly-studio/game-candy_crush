@@ -14,8 +14,8 @@
 	],
 	"game": [
 		"bin-debug/pages/page.js",
-		"bin-debug/pages/game.js",
 		"bin-debug/models/mesh/meshBase.js",
+		"bin-debug/pages/game.js",
 		"bin-debug/models/cell.js",
 		"bin-debug/models/mesh.js",
 		"bin-debug/models/mesh/crushedCells.js",
@@ -28,7 +28,7 @@
 		"bin-debug/pages/game2.js",
 		"bin-debug/pages/game3.js",
 		"bin-debug/pages/login.js",
-		"bin-debug/views/meshUI.js",
+		"bin-debug/events/CellEvent.js",
 		"bin-debug/pages/rank.js",
 		"bin-debug/pages/game/cheerSprite.js",
 		"bin-debug/pages/game/nextStageSprite.js",
@@ -43,6 +43,6 @@
 		"bin-debug/views/crossRowUI.js",
 		"bin-debug/views/gameUI.js",
 		"bin-debug/views/loadingUI.js",
-		"bin-debug/events/CellEvent.js"
+		"bin-debug/views/meshUI.js"
 	]
 }

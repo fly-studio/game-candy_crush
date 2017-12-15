@@ -12,9 +12,9 @@ namespace pages.login {
 			nameField.name = 'nickname';
 			nameField.fontFamily = "Microsoft Yahei";
 			nameField.bold = true;
-			nameField.x = 220;
+			nameField.x = 155;
 			nameField.y = 453;
-			nameField.width = 308;
+			nameField.width = 458;
 			nameField.height = 50;
 			nameField.size = 48;
 			if (DEBUG) nameField.border = true;
