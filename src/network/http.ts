@@ -8,7 +8,9 @@ namespace network {
 	export function todayRemaining() {
 		return layer.http.get('crush/today-remaining').then(json => {
 			return typeof json.data != 'undefined' ? json.data.todayRemaining : 0;
-		});
+		})/*.catch(() => {
+			return window.location.hash == '#automation' ? Infinity : 0;
+		})*/;
 	}
 
 	export function topQuery() {

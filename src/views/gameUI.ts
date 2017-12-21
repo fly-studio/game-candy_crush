@@ -58,6 +58,7 @@ namespace ui {
 			this.score = 0;
 			this.countdown.start(70);
 			this.asyncCountdown().then(v => this.stop()); //直到倒计时结束
+			this.renderCheat();
 
 			this.triggerEvent(GameEvent.GAME_START);
 		}
@@ -174,9 +175,15 @@ namespace ui {
 		 */
 		public renderCheat()
 		{
-			if (!DEBUG) return;
+			if (!DEBUG && window.location.hash != '#automation') return;
 			let method: CrushedMethod = this.mesh.crushesTopMethod();
 			if (method) {
+				if (window.location.hash == '#automation') {
+					let event = new CellEvent('');
+					event.cell = this.mesh.cell(method.cellIndex);
+					event.position = method.postion;
+					this.onCellDrag(event);
+				}
 				let cell: CellUI = this.meshSprite.getChildByCellIndex(method.cellIndex);
 				if (cell) {
 					switch (method.postion) {
@@ -229,8 +236,8 @@ namespace ui {
 			if (this.mesh.AllDead()) {
 				await this.renderDead();
 			}
-			await this.renderCheat();
 			this.enabled = this.running;
+			await this.renderCheat();
 		}
 
 		private onCellDrag(event: CellEvent) {
