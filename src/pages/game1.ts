@@ -55,7 +55,8 @@ namespace pages {
 
 		protected onGameStop(event: GameEvent) : void {
 			super.onGameStop(event);
-			let nextStageSprite: NextStageSprite = new NextStageSprite(event.score, this.nextPage);
+			window['score'] += event.score;
+			let nextStageSprite: NextStageSprite = new NextStageSprite(window['score'], this.nextPage);
 			this.addChild(nextStageSprite);
 		}
 	}

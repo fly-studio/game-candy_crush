@@ -95,6 +95,6 @@ class Main extends eui.UILayer  {
      * Create scene interface
      */
     protected createGameScene(): void {
-        new pages.Game1Page()
+        new pages.Game2Page()
     }
 }

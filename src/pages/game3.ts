@@ -11,7 +11,7 @@ namespace pages {
 
 		public nextPage()
 		{
-
+			alert('总共只有三关');
 		}
 
 		public onAddedToStage(event: egret.Event) : void {
@@ -49,12 +49,11 @@ namespace pages {
 		}
 
 		protected onGameStop(event: GameEvent) : void {
+
 			super.onGameStop(event);
-
-			let resultSprite: ResultSprite = new ResultSprite(event.score, 0);
-
-			this.addChild(resultSprite);
-
+			window['score'] += event.score;
+			let nextStageSprite: NextStageSprite = new NextStageSprite(window['score'], this.nextPage);
+			this.addChild(nextStageSprite);
 		}
 	}
 }

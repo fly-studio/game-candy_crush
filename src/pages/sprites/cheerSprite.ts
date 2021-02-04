@@ -18,7 +18,7 @@ namespace pages {
 			}
 			else if (score <= 8) // 一条
 			{
-				words = 'amazing';
+				words = 'perfect';
 			}
 			else if (score <= 11) //一条 + 1组
 			{
@@ -29,18 +29,17 @@ namespace pages {
 				words = 'unbelievable';
 			}
 			if (words.length)
-				this.createWords(words + '_fnt', score);
+				this.createWords(words + '_png');
 			layer.media.Sound.play(words + '_mp3');
 		}
 
-		protected createWords(font: string, score: number)
+		protected createWords(words: string)
 		{
 			if (!this.parent) return;
 
 			let wordSprite: egret.Sprite = new egret.Sprite;
-			let bmp: egret.BitmapText  = new egret.BitmapText();
-			bmp.font = RES.getRes(font)
-			bmp.text = '+' + score;
+			let bmp  = new layer.ui.BitmapUI(words);
+
 			wordSprite.addChild(bmp);
 			wordSprite.x = (this.stage.stageWidth - bmp.width) / 2;
 			wordSprite.y = 200;

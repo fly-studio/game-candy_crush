@@ -17,15 +17,11 @@
 			"name": "fonts"
 		},
 		{
-			"keys": "form_png,login_frame_png,copyright_png",
-			"name": "page-login"
-		},
-		{
 			"keys": "rank_frame_png,list-item-bg_png,rank-item_exml,rank-list_exml,rank_png,rank_fnt",
 			"name": "page-rank"
 		},
 		{
-			"keys": "game1_frame_png,out-tips_png,stage-1_mp3",
+			"keys": "game1_frame_png,stage-1_mp3",
 			"name": "page-game1"
 		},
 		{
@@ -33,7 +29,7 @@
 			"name": "page-game2"
 		},
 		{
-			"keys": "game3_frame_png,last-frame_png,stage-3_mp3",
+			"keys": "game3_frame_png,stage-3_mp3",
 			"name": "page-game3"
 		},
 		{
@@ -283,16 +279,6 @@
 			"url": "assets/countdown/go.png",
 			"type": "image",
 			"name": "go_png"
-		},
-		{
-			"url": "assets/page-game3/last-frame.png",
-			"type": "image",
-			"name": "last-frame_png"
-		},
-		{
-			"url": "assets/page-game1/out-tips.png",
-			"type": "image",
-			"name": "out-tips_png"
 		},
 		{
 			"url": "assets/sound/SelectFault.mp3",
