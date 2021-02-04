@@ -159,7 +159,7 @@ namespace ui {
 			return Promise.all(promises);
 		}
 
-		public renderCross(row: number = -1, col: number = -1) {
+		public renderCross(row: number = -1, col: number = -1): Promise<any> {
 			let rect: egret.Rectangle = this.getCellRectangle(this.mesh.index(row < 0 ? 0 : row, col < 0 ? 0 : col));
 			let crossUI = row >= 0 ? new CrossRowUI(rect) : new CrossColUI(rect);
 			this.addChild(crossUI);
@@ -209,7 +209,7 @@ namespace ui {
 				let cellUI: CellUI = this.getChildByCellIndex(index) as CellUI;
 				if (cellUI) promises.push(cellUI.fadeOut(300).then(() => {
 					cellUI.destroy();
-				})); //消失且移除
+				}).catch(error => {})); //消失且移除
 			}
 			return Promise.all(promises);
 		}

@@ -57,7 +57,7 @@ namespace ui {
 			this.running = true;
 			this.score = 0;
 			this.countdown.start(70);
-			this.asyncCountdown().then(v => this.stop()); //直到倒计时结束
+			this.asyncCountdown().then(v => this.stop()).catch(error => {}); //直到倒计时结束
 			this.renderCheat();
 
 			this.triggerEvent(GameEvent.GAME_START);
@@ -95,9 +95,14 @@ namespace ui {
 		public async asyncCountdown()
 		{
 			let remaining: number = 0;
-			while((remaining = await this.countdown.remainingPromise()) > 0) {
-				this.triggerEvent(GameEvent.GAME_COUNTDOWN, null, remaining);
+			try {
+				while((remaining = await this.countdown.remainingPromise()) > 0) {
+					this.triggerEvent(GameEvent.GAME_COUNTDOWN, null, remaining);
+				}
+			} catch (error) {
+
 			}
+
 			this.triggerEvent(GameEvent.GAME_COUNTDOWN, null, 0);
 		}
 
@@ -135,7 +140,7 @@ namespace ui {
 		/**
 		 * 渲染死局界面
 		 */
-		public renderDead() : Promise<any> {
+		public async renderDead() : Promise<any> {
 			this.pause();
 			let deadSprite: egret.Sprite = new egret.Sprite;
 			deadSprite.x = 0;
@@ -153,21 +158,21 @@ namespace ui {
 
 			this.stage.addChild(deadSprite);
 
-			return Promise.all([
+			await Promise.all([
 				new Promise(resolve => {
 					//重新渲染游戏区
 					this.buildMeshSprite();
-					resolve();
+					resolve(null);
 				}),
 				new Promise<any>(resolve => {
 					setTimeout(() => {
-						resolve();
+						resolve(null);
 					}, 500); //至少让用户等待.5秒
 				})
-			]).then(() => {
-				this.stage.removeChild(deadSprite); //移除死局遮罩
-				this.resume();
-			});
+			]);
+
+			this.stage.removeChild(deadSprite); //移除死局遮罩
+			this.resume();
 		}
 
 		/**
@@ -187,16 +192,16 @@ namespace ui {
 				let cell: CellUI = this.meshSprite.getChildByCellIndex(method.cellIndex);
 				if (cell) {
 					switch (method.postion) {
-						case sharp.POSITION.UP:
+						case POSITION.UP:
 							cell.text = '↑';
 							break;
-						case sharp.POSITION.FORWARD:
+						case POSITION.FORWARD:
 							cell.text = '→';
 							break;
-						case sharp.POSITION.DOWN:
+						case POSITION.DOWN:
 							cell.text = '↓';
 							break;
-						case sharp.POSITION.BACKWARD:
+						case POSITION.BACKWARD:
 							cell.text = '←';
 							break;
 					}
@@ -213,7 +218,11 @@ namespace ui {
 			if (!isCrushed)
 				layer.media.Sound.play('break_mp3');
 
-			await this.meshSprite.renderSwap(fromCell, toCell, !isCrushed);
+			try {
+				await this.meshSprite.renderSwap(fromCell, toCell, !isCrushed);
+			} catch (error) {
+
+			}
 
 			while (crushedCells.hasCrushes && this.running)
 			{
@@ -226,18 +235,26 @@ namespace ui {
 
 				this.selectedCell = null;
 				this.incrementScore(crushedCells.length);
+				try {
+					await this.meshSprite.renderCrush(crushedCells);
+					let filledCells: FilledCells = this.mesh.rebuildWithCrush(crushedCells);
+					await this.meshSprite.renderFill(filledCells);
+				} catch (error) {
 
-				await this.meshSprite.renderCrush(crushedCells);
-				let filledCells:FilledCells = this.mesh.rebuildWithCrush(crushedCells);
-				await this.meshSprite.renderFill(filledCells);
+				}
 
 				crushedCells = this.mesh.crushedCells();
 			}
 			if (this.mesh.AllDead()) {
-				await this.renderDead();
+				try {
+					await this.renderDead();
+				} catch (error) {
+
+				}
 			}
 			this.enabled = this.running;
-			await this.renderCheat();
+
+			this.renderCheat();
 		}
 
 		private onCellDrag(event: CellEvent) {

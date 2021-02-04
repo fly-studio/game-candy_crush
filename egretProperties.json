@@ -1,58 +1,36 @@
 {
-	"native": {
-		"path_ignore": []
-	},
-	"publish": {
-		"web": 0,
-		"native": 1,
-		"path": "bin-release"
-	},
-	"egret_version": "5.0.14",
-	"template": {},
-	"eui": {
-		"exmlRoot": [
-			"resource/eui_skins"
-		],
-		"themes": [
-			"resource/default.thm.json"
-		],
-		"exmlPublishPolicy": "content"
-	},
-	"modules": [
+  "engineVersion": "5.3.10",
+  "compilerVersion": "5.3.10",
+  "template": {},
+  "target": {
+    "current": "web"
+  },
+  "modules": [
+    {
+      "name": "egret"
+    },
+    {
+      "name": "eui"
+    },
+    {
+      "name": "game"
+    },
+    {
+      "name": "tween"
+    },
+    {
+      "name": "assetsmanager"
+    },
+    {
+      "name": "promise"
+    },
 		{
-			"name": "egret"
-		},
-		{
-			"name": "game"
-		},
-		{
-			"name": "res"
-		},
-		{
-			"name": "tween"
-		},
-		{
-			"name": "eui"
-		},
-		{
-			"name": "promise",
-			"path": "./promise"
-		},
-		{
-			"name": "lodash",
-			"path": "../libs/lodash"
-		},
-		{
-			"name": "axios",
-			"path": "../libs/axios"
-		},
-		{
-			"name": "_",
-			"path": "../libs/_"
+			"name": "lp",
+			"path": "../libs/lp"
 		},
 		{
 			"name": "layer",
 			"path": "../libs/layer"
 		}
-	]
+  ]
 }

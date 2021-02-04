@@ -29,66 +29,72 @@
 
 class Main extends eui.UILayer  {
 
-	public constructor() {
-		super();
-	}
 
-	protected createChildren() {
+
+    public constructor() {
+        super();
+
+    }
+
+    protected createChildren(): void {
 		super.createChildren();
 
-		egret.lifecycle.addLifecycleListener((context) => {
-			// custom lifecycle plugin
+        egret.lifecycle.addLifecycleListener((context) => {
+            // custom lifecycle plugin
 
-			context.onUpdate = () => {
-				//console.log('hello,world')
-			}
-		})
+            context.onUpdate = () => {
 
-		egret.lifecycle.onPause = () => {
-			egret.ticker.pause();
-		}
+            }
+        })
 
-		egret.lifecycle.onResume = () => {
-			egret.ticker.resume();
-		}
+        egret.lifecycle.onPause = () => {
+            egret.ticker.pause();
+        }
 
-		//inject the custom material parser
-		layer.adapter.registerEUI();
+        egret.lifecycle.onResume = () => {
+            egret.ticker.resume();
+        }
 
-		//设置加载进度界面
-		//Config to load process interface
-		let loadingView: layer.ui.LoadingUI = new layer.ui.LoadingUI();
-		loadingView.configList.push({
-			resourceFile: "resource/default.res.json",
-			path: "resource/"
-		});
-		loadingView.groupList = ["preload"];
-		loadingView.addToStage(this.stage);
-		loadingView.load().then(v => {
-			let loadingView1 = new ui.LoadingUI();
-			loadingView1.addToStage(this.stage);
-			
-			loadingView1.themeList = ['resource/default.thm.json'];
-			loadingView1.groupList = ["eui", "game", "fonts", "metro", "sound", "crush", "countdown"];
-			loadingView1.load().then(v => {
-				this.createGameScene();
-			}).catch(v => {
-				alert('无法读取：'+ v);
-			});
-		});
-	}
+        //inject the custom material parser
+        layer.adapter.registerEUI();
 
-	/**
-	 * 创建游戏场景
-	 * Create a game scene
-	 */
-	private createGameScene() {
-		if (window.location.hash == '#rank')
-			new pages.RankPage();
-		else
-			new pages.LoginPage();
-	}
+        this.runGame().catch(e => {
+            console.log(e);
+        })
 
+
+    }
+
+    private async runGame() {
+        await this.loadResource()
+        this.createGameScene();
+    }
+
+    private async loadResource() {
+        try {
+            const blankLoadingView: layer.ui.BlankLoadingUI = new layer.ui.BlankLoadingUI();
+            blankLoadingView.addConfigFile("resource/default.res.json", "resource/")
+                .addGroupNames('preload')
+                .addToStage(this.stage)
+            await blankLoadingView.load()
+
+            const loadingView: ui.LoadingUI = new ui.LoadingUI();
+            loadingView.addThemeFiles('resource/default.thm.json')
+                .addGroupNames("eui", "game", "fonts", "metro", "sound", "crush", "countdown")
+                .addToStage(this.stage)
+            await loadingView.load()
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
+
+    private textfield: egret.TextField;
+    /**
+     * 创建场景界面
+     * Create scene interface
+     */
+    protected createGameScene(): void {
+        new pages.Game1Page()
+    }
 }
-
-

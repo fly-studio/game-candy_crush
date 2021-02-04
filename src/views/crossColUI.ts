@@ -40,7 +40,7 @@ namespace ui {
 				}, duration * .8).to({
 					alpha: 0
 				}, duration * .2).call(() => {
-					resolve();
+					resolve(null);
 				});
 			}).then(() => {
 				this.destroy();

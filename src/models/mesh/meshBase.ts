@@ -1,4 +1,4 @@
-class MeshBase extends array.Grid {
+class MeshBase extends Grid {
 
 	public cells:Cell[];
 	public cellColors: any[];

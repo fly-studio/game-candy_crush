@@ -1,7 +1,8 @@
 interface CrushedMethod{
 	cellIndex: number,
-	postion: sharp.POSITION
+	postion: POSITION
 }
+
 class CrushedMethods {
 	public methods: CrushedMethod[];
 	protected mesh: Mesh
@@ -17,7 +18,7 @@ class CrushedMethods {
 		return this.methods.values();
 	}
 
-	public add(cellIndex: number, postion: sharp.POSITION): boolean
+	public add(cellIndex: number, postion: POSITION): boolean
 	{
 		let cell: Cell = this.mesh.getCellByPostion(cellIndex, postion);
 		if (!cell) return false;

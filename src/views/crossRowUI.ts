@@ -32,19 +32,18 @@ namespace ui {
 
 		}
 
-		public fadeOut(duration: number) : Promise<any> {
-			return new Promise<any>((resolve) => {
+		public async fadeOut(duration: number) : Promise<any> {
+			await new Promise<any>((resolve) => {
 				egret.Tween.get(this.rowSprite).to({
 					scaleX: 2,
 					x: -this.width * 0.5
-				}, duration * .8).to({
+				}, duration * 0.8).to({
 					alpha: 0
-				}, duration * .2).call(() => {
-					resolve();
+				}, duration * 0.2).call(() => {
+					resolve(null);
 				});
-			}).then(() => {
-				this.destroy();
 			});
+			this.destroy();
 		}
 
 	}

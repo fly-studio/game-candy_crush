@@ -1,7 +1,7 @@
 {
-	"groups": [
+	"groups":[
 		{
-			"keys": "bg_png,logo_png,logo-big_png",
+			"keys": "bg_png,logo_png",
 			"name": "preload"
 		},
 		{
@@ -53,7 +53,7 @@
 			"name": "eui"
 		}
 	],
-	"resources": [
+	"resources":[
 		{
 			"url": "config/description.json",
 			"type": "json",
@@ -553,11 +553,6 @@
 			"url": "assets/logo.png",
 			"type": "image",
 			"name": "logo_png"
-		},
-		{
-			"url": "assets/logo-big.png",
-			"type": "image",
-			"name": "logo-big_png"
 		},
 		{
 			"url": "assets/page-login/copyright.png",

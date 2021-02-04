@@ -3,12 +3,12 @@ namespace ui {
 		public cell:Cell;
 		public _selected:boolean;
 		private selectedSharp: egret.Shape;
-		private touchPoint: sharp.Point;
+		private touchPoint: egret.Point;
 
 		constructor(cell: Cell) {
 			super();
 			this.cell = cell;
-			this.touchPoint = new sharp.Point();
+			this.touchPoint = new egret.Point();
 		}
 
 		public set selected(value: boolean) {
@@ -84,7 +84,7 @@ namespace ui {
 				args.forEach(p => tween = tween.to({x: p.x, y: p.y}, duration));
 				tween.call(() => {
 					this.text = 'DEBUG';
-					resolve();
+					resolve(null);
 				}, this)
 			});
 		}
@@ -102,9 +102,10 @@ namespace ui {
 			mc.width = this.width;
 			mc.height = this.height;
 			this.addChild(mc);
-			return new Promise<any>(resolve => {
+
+			return new Promise<any>((resolve, reject) => {
 				mc.once(egret.Event.COMPLETE, () => {
-					resolve();
+					resolve(null);
 				}, this);
 				mc.gotoAndPlay('disappear', 1);
 			});
@@ -121,12 +122,12 @@ namespace ui {
 		public onTouchEnd(event: egret.TouchEvent) {
 			if (!this.cell || this.cell.block) return;
 
-			let position:sharp.POSITION = sharp.position(this.touchPoint, new sharp.Point(event.stageX, event.stageY));
-			console.log('touch-drag:', this.cell.index, 'direction:', position);
+			let _position: POSITION = position(this.touchPoint, new egret.Point(event.stageX, event.stageY));
+			console.log('touch-drag:', this.cell.index, 'direction:', _position);
 
 			let cellEvent = new CellEvent(CellEvent.CELL_DRAG, true);
 			cellEvent.cell = this.cell;
-			cellEvent.position = position;
+			cellEvent.position = _position;
 			this.parent.dispatchEvent(cellEvent);
 		}
 

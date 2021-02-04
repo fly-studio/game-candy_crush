@@ -1,5 +1,5 @@
 namespace pages {
-	export class Game3Page extends Game  {
+	export class Game3Page extends BaseGamePage  {
 
 		constructor() {
 			super();
@@ -20,7 +20,7 @@ namespace pages {
 			let bgSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI('bg_png');
 			this.addChild(bgSprite);
 
-			this.scorebarSprite = new pages.game.ScorebarSprite();
+			this.scorebarSprite = new pages.ScorebarSprite();
 			this.scorebarSprite.stageNumber = 3;
 			this.addChild(this.scorebarSprite);
 
@@ -51,11 +51,10 @@ namespace pages {
 		protected onGameStop(event: GameEvent) : void {
 			super.onGameStop(event);
 
-			network.scoreQuery(event.score, 3).then(json => {
-				let resultSprite: game.ResultSprite = new game.ResultSprite(json.data.score, json.data.rank);
-				this.addChild(resultSprite);
-			});
-			
+			let resultSprite: ResultSprite = new ResultSprite(event.score, 0);
+
+			this.addChild(resultSprite);
+
 		}
 	}
 }
