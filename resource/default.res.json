@@ -9,8 +9,8 @@
 			"name": "crush"
 		},
 		{
-			"keys": "metro_5_png,metro_4_png,metro_3_png,metro_2_png,metro_1_png",
-			"name": "metro"
+			"keys": "character_5_png,character_4_png,character_3_png,character_2_png,character_1_png",
+			"name": "character"
 		},
 		{
 			"keys": "good_fnt,good_fnt_png,great_fnt,great_fnt_png,perfect_fnt,perfect_fnt_png,pink_fnt,pink_fnt_png,unbelievable_fnt,unbelievable_fnt_png,select_fault_mp3",
@@ -76,29 +76,29 @@
 			"name": "cross_v_png"
 		},
 		{
-			"url": "assets/metro/metro_5.png",
+			"url": "assets/character/character_5.png",
 			"type": "image",
-			"name": "metro_5_png"
+			"name": "character_5_png"
 		},
 		{
-			"url": "assets/metro/metro_1.png",
+			"url": "assets/character/character_1.png",
 			"type": "image",
-			"name": "metro_1_png"
+			"name": "character_1_png"
 		},
 		{
-			"url": "assets/metro/metro_2.png",
+			"url": "assets/character/character_2.png",
 			"type": "image",
-			"name": "metro_2_png"
+			"name": "character_2_png"
 		},
 		{
-			"url": "assets/metro/metro_3.png",
+			"url": "assets/character/character_3.png",
 			"type": "image",
-			"name": "metro_3_png"
+			"name": "character_3_png"
 		},
 		{
-			"url": "assets/metro/metro_4.png",
+			"url": "assets/character/character_4.png",
 			"type": "image",
-			"name": "metro_4_png"
+			"name": "character_4_png"
 		},
 		{
 			"url": "assets/fonts/good.fnt",

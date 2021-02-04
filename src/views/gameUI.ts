@@ -24,11 +24,11 @@ namespace ui {
 				0x00ffff
 			];*/
 			this.mesh.cellColors = [
-				'metro_1_png',
-				'metro_2_png',
-				'metro_3_png',
-				'metro_4_png',
-				'metro_5_png'
+				'character_1_png',
+				'character_2_png',
+				'character_3_png',
+				'character_4_png',
+				'character_5_png'
 			];
 			this._selectedCell = null;
 			this.countdown = new layer.timer.Countdown(duration * 1000);

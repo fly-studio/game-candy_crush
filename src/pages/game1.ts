@@ -30,6 +30,7 @@ namespace pages {
 			this.addChild(frameSprite);
 
 			let gameUI = new ui.GameUI(60);
+
 			gameUI.x = 31;
 			gameUI.y = 381;
 			gameUI.width = 689;

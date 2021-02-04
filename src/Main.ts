@@ -80,7 +80,7 @@ class Main extends eui.UILayer  {
 
             const loadingView: ui.LoadingUI = new ui.LoadingUI();
             loadingView.addThemeFiles('resource/default.thm.json')
-                .addGroupNames("eui", "game", "fonts", "metro", "sound", "crush", "countdown")
+                .addGroupNames("eui", "game", "fonts", "character", "sound", "crush", "countdown")
                 .addToStage(this.stage)
             await loadingView.load()
         }
@@ -95,6 +95,6 @@ class Main extends eui.UILayer  {
      * Create scene interface
      */
     protected createGameScene(): void {
-        new pages.Game2Page()
+        new pages.Game1Page()
     }
 }

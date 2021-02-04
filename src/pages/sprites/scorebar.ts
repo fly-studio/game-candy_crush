@@ -29,7 +29,7 @@ namespace pages {
 		public onAddedToStage(event: egret.Event) : void {
 			let bgSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI('scorebar_png');
 			bgSprite.x = 24;
-			bgSprite.y = 298;
+			bgSprite.y = 100;
 			this.addChild(bgSprite);
 
 			let stageField: egret.TextField = new egret.TextField;
@@ -37,7 +37,7 @@ namespace pages {
 			stageField.fontFamily = "Microsoft Yahei";
 			stageField.bold = true;
 			stageField.x = 109;
-			stageField.y = 315;
+			stageField.y = 117;
 			stageField.width = 39;
 			stageField.height = 23;
 			if (DEBUG) stageField.border = true;
@@ -54,7 +54,7 @@ namespace pages {
 			countdownField.fontFamily = "Microsoft Yahei";
 			countdownField.bold = true;
 			countdownField.x = 335;
-			countdownField.y = 315;
+			countdownField.y = 117;
 			countdownField.width = 125;
 			countdownField.height = 34;
 			if (DEBUG) countdownField.border = true;
@@ -71,7 +71,7 @@ namespace pages {
 			scoreField.fontFamily = "Microsoft Yahei";
 			scoreField.bold = true;
 			scoreField.x = 600;
-			scoreField.y = 315;
+			scoreField.y = 117;
 			scoreField.width = 115;
 			scoreField.height = 34;
 			if (DEBUG) scoreField.border = true;
