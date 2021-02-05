@@ -1,0 +1,1398 @@
+{
+    "mc": {
+        "chicken": {
+            "frameRate": 10,
+            "labels": [{
+                "name": "click",
+                "frame": 1,
+                "end": 30
+            }, {
+                "name": "column",
+                "frame": 31,
+                "end": 59
+            }, {
+                "name": "line",
+                "frame": 60,
+                "end": 88
+            }, {
+                "name": "wrap",
+                "frame": 89,
+                "end": 137
+            }],
+            "events": [],
+            "frames": [{
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_00"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_01"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_02"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_03"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_04"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_05"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_06"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_07"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_08"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_09"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_10"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_11"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_12"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_13"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_14"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_15"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_16"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_17"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_18"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_19"
+            }, {
+                "x": -33,
+                "y": -32,
+                "res": "chicken_click_20"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_21"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_22"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_23"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_24"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_25"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_26"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_27"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_28"
+            }, {
+                "x": -33,
+                "y": -33,
+                "res": "chicken_click_29"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_column_00"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_column_01"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_column_02"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_column_03"
+            }, {
+                "x": -40,
+                "y": -41,
+                "res": "chicken_column_04"
+            }, {
+                "x": -40,
+                "y": -41,
+                "res": "chicken_column_05"
+            }, {
+                "x": -40,
+                "y": -41,
+                "res": "chicken_column_06"
+            }, {
+                "x": -40,
+                "y": -41,
+                "res": "chicken_column_07"
+            }, {
+                "x": -40,
+                "y": -41,
+                "res": "chicken_column_08"
+            }, {
+                "x": -40,
+                "y": -41,
+                "res": "chicken_column_09"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_column_10"
+            }, {
+                "x": -39,
+                "y": -39,
+                "res": "chicken_column_11"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_column_12"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_column_13"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_column_14"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_column_15"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_column_16"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_column_17"
+            }, {
+                "x": -37,
+                "y": -36,
+                "res": "chicken_column_18"
+            }, {
+                "x": -37,
+                "y": -36,
+                "res": "chicken_column_19"
+            }, {
+                "x": -37,
+                "y": -36,
+                "res": "chicken_column_20"
+            }, {
+                "x": -37,
+                "y": -36,
+                "res": "chicken_column_21"
+            }, {
+                "x": -37,
+                "y": -36,
+                "res": "chicken_column_22"
+            }, {
+                "x": -37,
+                "y": -36,
+                "res": "chicken_column_23"
+            }, {
+                "x": -37,
+                "y": -36,
+                "res": "chicken_column_24"
+            }, {
+                "x": -37,
+                "y": -36,
+                "res": "chicken_column_25"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_column_26"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_column_27"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_column_28"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_line_00"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_line_01"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_line_02"
+            }, {
+                "x": -39,
+                "y": -39,
+                "res": "chicken_line_03"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_line_04"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_line_05"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_line_06"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_line_07"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_line_08"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_line_09"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_line_10"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_line_11"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_line_12"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_line_13"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_line_14"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_line_15"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_line_16"
+            }, {
+                "x": -37,
+                "y": -38,
+                "res": "chicken_line_17"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_line_18"
+            }, {
+                "x": -36,
+                "y": -37,
+                "res": "chicken_line_19"
+            }, {
+                "x": -36,
+                "y": -37,
+                "res": "chicken_line_20"
+            }, {
+                "x": -36,
+                "y": -37,
+                "res": "chicken_line_21"
+            }, {
+                "x": -36,
+                "y": -37,
+                "res": "chicken_line_22"
+            }, {
+                "x": -36,
+                "y": -37,
+                "res": "chicken_line_23"
+            }, {
+                "x": -36,
+                "y": -37,
+                "res": "chicken_line_24"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_line_25"
+            }, {
+                "x": -37,
+                "y": -38,
+                "res": "chicken_line_26"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_line_27"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_line_28"
+            }, {
+                "x": -36,
+                "y": -36,
+                "res": "chicken_wrap_00"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_wrap_01"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_wrap_02"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_wrap_03"
+            }, {
+                "x": -37,
+                "y": -38,
+                "res": "chicken_wrap_04"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_wrap_05"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_wrap_06"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_wrap_07"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_08"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_09"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_10"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_11"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_12"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_wrap_13"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_wrap_14"
+            }, {
+                "x": -39,
+                "y": -41,
+                "res": "chicken_wrap_15"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_wrap_16"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_wrap_17"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_18"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_19"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_20"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_21"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_22"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_23"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_24"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_wrap_25"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_wrap_26"
+            }, {
+                "x": -39,
+                "y": -41,
+                "res": "chicken_wrap_27"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_wrap_28"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_wrap_29"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_30"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_31"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_32"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_33"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_34"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_35"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_36"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_wrap_37"
+            }, {
+                "x": -39,
+                "y": -40,
+                "res": "chicken_wrap_38"
+            }, {
+                "x": -39,
+                "y": -41,
+                "res": "chicken_wrap_39"
+            }, {
+                "x": -38,
+                "y": -39,
+                "res": "chicken_wrap_40"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_wrap_41"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_wrap_42"
+            }, {
+                "x": -38,
+                "y": -38,
+                "res": "chicken_wrap_43"
+            }, {
+                "x": -37,
+                "y": -38,
+                "res": "chicken_wrap_44"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_wrap_45"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_wrap_46"
+            }, {
+                "x": -37,
+                "y": -37,
+                "res": "chicken_wrap_47"
+            }, {
+                "x": -36,
+                "y": -36,
+                "res": "chicken_wrap_48"
+            }]
+        }
+    },
+    "res": {
+        "chicken_click_00": {
+            "x": 305,
+            "y": 794,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_01": {
+            "x": 530,
+            "y": 784,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_02": {
+            "x": 748,
+            "y": 755,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_03": {
+            "x": 680,
+            "y": 710,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_04": {
+            "x": 612,
+            "y": 710,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_05": {
+            "x": 762,
+            "y": 687,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_06": {
+            "x": 781,
+            "y": 534,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_07": {
+            "x": 830,
+            "y": 602,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_08": {
+            "x": 509,
+            "y": 916,
+            "w": 66,
+            "h": 63
+        },
+        "chicken_click_09": {
+            "x": 816,
+            "y": 755,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_10": {
+            "x": 666,
+            "y": 784,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_11": {
+            "x": 598,
+            "y": 784,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_12": {
+            "x": 441,
+            "y": 794,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_13": {
+            "x": 734,
+            "y": 955,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_14": {
+            "x": 734,
+            "y": 889,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_15": {
+            "x": 666,
+            "y": 889,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_16": {
+            "x": 441,
+            "y": 860,
+            "w": 66,
+            "h": 63
+        },
+        "chicken_click_17": {
+            "x": 598,
+            "y": 850,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_18": {
+            "x": 734,
+            "y": 823,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_19": {
+            "x": 816,
+            "y": 821,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_20": {
+            "x": 830,
+            "y": 668,
+            "w": 66,
+            "h": 64
+        },
+        "chicken_click_21": {
+            "x": 373,
+            "y": 794,
+            "w": 66,
+            "h": 65
+        },
+        "chicken_click_22": {
+            "x": 781,
+            "y": 466,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_23": {
+            "x": 796,
+            "y": 305,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_24": {
+            "x": 882,
+            "y": 69,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_25": {
+            "x": 882,
+            "y": 1,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_26": {
+            "x": 837,
+            "y": 149,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_27": {
+            "x": 796,
+            "y": 237,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_28": {
+            "x": 781,
+            "y": 398,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_click_29": {
+            "x": 762,
+            "y": 619,
+            "w": 66,
+            "h": 66
+        },
+        "chicken_column_00": {
+            "x": 78,
+            "y": 719,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_column_01": {
+            "x": 392,
+            "y": 482,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_column_02": {
+            "x": 548,
+            "y": 403,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_column_03": {
+            "x": 1,
+            "y": 327,
+            "w": 77,
+            "h": 79
+        },
+        "chicken_column_04": {
+            "x": 406,
+            "y": 1,
+            "w": 79,
+            "h": 81
+        },
+        "chicken_column_05": {
+            "x": 325,
+            "y": 1,
+            "w": 79,
+            "h": 81
+        },
+        "chicken_column_06": {
+            "x": 244,
+            "y": 1,
+            "w": 79,
+            "h": 81
+        },
+        "chicken_column_07": {
+            "x": 163,
+            "y": 1,
+            "w": 79,
+            "h": 81
+        },
+        "chicken_column_08": {
+            "x": 82,
+            "y": 1,
+            "w": 79,
+            "h": 81
+        },
+        "chicken_column_09": {
+            "x": 1,
+            "y": 1,
+            "w": 79,
+            "h": 81
+        },
+        "chicken_column_10": {
+            "x": 238,
+            "y": 325,
+            "w": 77,
+            "h": 79
+        },
+        "chicken_column_11": {
+            "x": 161,
+            "y": 84,
+            "w": 77,
+            "h": 77
+        },
+        "chicken_column_12": {
+            "x": 1,
+            "y": 487,
+            "w": 75,
+            "h": 77
+        },
+        "chicken_column_13": {
+            "x": 232,
+            "y": 563,
+            "w": 75,
+            "h": 76
+        },
+        "chicken_column_14": {
+            "x": 78,
+            "y": 642,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_column_15": {
+            "x": 386,
+            "y": 638,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_column_16": {
+            "x": 231,
+            "y": 642,
+            "w": 74,
+            "h": 74
+        },
+        "chicken_column_17": {
+            "x": 77,
+            "y": 796,
+            "w": 73,
+            "h": 74
+        },
+        "chicken_column_18": {
+            "x": 721,
+            "y": 237,
+            "w": 73,
+            "h": 72
+        },
+        "chicken_column_19": {
+            "x": 807,
+            "y": 75,
+            "w": 73,
+            "h": 72
+        },
+        "chicken_column_20": {
+            "x": 807,
+            "y": 1,
+            "w": 73,
+            "h": 72
+        },
+        "chicken_column_21": {
+            "x": 762,
+            "y": 163,
+            "w": 73,
+            "h": 72
+        },
+        "chicken_column_22": {
+            "x": 707,
+            "y": 324,
+            "w": 73,
+            "h": 72
+        },
+        "chicken_column_23": {
+            "x": 687,
+            "y": 636,
+            "w": 73,
+            "h": 72
+        },
+        "chicken_column_24": {
+            "x": 612,
+            "y": 636,
+            "w": 73,
+            "h": 72
+        },
+        "chicken_column_25": {
+            "x": 463,
+            "y": 636,
+            "w": 73,
+            "h": 72
+        },
+        "chicken_column_26": {
+            "x": 230,
+            "y": 793,
+            "w": 73,
+            "h": 74
+        },
+        "chicken_column_27": {
+            "x": 386,
+            "y": 561,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_column_28": {
+            "x": 309,
+            "y": 562,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_line_00": {
+            "x": 624,
+            "y": 559,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_line_01": {
+            "x": 551,
+            "y": 244,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_line_02": {
+            "x": 551,
+            "y": 324,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_line_03": {
+            "x": 641,
+            "y": 163,
+            "w": 78,
+            "h": 78
+        },
+        "chicken_line_04": {
+            "x": 1,
+            "y": 165,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_line_05": {
+            "x": 161,
+            "y": 163,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_line_06": {
+            "x": 81,
+            "y": 84,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_line_07": {
+            "x": 1,
+            "y": 84,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_line_08": {
+            "x": 727,
+            "y": 82,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_line_09": {
+            "x": 727,
+            "y": 1,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_line_10": {
+            "x": 561,
+            "y": 163,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_line_11": {
+            "x": 630,
+            "y": 84,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_line_12": {
+            "x": 552,
+            "y": 84,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_line_13": {
+            "x": 474,
+            "y": 84,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_line_14": {
+            "x": 78,
+            "y": 565,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_line_15": {
+            "x": 1,
+            "y": 643,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_line_16": {
+            "x": 1,
+            "y": 566,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_line_17": {
+            "x": 155,
+            "y": 718,
+            "w": 73,
+            "h": 75
+        },
+        "chicken_line_18": {
+            "x": 77,
+            "y": 872,
+            "w": 73,
+            "h": 74
+        },
+        "chicken_line_19": {
+            "x": 382,
+            "y": 717,
+            "w": 72,
+            "h": 73
+        },
+        "chicken_line_20": {
+            "x": 538,
+            "y": 709,
+            "w": 72,
+            "h": 73
+        },
+        "chicken_line_21": {
+            "x": 538,
+            "y": 634,
+            "w": 72,
+            "h": 73
+        },
+        "chicken_line_22": {
+            "x": 538,
+            "y": 559,
+            "w": 72,
+            "h": 73
+        },
+        "chicken_line_23": {
+            "x": 707,
+            "y": 398,
+            "w": 72,
+            "h": 73
+        },
+        "chicken_line_24": {
+            "x": 456,
+            "y": 717,
+            "w": 72,
+            "h": 73
+        },
+        "chicken_line_25": {
+            "x": 152,
+            "y": 796,
+            "w": 73,
+            "h": 73
+        },
+        "chicken_line_26": {
+            "x": 307,
+            "y": 717,
+            "w": 73,
+            "h": 75
+        },
+        "chicken_line_27": {
+            "x": 624,
+            "y": 482,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_line_28": {
+            "x": 547,
+            "y": 482,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_wrap_00": {
+            "x": 701,
+            "y": 546,
+            "w": 72,
+            "h": 71
+        },
+        "chicken_wrap_01": {
+            "x": 463,
+            "y": 561,
+            "w": 73,
+            "h": 73
+        },
+        "chicken_wrap_02": {
+            "x": 1,
+            "y": 874,
+            "w": 74,
+            "h": 73
+        },
+        "chicken_wrap_03": {
+            "x": 307,
+            "y": 641,
+            "w": 74,
+            "h": 74
+        },
+        "chicken_wrap_04": {
+            "x": 1,
+            "y": 720,
+            "w": 74,
+            "h": 75
+        },
+        "chicken_wrap_05": {
+            "x": 470,
+            "y": 482,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_wrap_06": {
+            "x": 309,
+            "y": 485,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_wrap_07": {
+            "x": 155,
+            "y": 487,
+            "w": 75,
+            "h": 76
+        },
+        "chicken_wrap_08": {
+            "x": 396,
+            "y": 84,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_09": {
+            "x": 318,
+            "y": 84,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_10": {
+            "x": 240,
+            "y": 84,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_11": {
+            "x": 470,
+            "y": 403,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_12": {
+            "x": 392,
+            "y": 403,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_13": {
+            "x": 1,
+            "y": 246,
+            "w": 77,
+            "h": 79
+        },
+        "chicken_wrap_14": {
+            "x": 481,
+            "y": 163,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_wrap_15": {
+            "x": 647,
+            "y": 1,
+            "w": 78,
+            "h": 81
+        },
+        "chicken_wrap_16": {
+            "x": 321,
+            "y": 163,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_wrap_17": {
+            "x": 80,
+            "y": 246,
+            "w": 77,
+            "h": 79
+        },
+        "chicken_wrap_18": {
+            "x": 629,
+            "y": 403,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_19": {
+            "x": 629,
+            "y": 324,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_20": {
+            "x": 473,
+            "y": 244,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_21": {
+            "x": 473,
+            "y": 324,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_22": {
+            "x": 395,
+            "y": 244,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_23": {
+            "x": 395,
+            "y": 324,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_24": {
+            "x": 317,
+            "y": 244,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_25": {
+            "x": 641,
+            "y": 243,
+            "w": 77,
+            "h": 79
+        },
+        "chicken_wrap_26": {
+            "x": 241,
+            "y": 163,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_wrap_27": {
+            "x": 567,
+            "y": 1,
+            "w": 78,
+            "h": 81
+        },
+        "chicken_wrap_28": {
+            "x": 401,
+            "y": 163,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_wrap_29": {
+            "x": 159,
+            "y": 246,
+            "w": 77,
+            "h": 79
+        },
+        "chicken_wrap_30": {
+            "x": 158,
+            "y": 406,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_31": {
+            "x": 1,
+            "y": 408,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_32": {
+            "x": 80,
+            "y": 406,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_33": {
+            "x": 317,
+            "y": 324,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_34": {
+            "x": 158,
+            "y": 327,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_35": {
+            "x": 80,
+            "y": 327,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_36": {
+            "x": 314,
+            "y": 406,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_37": {
+            "x": 238,
+            "y": 244,
+            "w": 77,
+            "h": 79
+        },
+        "chicken_wrap_38": {
+            "x": 81,
+            "y": 165,
+            "w": 78,
+            "h": 79
+        },
+        "chicken_wrap_39": {
+            "x": 487,
+            "y": 1,
+            "w": 78,
+            "h": 81
+        },
+        "chicken_wrap_40": {
+            "x": 236,
+            "y": 406,
+            "w": 76,
+            "h": 77
+        },
+        "chicken_wrap_41": {
+            "x": 232,
+            "y": 485,
+            "w": 75,
+            "h": 76
+        },
+        "chicken_wrap_42": {
+            "x": 78,
+            "y": 487,
+            "w": 75,
+            "h": 76
+        },
+        "chicken_wrap_43": {
+            "x": 155,
+            "y": 565,
+            "w": 75,
+            "h": 75
+        },
+        "chicken_wrap_44": {
+            "x": 1,
+            "y": 797,
+            "w": 74,
+            "h": 75
+        },
+        "chicken_wrap_45": {
+            "x": 155,
+            "y": 642,
+            "w": 74,
+            "h": 74
+        },
+        "chicken_wrap_46": {
+            "x": 230,
+            "y": 718,
+            "w": 74,
+            "h": 73
+        },
+        "chicken_wrap_47": {
+            "x": 1,
+            "y": 949,
+            "w": 73,
+            "h": 73
+        },
+        "chicken_wrap_48": {
+            "x": 707,
+            "y": 473,
+            "w": 72,
+            "h": 71
+        }
+    }
+}

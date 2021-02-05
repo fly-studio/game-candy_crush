@@ -129,6 +129,9 @@ namespace ui {
 			return cellUI;
 		}
 
+		/**
+		 * 渲染棋盘, 和每个cell
+		 */
 		public renderMesh() : void
 		{
 			this.removeChildren();
@@ -141,6 +144,13 @@ namespace ui {
 			}
 		}
 
+		/**
+		 * 渲染交换动画
+		 *
+		 * @param fromCell
+		 * @param toCell
+		 * @param swapBack 如果不能消除，则还需要渲染恢复交换动画
+		 */
 		public renderSwap(fromCell: Cell, toCell:Cell, swapBack:boolean) : Promise<any>
 		{
 			let fromCellUI: CellUI = this.getChildByCellIndex(fromCell.index) as CellUI;
@@ -159,6 +169,11 @@ namespace ui {
 			return Promise.all(promises);
 		}
 
+		/**
+		 * 渲染十字消(横/竖)
+		 * @param row
+		 * @param col
+		 */
 		public renderCross(row: number = -1, col: number = -1): Promise<any> {
 			let rect: egret.Rectangle = this.getCellRectangle(this.mesh.index(row < 0 ? 0 : row, col < 0 ? 0 : col));
 			let crossUI = row >= 0 ? new CrossRowUI(rect) : new CrossColUI(rect);
@@ -166,6 +181,10 @@ namespace ui {
 			return crossUI.fadeOut(400); //十字架时间长一点
 		}
 
+		/**
+		 * 渲染单个消除(含十字消)
+		 * @param crushedCells
+		 */
 		public renderCrush(crushedCells: CrushedCells) : Promise<any>
 		{
 			let promises : Promise<any>[] = [];
@@ -214,16 +233,21 @@ namespace ui {
 			return Promise.all(promises);
 		}
 
+		/**
+		 * 渲染补充动画, 从上往下掉
+		 * @param filledCells
+		 */
 		public renderFill(filledCells:FilledCells) : Promise<any> {
 			let promises: Promise<any>[] = [];
 			for(let group of filledCells.fills)
 			{
+				// 上面已存在的往下掉
 				if (!group.creating) {
 					let cellUI: CellUI = this.getChildByCellIndex(group.toIndex);
 					if (cellUI)
 						promises.push(cellUI.moveTo(group.delta * 50, this.getCellPoint(group.toIndex)));
-				} else {
-					let rect:egret.Rectangle = this.getCellRectangle(group.delta - this.mesh.row(group.toIndex), this.mesh.col(group.toIndex));
+				} else { // 需要先创建cell 然后往下掉
+					let rect: egret.Rectangle = this.getCellRectangle(group.delta - this.mesh.row(group.toIndex), this.mesh.col(group.toIndex));
 					rect.y = -rect.y;
 					let cellUI: CellUI = this.createCellUI(this.mesh.cell(group.toIndex), rect);
 					this.addChild(cellUI);
@@ -252,12 +276,39 @@ namespace ui {
 			}
 		}
 
+		public unselect(cell: Cell): void {
+			// 发送unselect消息
+			let element: CellUI = this.getChildByCellIndex(cell.index);
+			if (element instanceof CellUI) {
+				let cellEvent = new CellEvent(CellEvent.CELL_UNSELECT, false);
+				cellEvent.cell = cell;
+				element.dispatchEvent(cellEvent);
+			}
+		}
+
 		public select(cell: Cell) : void {
 			this.clearSelected();
 			if (!cell) return;
 			let element: CellUI = this.getChildByCellIndex(cell.index);
-			if (element instanceof CellUI)
+			if (element instanceof CellUI) {
 				element.selected = true;
+				// 发送select消息
+				let cellEvent = new CellEvent(CellEvent.CELL_SELECT, false);
+				cellEvent.cell = cell;
+				element.dispatchEvent(cellEvent);
+			}
+		}
+
+		public changeCell(): void {
+			for (let cell of this.mesh.specialCells) {
+				let element: CellUI = this.getChildByCellIndex(cell.index);
+				if (element instanceof CellUI) {
+					// 发送change action消息
+					let cellEvent = new CellEvent(CellEvent.CELL_CHANGE, false);
+					cellEvent.cell = cell;
+					element.dispatchEvent(cellEvent);
+				}
+			}
 		}
 
 	}

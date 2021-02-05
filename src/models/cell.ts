@@ -1,8 +1,22 @@
+enum CellAction {
+	NORMAL = '',
+	SELECTED = 'click',
+	HORIZON = 'line',
+	VERTICAL = 'column',
+	WRAP = 'wrap',
+}
+
+function cellActionRandom(): CellAction {
+	const v = randNumber(0, 2);
+	return [CellAction.VERTICAL, CellAction.HORIZON, CellAction.WRAP][v];
+}
+
 class Cell {
 	public mesh: MeshBase;
 	public index:number;
 	public crossing: boolean; //是否是十字消
 	public colorIndex:number = -1;
+	public action: CellAction = CellAction.NORMAL;
 
 	constructor(mesh: MeshBase, index:number) {
 		this.mesh = mesh;

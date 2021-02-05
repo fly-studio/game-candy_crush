@@ -1,6 +1,6 @@
 {
-  "engineVersion": "5.3.10",
-  "compilerVersion": "5.3.10",
+  "engineVersion": "5.4.0",
+  "compilerVersion": "5.4.0",
   "template": {},
   "target": {
     "current": "web"
@@ -24,13 +24,18 @@
     {
       "name": "promise"
     },
-		{
-			"name": "lp",
-			"path": "../libs/lp"
-		},
-		{
-			"name": "layer",
-			"path": "../libs/layer"
-		}
-  ]
+    {
+      "name": "lp",
+      "path": "../libs/lp"
+    },
+    {
+      "name": "layer",
+      "path": "../libs/layer"
+    }
+  ],
+  "eui": {
+    "exmlRoot": [
+      "resource/eui_skins"
+    ]
+  }
 }

@@ -9,7 +9,7 @@
 			"name": "crush"
 		},
 		{
-			"keys": "character_5_png,character_4_png,character_3_png,character_2_png,character_1_png",
+			"keys": "bear_json,bear_png,chicken_json,chicken_png,fox_json,fox_png,frog_json,frog_png,hippo_json,hippo_png,owl_json,owl_png,",
 			"name": "character"
 		},
 		{
@@ -76,29 +76,64 @@
 			"name": "cross_v_png"
 		},
 		{
-			"url": "assets/character/character_5.png",
-			"type": "image",
-			"name": "character_5_png"
+			"url": "assets/character/bear.json",
+			"type": "json",
+			"name": "bear_json"
 		},
 		{
-			"url": "assets/character/character_1.png",
+			"url": "assets/character/bear.png",
 			"type": "image",
-			"name": "character_1_png"
+			"name": "bear_png"
 		},
 		{
-			"url": "assets/character/character_2.png",
-			"type": "image",
-			"name": "character_2_png"
+			"url": "assets/character/chicken.json",
+			"type": "json",
+			"name": "chicken_json"
 		},
 		{
-			"url": "assets/character/character_3.png",
+			"url": "assets/character/chicken.png",
 			"type": "image",
-			"name": "character_3_png"
+			"name": "chicken_png"
 		},
 		{
-			"url": "assets/character/character_4.png",
+			"url": "assets/character/fox.json",
+			"type": "json",
+			"name": "fox_json"
+		},
+		{
+			"url": "assets/character/fox.png",
 			"type": "image",
-			"name": "character_4_png"
+			"name": "fox_png"
+		},
+		{
+			"url": "assets/character/frog.json",
+			"type": "json",
+			"name": "frog_json"
+		},
+		{
+			"url": "assets/character/frog.png",
+			"type": "image",
+			"name": "frog_png"
+		},
+		{
+			"url": "assets/character/hippo.json",
+			"type": "json",
+			"name": "hippo_json"
+		},
+		{
+			"url": "assets/character/hippo.png",
+			"type": "image",
+			"name": "hippo_png"
+		},
+		{
+			"url": "assets/character/owl.json",
+			"type": "json",
+			"name": "owl_json"
+		},
+		{
+			"url": "assets/character/owl.png",
+			"type": "image",
+			"name": "owl_png"
 		},
 		{
 			"url": "assets/fonts/good.fnt",

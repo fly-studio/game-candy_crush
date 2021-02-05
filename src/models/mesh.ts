@@ -14,6 +14,10 @@ class Mesh extends MeshBase {
 		return this.cell(rowOrIndex, col).block;
 	}
 
+	public action(rowOrIndex: number, col?: number): CellAction {
+		return this.cell(rowOrIndex, col).action;
+	}
+
 	public at(index: number) : Cell|null {
 		if (index >= this.cells.length || index < 0)
 			throw new Error('Out of "cells" Array\'s bound');
@@ -25,13 +29,20 @@ class Mesh extends MeshBase {
 		return this.at(index);
 	}
 
+	/**
+	 * 随机生成某cell的颜色
+	 * 会判断上下左右是否有4个相同项，避免在开局的时候就有3个连续项
+	 *
+	 * @param {number} rowOrIndex: 如果为-1, 则表示不需要判断上下左右出现3个相同颜色的情况。在补充被消掉cell时下传入-1
+	 * @return {number}: -1 表示是障碍物, 其它表示cell的颜色
+	 */
 	protected randomColorIndex(rowOrIndex: number, col?: number): number {
-		let random = (): number => {
+		const random = (): number => {
 			let colorCount:number = this.cellColors.length;
 			return ~~(Math.random() * colorCount);
 		};
 		// 直接出结果
-		if (rowOrIndex < 0) 
+		if (rowOrIndex < 0)
 			return random();
 
 		let row: number = rowOrIndex;
@@ -42,8 +53,8 @@ class Mesh extends MeshBase {
 		if (this.block(row, col)) return -1; // 障碍物
 
 		let colorIndex:number = -1;
-		let last2Row = row >= 2 ? this.cell(row - 2, col).colorIndex : -1; //纵列不能3个相同
-		let last2Col = col >= 2 ? this.cell(row, col - 2).colorIndex : -1; //横列不能3个相同
+		let last2Row = row >= 2 ? this.cell(row - 2, col).colorIndex : -1; // 纵列不能3个相同
+		let last2Col = col >= 2 ? this.cell(row, col - 2).colorIndex : -1; // 横列不能3个相同
 		do {
 			colorIndex = random();
 		} while(colorIndex == last2Row || colorIndex == last2Col);
@@ -51,6 +62,50 @@ class Mesh extends MeshBase {
 		return colorIndex;
 	}
 
+	public makeSpecialCells() {
+
+		while1:
+		while (this.specialCells.length < this.maxSpecialCellCount) {
+			let i = randNumber(0, this.size - 1);
+
+			let cell = this.cell(i);
+
+			if (cell.block)
+				continue;
+
+			for (let _cell of this.specialCells) {
+				if (cell.row == _cell.row || cell.col == _cell.col) {
+					continue while1;
+				}
+			}
+
+			cell.action = cellActionRandom()
+			this._specialCells.push(cell);
+		}
+	}
+
+	/**
+	 * 移除特殊cells
+	 *
+	 * @param cells
+	 */
+	public removeSpecialCells(cells: number[]) {
+		if (!cells)
+			return;
+		for (let i = this.specialCells.length - 1; i >= 0; i--) {
+			let cell = this.specialCells[i];
+			if (cells.indexOf(cell.index) != -1) {
+				this.specialCells.splice(i, 1);
+			}
+		}
+	}
+
+	/**
+	 * 在手指滑动消除时，传入起始cell和手指滑动方向，得出期待swap的cell，如果是障碍物，则返回null
+	 *
+	 * @param fromIndex 起始cell的index
+	 * @param position 手指滑动方向
+	 */
 	public getCellByPostion(fromIndex: number, position: POSITION) : Cell {
 		if (this.block(fromIndex))
 			throw new Error('Cell must be not block.');
@@ -77,6 +132,7 @@ class Mesh extends MeshBase {
 
 	/**
 	 * 获取某一块所有可以消除的方法
+	 * （核心方法）
 	 *
 	 * @param row
 	 *            格子的x坐标
@@ -469,15 +525,18 @@ class Mesh extends MeshBase {
 			let row: number = this.row(index);
 			let col: number = this.col(index);
 
-			let methods:CrushedMethods = this.crushedMethods(row, col);
+			let methods: CrushedMethods = this.crushedMethods(row, col);
 			if (methods.length > 0) // 一个格子不是死格子, 就可以解
 				return false;
 		}
 		return true;
 	}
 
-	//此类都是写入的函数
-
+	/**
+	 * 创建cell对象
+	 * @param rowOrIndex
+	 * @param col
+	 */
 	public createCell(rowOrIndex: number, col?: number) : Cell {
 		let index: number = rowOrIndex;
 		if (!isNaN(col))
@@ -487,10 +546,14 @@ class Mesh extends MeshBase {
 		return cell;
 	}
 
+	/**
+	 * 创建棋盘
+	 */
 	public createMesh() : void
 	{
 		do {
 			this.cells = [];
+
 			for(let row of this.rowsEntries()) {
 				for(let col of this.colsEntries()) {
 					let cell: Cell = this.createCell(row, col);
@@ -499,16 +562,28 @@ class Mesh extends MeshBase {
 				}
 			}
 		} while (this.AllDead());
+
+		this.makeSpecialCells();
 	}
 
-	public replace(fromCell:Cell, toIndex) {
+	/**
+	 * 从上往下掉补充被消掉的cell
+	 * @param fromCell
+	 * @param toIndex
+	 */
+	public replace(fromCell: Cell, toIndex: number) {
 		if (fromCell.block)
 			throw new Error('Cell must be not a block.');
 
 		fromCell.to(toIndex);
 	}
 
-	public swap(fromCell:Cell, toCell:Cell) : void {
+	/**
+	 * 交换两个cell
+	 * @param fromCell
+	 * @param toCell
+	 */
+	public swap(fromCell: Cell, toCell: Cell) : void {
 		if (fromCell.block || toCell.block)
 			throw new Error('Cell must be not a block.');
 
@@ -519,7 +594,12 @@ class Mesh extends MeshBase {
 	/* 下面都是消除函数 */
 	/****************************************/
 
-
+	/**
+	 * 简单计算可消除的cells
+	 * 此方法是遍历整个棋盘来判断横/列是否有超过3个相同颜色。
+	 * 对于swap的，可以减少判断范围，但是因为棋盘没多少格子，所以并没有为此优化
+	 * 消除后，补充cell后，也可以缩小判断范围
+	 */
 	public crushedCells() : CrushedCells {
 		let crushes : CrushedCells = new CrushedCells(this);
 		let cells: Cell[] = [];
@@ -566,11 +646,15 @@ class Mesh extends MeshBase {
 		return crushes;
 	}
 
+	/**
+	 * 生成需要补充的cells
+	 * @param crushedCells 已经被消除的cells
+	 */
 	public rebuildWithCrush(crushedCells: CrushedCells) : FilledCells {
 		if (!crushedCells.hasCrushes)
 			throw new Error('crushedCells has no crushes.');
 
-		let colCells: number[][] = crushedCells.colCellIndices(); //Col DESC
+		let colCells: number[][] = crushedCells.colCellIndices(); //按照列倒序 Col DESC
 		let filledCells: FilledCells = new FilledCells(this);
 
 		colCells.forEach((crushedIndices, col) => {
@@ -595,16 +679,20 @@ class Mesh extends MeshBase {
 				});
 			}
 		});
+		// 填充特殊cells
+		this.makeSpecialCells();
+
 		return filledCells;
 	}
 
-	public swapWithCrush(fromCell:Cell, toCell:Cell) : CrushedCells|null {
-		//交换一次
+	public swapWithCrush(fromCell: Cell, toCell: Cell): CrushedCells|null {
+		//尝试交换一次
 		this.swap(fromCell, toCell);
 
 		let crushedCells: CrushedCells = this.crushedCells();
 
-		if (!crushedCells.isCellIndicesCrushed(fromCell.index, toCell.index)) //没有可以消的 //交换回来
+		//没有可以消的 //交换回来
+		if (!crushedCells.isCellIndicesCrushed(fromCell.index, toCell.index))
 			this.swap(fromCell, toCell);
 
 		return crushedCells;

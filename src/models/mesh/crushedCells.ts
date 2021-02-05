@@ -35,7 +35,8 @@ class CrushedCells {
 		//数量小于3
 		if (cells.length < 3)
 			throw new Error('cells length must > 3.');
-		let crush:CrushedGroup = {
+
+		let crush: CrushedGroup = {
 			row: -1,
 			col: -1,
 			cellIndices: cells.map(v => v.index).sort((a, b) => a - b) //index asc
@@ -84,7 +85,7 @@ class CrushedCells {
 	 *
 	 * @param withCross [false] 是否包含十字消的索引
 	 */
-	public cellIndices(withCross:boolean = true) : number[] {
+	public cellIndices(withCross: boolean = true) : number[] {
 		let indices: number[] = [].concat(...this._crushes.map(group => group.cellIndices));
 		if (withCross)
 		{
