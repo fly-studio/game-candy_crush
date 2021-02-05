@@ -47,18 +47,20 @@ namespace ui {
 				mc.width = parent.width;
 				mc.height = parent.height;
 
-				if (cell.action == CellAction.NORMAL) {
-					mc.addEventListener(CellEvent.CELL_SELECT, (event: CellEvent) => {
+				mc.addEventListener(CellEvent.CELL_SELECT, (event: CellEvent) => {
+					if (event.cell.action == CellAction.NORMAL)
 						mc.gotoAndPlay(CellAction.SELECTED, -1)
-					}, mc);
-					mc.addEventListener(CellEvent.CELL_UNSELECT, (event: CellEvent) => {
+				}, mc);
+				mc.addEventListener(CellEvent.CELL_UNSELECT, (event: CellEvent) => {
+					if (event.cell.action == CellAction.NORMAL)
 						mc.stop()
-					}, mc);
-					mc.addEventListener(CellEvent.CELL_CHANGE, (event: CellEvent) => {
-						if (event.cell.action != CellAction.NORMAL)
-							mc.gotoAndPlay(event.cell.action, -1)
-					}, mc);
-				} else {
+				}, mc);
+				mc.addEventListener(CellEvent.CELL_CHANGE, (event: CellEvent) => {
+					if (event.cell.action != CellAction.NORMAL)
+						mc.gotoAndPlay(event.cell.action, -1)
+				}, mc);
+
+				if (cell.action != CellAction.NORMAL) {
 					mc.gotoAndPlay(cell.action, -1);
 				}
 
