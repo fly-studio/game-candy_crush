@@ -15,7 +15,7 @@ namespace ui {
 		constructor(duration:number) {
 			super();
 
-			this.mesh = new Mesh(8, 8);
+			this.mesh = new Mesh(12, 8);
 
 			/*this.mesh.cellColors = [
 				0xff0000,
@@ -48,19 +48,21 @@ namespace ui {
 				mc.height = parent.height;
 
 				mc.addEventListener(CellEvent.CELL_SELECT, (event: CellEvent) => {
-					if (event.cell.action == CellAction.NORMAL)
+					if (event.cell.isNormalAction)
 						mc.gotoAndPlay(CellAction.SELECTED, -1)
 				}, mc);
 				mc.addEventListener(CellEvent.CELL_UNSELECT, (event: CellEvent) => {
-					if (event.cell.action == CellAction.NORMAL)
+					if (event.cell.isNormalAction)
 						mc.stop()
 				}, mc);
 				mc.addEventListener(CellEvent.CELL_CHANGE, (event: CellEvent) => {
-					if (event.cell.action != CellAction.NORMAL)
+
+					if (!event.cell.isNormalAction && mc.currentFrameLabel != event.cell.action){
 						mc.gotoAndPlay(event.cell.action, -1)
+					}
 				}, mc);
 
-				if (cell.action != CellAction.NORMAL) {
+				if (!cell.isNormalAction) {
 					mc.gotoAndPlay(cell.action, -1);
 				}
 
@@ -234,12 +236,12 @@ namespace ui {
 				if (window.location.hash == '#automation') {
 					let event = new CellEvent('');
 					event.cell = this.mesh.cell(method.cellIndex);
-					event.position = method.postion;
+					event.position = method.position;
 					this.onCellDrag(event);
 				}
 				let cell: CellUI = this.meshSprite.getChildByCellIndex(method.cellIndex);
 				if (cell) {
-					switch (method.postion) {
+					switch (method.position) {
 						case POSITION.UP:
 							cell.text = '↑';
 							break;
@@ -278,7 +280,7 @@ namespace ui {
 			while (crushedCells.hasCrushes && this.running)
 			{
 				if (serials > 0)
-					layer.media.Sound.play('syllable_' + (serials % 8) + '_mp3');
+					layer.media.Sound.play('syllable_' + (serials % 9) + '_mp3');
 				else
 					layer.media.Sound.play('normal_mp3');
 
@@ -332,7 +334,7 @@ namespace ui {
 
 			this.lastTappedCell = event.cell;
 
-			let cell: Cell = this.mesh.getCellByPostion(event.cell.index, event.position);
+			let cell: Cell = this.mesh.getCellByPosition(event.cell.index, event.position);
 			if (cell instanceof Cell) { // valid
 				let crushedCells: CrushedCells  = this.mesh.swapWithCrush(event.cell, cell); //计算可以消失的cells
 				this.swapAndCrush(event.cell, cell, crushedCells);

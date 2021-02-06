@@ -12,19 +12,15 @@ namespace pages {
 			{
 				words = 'good';
 			}
-			else if (score <= 6) // 两组
+			else if (score <= 8) // 一横条 或2
 			{
 				words = 'great';
 			}
-			else if (score <= 8) // 一条
-			{
-				words = 'perfect';
-			}
-			else if (score <= 11) //一条 + 1组
+			else if (score <= 12) // 一竖条
 			{
 				words = 'excellent';
 			}
-			else if (score > 11)
+			else if (score > 12) //包裹 或 1条+1组
 			{
 				words = 'unbelievable';
 			}

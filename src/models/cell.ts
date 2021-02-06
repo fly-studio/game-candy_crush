@@ -13,15 +13,13 @@ function cellActionRandom(): CellAction {
 
 class Cell {
 	public mesh: MeshBase;
-	public index:number;
-	public crossing: boolean; //是否是十字消
-	public colorIndex:number = -1;
+	public index: number = -1;
+	public colorIndex: number = -1;
 	public action: CellAction = CellAction.NORMAL;
 
 	constructor(mesh: MeshBase, index:number) {
 		this.mesh = mesh;
 		this.index = index;
-		this.crossing = false;
 	}
 
 	public get color(): any {
@@ -60,6 +58,10 @@ class Cell {
 		let index: number = this.index;
 		this.index = toIndex;
 		return index;
+	}
+
+	public get isNormalAction(): boolean {
+		return this.action == CellAction.NORMAL;
 	}
 
 }

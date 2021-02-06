@@ -41,10 +41,16 @@ class Grid {
 
     /**
      * 根据 row / col 返回 index
-     * @param row
-     * @param col
+     * @param {number} row: 行号
+     * @param {number} col: 列号
+     * @param {boolean} strict: 严格模式，如果不符合要求，会返回-1
      */
-    public index(row: number, col: number): number {
+    public index(row: number, col: number, strict: boolean = false): number {
+        if (strict) {
+            if (row < 0 || row >= this.rows || col < 0 || col >= this.cols)
+                return -1
+        }
+
         return row * this.cols + col;
     }
 

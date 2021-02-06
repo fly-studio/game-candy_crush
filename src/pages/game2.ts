@@ -24,16 +24,16 @@ namespace pages {
 			this.scorebarSprite.stageNumber = 2;
 			this.addChild(this.scorebarSprite);
 
-			let frameSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI("game2_frame_png");
-			frameSprite.x = 21;
-			frameSprite.y = 373;
-			this.addChild(frameSprite);
+			// let frameSprite: layer.ui.BitmapUI = new layer.ui.BitmapUI("game2_frame_png");
+			// frameSprite.x = 21;
+			// frameSprite.y = 373;
+			// this.addChild(frameSprite);
 
 			let gameUI = new ui.GameUI(60);
 			gameUI.x = 31;
-			gameUI.y = 381;
+			gameUI.y = 181;
 			gameUI.width = 689;
-			gameUI.height = 689;
+			gameUI.height = 889;
 			gameUI.blocks = [0, 1, 8, 9, 6, 7, 14, 15/*, 48, 49, 56, 57, 54, 55, 62, 63, 27, 28, 35, 36*/];
 			this.addChild(gameUI);
 

@@ -1,6 +1,6 @@
 interface CrushedGroup {
-	row: number;
-	col: number;
+	row: number; // 如果是横消 设置这项
+	col: number; // 如果是竖消 设置这项
 	cellIndices: number[];
 };
 
@@ -39,7 +39,7 @@ class CrushedCells {
 		let crush: CrushedGroup = {
 			row: -1,
 			col: -1,
-			cellIndices: cells.map(v => v.index).sort((a, b) => a - b) //index asc
+			cellIndices: cells.map(v => v.index).sort((a, b) => a - b) // index asc
 		};
 
 		if (cells[0].row == cells[1].row) {
@@ -52,7 +52,38 @@ class CrushedCells {
 		}
 		this._crushes.push(crush);
 
-		this.checkCross(cells); //检查最后一个是否包含十字消
+		this.checkCross(cells); //检查是否包含十字消
+
+		// 包裹需要在判断cross之后
+		let wrapCellIndices = this.checkWrap(cells);
+		crush.cellIndices.push(...wrapCellIndices)
+		crush.cellIndices = _.uniq(crush.cellIndices)
+	}
+
+	// 检查是否有消包裹的 o 是当前cell, x是周围一圈
+	//   x x x
+	// x x o x x
+	//   x x x
+	private checkWrap(cells: Cell[]) {
+
+		let indices: number[] = [];
+		const wrap = [
+			[-1, -1], [-1, 0], [-1, 1],
+			[0, -2], [0, -1], [0, 1], [0, 2],
+			[1, -1], [1, 0], [1, 1]
+		];
+		cells.filter(cell => cell.action == CellAction.WRAP).forEach(cell => {
+			for (let c of wrap) {
+				const i = this.mesh.index(cell.row + c[0], cell.col + c[1], true);
+				// 有效的index并且不是障碍物
+				if (i < 0 || this.mesh.block(i))
+					continue;
+
+				indices.push(i);
+			}
+		});
+
+		return _.uniq(indices).sort((a, b) => a - b);
 	}
 
 	/**
@@ -61,10 +92,16 @@ class CrushedCells {
 	 */
 	private checkCross(cells: Cell[]) {
 
-		cells.filter(cell => cell.crossing).forEach(cell => {
+		// 消一行
+		cells.filter(cell => cell.action == CellAction.HORIZON).forEach(cell => {
 			this._crosses.rows.push(cell.row);
+		});
+
+		// 消一列
+		cells.filter(cell => cell.action == CellAction.VERTICAL).forEach(cell => {
 			this._crosses.cols.push(cell.col);
 		});
+
 		if (cells.length >= 5) //5 个消整列/行
 		{
 			let last: CrushedGroup = this.at(this.crushes.length - 1);

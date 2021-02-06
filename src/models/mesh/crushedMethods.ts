@@ -1,6 +1,7 @@
 interface CrushedMethod{
 	cellIndex: number,
-	postion: POSITION
+	position: POSITION,
+	crushedCells?: CrushedCells,
 }
 
 class CrushedMethods {
@@ -18,18 +19,37 @@ class CrushedMethods {
 		return this.methods.values();
 	}
 
-	public add(cellIndex: number, postion: POSITION): boolean
+	/**
+	 * 添加可以消除的cell和方向
+	 *
+	 * @param cellIndex
+	 * @param position
+	 */
+	public add(cellIndex: number, position: POSITION): boolean
 	{
-		let cell: Cell = this.mesh.getCellByPostion(cellIndex, postion);
+		let cell: Cell = this.mesh.getCellByPosition(cellIndex, position);
 		if (!cell) return false;
 		this.methods.push({
 			cellIndex,
-			postion
+			position
 		});
 		return true;
 	}
 
-	public get length() : number {
+	public get length(): number {
 		return this.methods.length;
+	}
+
+	/**
+	 * 计算每一个可以消的方法能够消掉的cells
+	 */
+	public calcCrushedCells(): void {
+		for (let method of this.methods) {
+			let swapCell: Cell = this.mesh.getCellByPosition(method.cellIndex, method.position);
+
+			const crushedCells: CrushedCells  = this.mesh.trySwapWithCrush(this.mesh.cell(method.cellIndex), swapCell); //计算可以消失的cells
+
+			method.crushedCells = crushedCells
+		}
 	}
 }

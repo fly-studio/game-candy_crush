@@ -1,34 +1,5 @@
 class Mesh extends MeshBase {
 
-	//此类都是读取的函数
-
-	public color(rowOrIndex: number, col?: number) : any {
-		return this.cell(rowOrIndex, col).color;
-	}
-
-	public colorIndex(rowOrIndex: number, col?: number) : number {
-		return this.cell(rowOrIndex, col).colorIndex;
-	}
-
-	public block(rowOrIndex: number, col?: number) : boolean {
-		return this.cell(rowOrIndex, col).block;
-	}
-
-	public action(rowOrIndex: number, col?: number): CellAction {
-		return this.cell(rowOrIndex, col).action;
-	}
-
-	public at(index: number) : Cell|null {
-		if (index >= this.cells.length || index < 0)
-			throw new Error('Out of "cells" Array\'s bound');
-		return this.cells[index];
-	}
-
-	public cell(rowOrIndex: number, col?: number): Cell {
-		let index: number = col == null ? rowOrIndex : this.index(rowOrIndex, col);
-		return this.at(index);
-	}
-
 	/**
 	 * 随机生成某cell的颜色
 	 * 会判断上下左右是否有4个相同项，避免在开局的时候就有3个连续项
@@ -106,7 +77,7 @@ class Mesh extends MeshBase {
 	 * @param fromIndex 起始cell的index
 	 * @param position 手指滑动方向
 	 */
-	public getCellByPostion(fromIndex: number, position: POSITION) : Cell {
+	public getCellByPosition(fromIndex: number, position: POSITION) : Cell {
 		if (this.block(fromIndex))
 			throw new Error('Cell must be not block.');
 
@@ -685,43 +656,70 @@ class Mesh extends MeshBase {
 		return filledCells;
 	}
 
-	public swapWithCrush(fromCell: Cell, toCell: Cell): CrushedCells|null {
+	/**
+	 * 交换2项 并检查是否有可消除的
+	 *
+	 * @param fromCell
+	 * @param toCell
+	 * @param fakeSwap 需要作弊时, 传入true。不然是真交换了
+	 */
+	public swapWithCrush(fromCell: Cell, toCell: Cell, fakeSwap: boolean = false): CrushedCells|null {
 		//尝试交换一次
 		this.swap(fromCell, toCell);
 
 		let crushedCells: CrushedCells = this.crushedCells();
 
-		//没有可以消的 //交换回来
-		if (!crushedCells.isCellIndicesCrushed(fromCell.index, toCell.index))
+		// 没有可以消的 交换回来
+		if (fakeSwap || !crushedCells.isCellIndicesCrushed(fromCell.index, toCell.index))
 			this.swap(fromCell, toCell);
 
 		return crushedCells;
 	}
 
+	public trySwapWithCrush(fromCell: Cell, toCell: Cell): CrushedCells|null {
+		return this.swapWithCrush(fromCell, toCell, true)
+	}
+
+	/**
+	 * 查找消除的最优解方法
+	 */
 	public crushesTopMethod() : CrushedMethod | null {
 
-		let top: CrushedMethod[][] = new Array();
-		for(let i of this.indicesEntries())
-			top.push([]);
+		let top: {'method': CrushedMethod, 'crushedCellLength': number}[] = new Array();
+
 		for (let index of this.indices(true)){
 			let row: number = this.row(index);
 			let col: number = this.col(index);
 
-			let methods:CrushedMethods = this.crushedMethods(row, col);
+			let methods: CrushedMethods = this.crushedMethods(row, col);
+			methods.calcCrushedCells();
+
 			for(let method of methods.methods)
-				top[method.cellIndex].push(method);
+			{
+				let crushedCells = method.crushedCells;
+				if (crushedCells)
+				{
+					top.push({
+						'crushedCellLength': crushedCells.cellIndices(true).length,
+						'method': method,
+					});
+				}
+			}
+			// 检查可以消除的cells
 		}
 
-		top.sort((a, b) => b.length - a.length); //整体排序
-		top = top.map(methods => { // 按最多的方向排序
-			let positions: CrushedMethod[][] = new Array();
-			positions.push([], [], [], []);
-			for (let method of methods)
-				positions[method.postion].push(method);
-			return _.flatten(positions.filter(v => v.length > 0).sort((a, b) => b.length - a.length));
+		// 按照crushedCellLength desc, cellIndex desc
+		// 在得分相同的情况下，消底部的比消顶部的能让补充的更有机会得分
+		top.sort((a, b) => {
+			let r = b.crushedCellLength - a.crushedCellLength;
+			if (r == 0) {
+				return b.method.cellIndex - a.method.cellIndex;
+			}
+			return r;
 		});
+
 		//第一项就是最高选项
-		return top[0] && top[0].length > 0 ? top[0][0] : null;
+		return top[0] ? top[0].method: null;
 	}
 
 }
